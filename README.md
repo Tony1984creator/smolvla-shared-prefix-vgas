@@ -2,6 +2,24 @@
 
 This research artifact evaluates the released VGAS action selector and implements shared observation encoding for batched inference. The SmolVLA actor samples four action chunks from independent noise. The released critic ranks them. Our implementation computes the vision-language prefix once per query and reuses its attention cache and critic features across candidates.
 
+**Hardware contribution.** On the same A100 and at four candidates per decision, sharing the actor prefix reduces mean decision time from 271.64 to 216.78 ms. The single-sample control and the equal-candidate control answer different questions. The first measures task benefit from selection; the second measures implementation cost.
+
+```text
+two cameras + instruction + robot state
+                 │
+       one shared observation encoding ─────────────┐
+                 │                                  │
+       four independent action proposals            │
+                 └──── released twin critic ◄───────┘
+                             │
+                 execute the highest-scoring
+                 proposal for up to 20 steps
+                             │
+                        observe again
+```
+
+[Hardware analysis and related work](docs/HARDWARE_ANALYSIS.md) · [Reference implementation](method/shared_prefix_selection.py) · [Reproducibility](docs/REPRODUCIBILITY.md) · [Workshop report](workshop/README.md)
+
 ## Main results
 
 | Evaluation | Paired comparison | Success | Change |
@@ -26,3 +44,7 @@ The command verifies the released paired outcomes and recomputes headline succes
 - [Experiment archive](docs/EXPERIMENT_ARCHIVE.md)
 - [Briefing figure](docs/briefing.png)
 - [Third-party attribution](docs/ATTRIBUTION.md)
+
+## What else can hardware skip?
+
+A replay on 20 recorded Object observations tests a value-token-only readout in the critic's final layer. The four-way winner stayed the same in all 20 pairs. The isolated critic median went from 4.79 to 4.92 ms. The experiment identifies removable computation and the A100 timing bounds its practical benefit. [Code, prior art and paired measurements](docs/HARDWARE_ANALYSIS.md).
