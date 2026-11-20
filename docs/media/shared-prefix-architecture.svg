@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="390" viewBox="0 0 1040 390" role="img" aria-labelledby="title desc">
+<title id="title">Shared-prefix inference with four SmolVLA proposals</title>
+<desc id="desc">One observation encoding supplies an attention cache to the actor and features to the critic. Four noise samples generate separate action chunks. The critic ranks the chunks, one is executed, and a new observation starts the next decision.</desc>
+<defs><marker id="arrow" orient="auto" markerWidth="7" markerHeight="7" refX="6" refY="3.5"><path d="M0 0L7 3.5L0 7Z" fill="#465467"/></marker><marker id="teal" orient="auto" markerWidth="7" markerHeight="7" refX="6" refY="3.5"><path d="M0 0L7 3.5L0 7Z" fill="#08766c"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#19293c}.h{font-size:20px;font-weight:700}.b{font-size:16px}.small{font-size:15px}.shared{fill:#086b62}.line{fill:none;stroke:#465467;stroke-width:2;marker-end:url(#arrow)}.reuse{fill:none;stroke:#08766c;stroke-width:2.5;marker-end:url(#teal)}</style>
+<rect width="1040" height="390" rx="12" fill="#fff"/>
+<rect x="20" y="25" width="255" height="158" rx="9" fill="#e5f4ef" stroke="#15877a" stroke-width="2"/>
+<text x="37" y="55" class="h shared">Encode once per query</text>
+<text x="37" y="88" class="b">Two camera views</text><text x="37" y="113" class="b">Task instruction</text><text x="37" y="138" class="b">Robot state</text>
+<text x="37" y="167" class="small shared">Shared observation prefix</text>
+<path class="reuse" d="M275 77H390"/><text x="283" y="65" class="small shared">KV cache</text>
+<rect x="393" y="25" width="278" height="158" rx="9" fill="#eff3f8" stroke="#8397af"/>
+<text x="409" y="55" class="h">Frozen SmolVLA actor</text><text x="409" y="85" class="b">Four independent noise samples</text><text x="409" y="109" class="b">10 flow steps per proposal</text>
+<g fill="#fff" stroke="#8d9fb5"><rect x="409" y="129" width="51" height="31" rx="4"/><rect x="470" y="129" width="51" height="31" rx="4"/><rect x="531" y="129" width="51" height="31" rx="4"/><rect x="592" y="129" width="51" height="31" rx="4"/></g>
+<g text-anchor="middle" class="b"><text x="435" y="150">A₁</text><text x="496" y="150">A₂</text><text x="557" y="150">A₃</text><text x="618" y="150">A₄</text></g>
+<path class="line" d="M671 99H762"/><text x="679" y="84" class="small">50 steps</text><text x="679" y="122" class="small">per chunk</text>
+<rect x="765" y="25" width="255" height="158" rx="9" fill="#eff3f8" stroke="#8397af"/>
+<text x="781" y="55" class="h">Frozen VGAS critic</text><text x="781" y="85" class="b">Score each action chunk</text><text x="781" y="111" class="b">Object: first 32 steps</text><text x="781" y="136" class="b">Long: all 50 steps</text><text x="781" y="162" class="small">Keep the lower of two Q values</text>
+<path class="reuse" d="M250 183V218H804V185"/><rect x="355" y="207" width="343" height="23" fill="white"/><text x="526" y="224" text-anchor="middle" class="b shared">Reuse the same observation features</text>
+<path class="line" d="M931 183V260"/>
+<rect x="466" y="263" width="554" height="87" rx="9" fill="#fff" stroke="#8397af"/>
+<text x="486" y="294" class="h">Execute the highest-scoring proposal</text><text x="486" y="324" class="b">Send up to 20 actions. Stop early if the task finishes.</text>
+<path class="line" d="M466 309H124V185"/><text x="152" y="299" class="b">Next observation</text><text x="152" y="333" class="small">while the episode is active</text>
+</svg>
