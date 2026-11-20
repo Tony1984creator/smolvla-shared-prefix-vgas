@@ -1,0 +1,24 @@
+{
+  "query_count": 500,
+  "original_bytes": 175026696,
+  "formats": {
+    "int8": {
+      "matches": 495,
+      "mean_query_spearman": 0.9955999999999999,
+      "defined_spearman": 500,
+      "bytes": 44023952
+    },
+    "float16": {
+      "matches": 500,
+      "mean_query_spearman": 1.0,
+      "defined_spearman": 500,
+      "bytes": 87577864
+    },
+    "bfloat16": {
+      "matches": 498,
+      "mean_query_spearman": 0.9972000000000001,
+      "defined_spearman": 500,
+      "bytes": 87577864
+    }
+  }
+}

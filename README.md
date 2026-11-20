@@ -45,9 +45,9 @@ The ten action-expert steps took 188.68 ms at one candidate and 191.86 ms at six
 
 Follow the [installation and full evaluation instructions](docs/INSTALL.md) for the frozen SmolVLA and suite-specific VGAS critic.
 
-`ash
+```bash
 python scripts/eval_libero.py --suite object --candidates 4 --impl shared --seed 42 --episodes 2
-`
+```
 
 ## Run a real example
 
@@ -69,6 +69,10 @@ normalized_chunk = selected_action(pool, winner)  # keep batch dimension
 ```
 
 The [benchmark driver](scripts/benchmark_value_readout.py) shows how the policy, critic, observation processor and noise tensors are initialized. The standalone evaluator completed two full Object episodes in a freshly installed server environment using cached packages and pinned assets. The historical headline cohorts and their exact controls are documented in the [reproduction notes](docs/REPRODUCIBILITY.md).
+
+## Critic weight storage
+
+On Object, per-channel INT8 storage reduced the frozen critic's persistent tensor payload from **175.03 MB to 44.02 MB** including scales. It selected the original winner on **495/500** archived queries. On the same 300 physical layouts, the INT8-storage arm succeeded **170** times, full-precision shared Bo4 **169**, and single-proposal SmolVLA **144**. INT8 minus full precision was +0.33 pp (paired bootstrap 95% interval [0.00, 1.00], one rescue and zero harms). Weights are unpacked for computation. Native INT8 latency and target-chip execution remain open. [Precision analysis, case outcomes and code](docs/PRECISION.md).
 
 ## Compute per episode
 

@@ -126,6 +126,9 @@ def run(args):
                 batch = prepare(pre, env, obs)
                 if args.candidates > 1 and trainer is None:
                     trainer = critic(policy, batch, args.assets, args.suite, args.candidates)
+                    if args.critic_storage == "int8":
+                        from method.precision import pack_weights
+                        trainer.target_critic = pack_weights(trainer.critic, "int8")
                 query_seed = seed + steps if args.suite == "object" else (seed << 12) + queries + 1
                 rng = torch.Generator(device="cuda").manual_seed(query_seed)
                 bank = torch.randn(16, policy.config.chunk_size, policy.config.max_action_dim,
@@ -151,7 +154,7 @@ def run(args):
         finally:
             env.close()
         print(json.dumps(dict(suite=args.suite, task=args.task_id, init=index, seed=seed,
-                              candidates=args.candidates, impl=args.impl, steps=steps,
+                              candidates=args.candidates, impl=args.impl, critic_storage=args.critic_storage, steps=steps,
                               queries=queries, success=success)), flush=True)
 
 
@@ -160,12 +163,16 @@ if __name__ == "__main__":
     parser.add_argument("--suite", choices=["object","long"], default="object")
     parser.add_argument("--impl", choices=["original","shared"], default="shared")
     parser.add_argument("--candidates", type=int, choices=[1,2,4,8,16], default=4)
+    parser.add_argument("--critic-storage", choices=["original", "int8"], default="original",
+                        help="INT8 packs critic weights; arithmetic uses the checkpoint dtype.")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--task-id", type=int, default=None)
     parser.add_argument("--init-id", type=int, default=0)
     parser.add_argument("--episodes", type=int, default=1)
     parser.add_argument("--assets", type=Path, default=ROOT/"assets")
     args = parser.parse_args()
+    if args.candidates == 1 and args.critic_storage == "int8":
+        parser.error("Single-proposal BC has no critic to pack.")
     if args.task_id is None:
         args.task_id = 0 if args.suite == "object" else 2
     if not 0 <= args.task_id < 10 or args.episodes < 1 or args.init_id < 0:

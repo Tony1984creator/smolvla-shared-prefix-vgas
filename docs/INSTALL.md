@@ -28,3 +28,5 @@ CUDA_VISIBLE_DEVICES=0 python tests/test_equivalence.py
 ```
 
 Each JSON output line gives the suite, zero-based task and initial-state indices, seed, control steps, decisions and terminal success. Each additional episode advances the initial-state index and seed by one. Use the same indices and seed for paired runs. Select one candidate for BC. Use `--assets` for a separately stored checkpoint tree. The standalone examples evaluate the selected cases. The headline tables aggregate the published paired cohorts.
+
+For the Object weight-storage experiment add `--critic-storage int8` to the shared four-candidate command. This loads the original critic and packs its matrices with per-channel scales. [Precision protocol](PRECISION.md).

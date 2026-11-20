@@ -1,0 +1,1528 @@
+{
+  "episodes": 300,
+  "successes": 170,
+  "comparisons": {
+    "B-BC": {
+      "control_successes": 144,
+      "delta_pp": 8.666666666666668,
+      "ci95_pp": [
+        2.0,
+        15.333333333333332
+      ],
+      "rescues": 66,
+      "damages": 40
+    },
+    "B-Bo4": {
+      "control_successes": 169,
+      "delta_pp": 0.33333333333333337,
+      "ci95_pp": [
+        0.0,
+        1.0
+      ],
+      "rescues": 1,
+      "damages": 0
+    }
+  },
+  "cases": {
+    "object_t0_init20_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t7_init20_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init36_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init37_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init38_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init39_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init40_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init41_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init42_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init43_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t2_init44_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t2_init45_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t2_init46_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init47_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init48_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t2_init49_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init20_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t3_init21_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t3_init22_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t3_init23_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t3_init24_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init25_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init26_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t3_init27_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t3_init28_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init29_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t3_init30_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t5_init46_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t5_init47_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init48_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init49_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t6_init20_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init21_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t6_init22_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init23_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init24_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init25_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t6_init26_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init27_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t6_init28_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init29_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init30_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init31_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t6_init32_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init33_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init34_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t6_init35_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init36_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init37_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init38_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t6_init39_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init40_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init27_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t9_init28_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t9_init29_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t9_init30_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t9_init31_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t9_init32_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t9_init33_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t9_init34_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init35_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t9_init36_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t9_init37_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t9_init38_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init39_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init40_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init41_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init42_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init43_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t9_init44_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t9_init45_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init46_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t9_init47_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t9_init48_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init49_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t0_init21_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init22_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t0_init23_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init24_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t0_init25_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t0_init26_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init27_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init28_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init29_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init30_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init31_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init32_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t0_init33_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init34_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t0_init35_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init36_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init37_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init38_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init39_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t0_init40_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init41_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init42_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init43_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init44_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init45_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t3_init31_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t3_init32_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init33_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init34_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t3_init35_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t3_init36_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init37_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t3_init38_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init39_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init40_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init41_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t3_init42_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t3_init43_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t3_init44_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init45_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init46_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t3_init47_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t3_init48_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t3_init49_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t4_init20_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init21_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init22_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init23_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init24_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t4_init25_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t6_init41_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t6_init42_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init43_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t6_init44_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init45_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t6_init46_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init47_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t6_init48_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t6_init49_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t7_init21_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t7_init22_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init23_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init24_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t7_init25_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init26_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t7_init27_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t7_init28_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t7_init29_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init30_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init31_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init32_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t7_init33_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t7_init34_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t7_init35_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init36_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t0_init46_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init47_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init48_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t0_init49_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init20_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init21_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t1_init22_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t1_init23_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init24_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init25_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t1_init26_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init27_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t1_init28_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init29_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init30_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init31_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init32_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init33_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init34_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init35_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init36_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init37_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init38_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init39_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init40_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t4_init26_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t4_init27_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t4_init28_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init29_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t4_init30_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t4_init31_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init32_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init33_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init34_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init35_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init36_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init37_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init38_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init39_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init40_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t4_init41_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init42_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t4_init43_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init44_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t4_init45_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init46_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init47_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init48_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t4_init49_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t5_init20_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t7_init37_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init38_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t7_init39_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t7_init40_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init41_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init42_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t7_init43_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t7_init44_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init45_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init46_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init47_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init48_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t7_init49_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init20_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init21_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init22_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init23_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init24_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init25_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init26_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t8_init27_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t8_init28_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init29_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init30_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init31_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init41_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init42_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t1_init43_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init44_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t1_init45_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init46_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t1_init47_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init48_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t1_init49_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t2_init20_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init21_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init22_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init23_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init24_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t2_init25_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init26_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init27_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init28_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t2_init29_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init30_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init31_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init32_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init33_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t2_init34_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t2_init35_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init21_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t5_init22_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t5_init23_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init24_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t5_init25_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t5_init26_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init27_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init28_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t5_init29_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init30_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t5_init31_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init32_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init33_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init34_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t5_init35_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init36_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init37_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init38_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init39_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init40_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t5_init41_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t5_init42_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init43_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t5_init44_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t5_init45_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t8_init32_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t8_init33_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t8_init34_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init35_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init36_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init37_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t8_init38_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init39_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t8_init40_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init41_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init42_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init43_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t8_init44_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init45_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init46_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init47_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init48_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t8_init49_policy2": {
+      "int8": 1,
+      "B-BC": 1,
+      "B-Bo4": 1
+    },
+    "object_t9_init20_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init21_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t9_init22_policy2": {
+      "int8": 1,
+      "B-BC": 0,
+      "B-Bo4": 1
+    },
+    "object_t9_init23_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init24_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    },
+    "object_t9_init25_policy2": {
+      "int8": 0,
+      "B-BC": 0,
+      "B-Bo4": 0
+    },
+    "object_t9_init26_policy2": {
+      "int8": 0,
+      "B-BC": 1,
+      "B-Bo4": 0
+    }
+  }
+}

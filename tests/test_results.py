@@ -40,3 +40,16 @@ class ResultTests(unittest.TestCase):
         points = {(int(r["N"]), r["implementation"]): round(float(r["median_ms"]), 2) for r in rows}
         self.assertEqual(set(points), {(n, a) for n in (1, 2, 4, 8, 16) for a in ("original", "shared")})
         self.assertEqual((points[1, "shared"], points[16, "shared"]), (216.97, 219.66))
+
+    def test_precision_replay(self):
+        rows = json.loads((RESULTS / "precision/scores.json").read_bytes())
+        manifest = json.loads((RESULTS / "precision/queries.json").read_bytes())
+        self.assertEqual([row["query"] for row in rows], manifest)
+        self.assertEqual(len(set(manifest)), 500)
+        for row in rows:
+            self.assertEqual(len(row["original"]), 4)
+            self.assertEqual(row["original"], row["archived"])
+        for arm, count in [("float16", 500), ("bfloat16", 498), ("int8", 495)]:
+            def winner(scores):
+                return max(range(4), key=scores.__getitem__)
+            self.assertEqual(sum(winner(r["original"]) == winner(r[arm]) for r in rows), count)
