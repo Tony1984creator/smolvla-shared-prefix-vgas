@@ -1,0 +1,3 @@
+# Attribution
+
+Action selection, SmolVLA adaptation and critic weights are from [VGAS: Value-Guided Action-Chunk Selection for Few-Shot Vision-Language-Action Adaptation](https://ijcai.org/proceedings/2026/569). The project contribution is the shared-prefix integration and its paired evaluation. Corrector and QGF are prior methods examined in earlier experiments. See the [Corrector repository](https://github.com/ZJU-OmniAI/vla-corrector) and [QGF repository](https://github.com/zhouzypaul/qgf). Consult upstream distribution terms before redistributing code, checkpoints or simulator assets.
