@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Cite this software artifact when using the implementation or paired results."
+title: "Shared-prefix inference for VGAS on SmolVLA"
+type: software
+authors:
+  - name: "Shared-prefix SmolVLA contributors"
+version: 0.1.0
+repository-code: "https://github.com/Tony1984creator/smolvla-shared-prefix-vgas"
+license: MIT

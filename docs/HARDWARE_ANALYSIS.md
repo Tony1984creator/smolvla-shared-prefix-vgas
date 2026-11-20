@@ -2,6 +2,12 @@
 
 The question for a small accelerator is which work must scale with four proposed actions. At one control query the camera images, instruction and robot state are identical across all proposals. Each proposal still needs independent noise, action generation and a score. Our deployed-in-simulation path encodes the observation once, reuses its actor attention cache and supplies its features to the released critic. The next control query starts from a new observation.
 
+## Candidate scaling on A100
+
+![Four inference stages and their model-based roofline positions](media/profile.png)
+
+At one candidate, vision and prefix encoding represent 79% of the counted FLOPs, while the ten-step action expert accounts for 84% of stage latency. At sixteen candidates, expert latency rose from 188.68 to 191.86 ms. These stage timings document batching behavior; bandwidth saturation requires hardware counters. [Measurements, byte accounting and replay input](PROFILE.md).
+
 ## What prior work establishes
 
 | Work | Decision or optimization | Relation to this artifact |

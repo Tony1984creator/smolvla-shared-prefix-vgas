@@ -7,6 +7,10 @@
 - Object and Plus used the server's smolvla-plus environment, Long used vgas-author. Object PyTorch was 2.7.1+cu126 on A100 80 GB PCIe. Checkout, compatible LIBERO/PyTorch stack and asset layout are dependencies of the full evaluator.
 - Candidate generation emits 50×7 actions in 10 flow steps. Object critic consumes the first 32, Long critic 50. Both execute at most 20 before observing again. Episode budgets are 280 Object steps and 520 Long steps. Score with the smaller of the two critic outputs and execute the maximum-scoring candidate.
 
+## Standalone check
+
+The [standalone evaluator](../scripts/eval_libero.py) ran two complete Object episodes with shared Bo4 in a newly installed CPython 3.10.12 environment on A100. Each episode reached the 280-step limit after 14 queries and finished without success. A separate FP32 test compared all four candidates and scores to the original upstream selector. Both the selected index and dispatched chunk matched within the published test tolerances. Installation used a package cache and independent copies of frozen upstream code and model assets. See [installation instructions](INSTALL.md).
+
 ## Existing server evaluator entry points
 
 | Evidence | Server command from the official-reproductions root | Frozen inputs |

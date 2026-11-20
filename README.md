@@ -1,14 +1,53 @@
 # Shared-prefix inference for VGAS on SmolVLA
 
-We implement shared observation encoding for the released VGAS four-candidate selector on SmolVLA. Each control query encodes the scene once, generates four action chunks, and executes the highest-scoring proposal. On LIBERO-Object, prefix sharing reduces mean A100 decision time from **271.64 to 216.78 ms** at the same candidate count.
+SmolVLA encodes the current observation once, reuses it across four independently generated actions, and executes the proposal preferred by the released VGAS critic.
 
-[Method and code](method/shared_prefix_selection.py) · [Reproduce the numbers](docs/REPRODUCIBILITY.md) · [Research path](docs/RESEARCH_PATH.md) · [Hardware analysis](docs/HARDWARE_ANALYSIS.md) · [中文汇报图](docs/briefing.png)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Python 3.10](https://img.shields.io/badge/python-3.10-blue)](docs/INSTALL.md) [Project overview](#architecture) · ![arXiv: pending](https://img.shields.io/badge/arXiv-pending-lightgrey) · [Code](method/shared_prefix_selection.py) · [Data and settings](docs/REPRODUCIBILITY.md)
+
+![Closed-loop success in Object and Long Task2 alongside the A100 decision latency for one to sixteen candidates](docs/media/decision-cost.png)
+
+Left: marginal 95% bootstrap intervals resample physical layouts, keeping noise repeats together. The table below reports intervals for paired differences. Right: median latency over 60 repetitions per condition on a fixed Object observation, with the critic active even at one candidate. [Figure code](scripts/plot_overview.py) · [Latency measurements](results/fixed-observation-latency.csv)
+
+- **Task outcome.** Four-way selection improved Object success by 8.33 percentage points and Long Task2 by 12.11 points against one SmolVLA proposal.
+- **System cost.** At four candidates, sharing reduced the mean A100 decision time in Object rollouts from 271.64 to 216.78 ms. Single-proposal SmolVLA took 210.57 ms.
+- **Scaling.** Increasing the candidate batch from one to sixteen raised fixed-observation median latency from 252.21 to 331.13 ms in original VGAS and from 216.97 to 219.66 ms with sharing.
+
+## Closed-loop results
+
+| Question | Paired result | Success-rate difference |
+|---|---|---:|
+| Four proposals vs one · Object, ten tasks | 144 → 169 successes / 300 | +8.33 pp [1.67, 15.00] |
+| Four proposals vs one · Long, Task2 | 93 → 124 / 256 | +12.11 pp [5.86, 18.75] |
+| Four proposals vs one · Object with fixed Plus lighting | 100 → 123 / 300 | +7.67 pp, adjusted interval [−1.67, 17.00] |
+| Shared vs original implementation · Object, four proposals in both | 170 → 169 / 300 | −0.33 pp [−5.00, 4.33] |
+
+On Object the shared implementation saved **20.2%** of mean A100 decision time at four candidates. Timing includes encoding, generation and scoring. Action postprocessing and simulation are outside that timer. The success interval still allows several percentage points of difference. Long Task2 was selected in development and uses 128 historical layouts with two noise repeats each. All evaluations use LIBERO simulation. Target-chip latency and power remain unmeasured.
+
+### Fixed-observation scaling
+
+| Candidates | Original median (ms) | Shared median (ms) | Original peak allocated (MiB) | Shared peak allocated (MiB) |
+|---:|---:|---:|---:|---:|
+| 1 | 252.21 | 216.97 | 1624.5 | 1623.9 |
+| 2 | 257.25 | 218.66 | 1656.7 | 1628.4 |
+| 4 | 266.98 | 220.46 | 1714.9 | 1649.2 |
+| 8 | 287.34 | 218.52 | 1829.4 | 1691.1 |
+| 16 | 331.13 | 219.66 | 2063.5 | 1773.8 |
+
+The ten action-expert steps took 188.68 ms at one candidate and 191.86 ms at sixteen in the stage profile. [Stage breakdown and roofline](docs/PROFILE.md).
 
 ## Architecture
 
 ![One shared observation encoding feeds the four-proposal actor and the twin critic. The winner supplies up to twenty actions before the next observation.](docs/media/shared-prefix-architecture.svg)
 
 **VGAS supplies** the frozen actor, the suite-specific critic and the selection rule. **Our implementation** shares the observation encoding across generation and scoring, preserves separate noise for each proposal, and dispatches the winning chunk. Both critic heads evaluate the first 32 proposed steps on Object or all 50 on Long. The smaller of the two scores ranks each proposal. An episode that succeeds during execution stops immediately. [VGAS source](https://github.com/Jyugo-15/VGAS) · [Pinned weights and evaluation settings](docs/REPRODUCIBILITY.md)
+
+## Installation and evaluation
+
+Follow the [installation and full evaluation instructions](docs/INSTALL.md) for the frozen SmolVLA and suite-specific VGAS critic.
+
+`ash
+python scripts/eval_libero.py --suite object --candidates 4 --impl shared --seed 42 --episodes 2
+`
 
 ## Run a real example
 
@@ -29,18 +68,19 @@ normalized_chunk = selected_action(pool, winner)  # keep batch dimension
 # Apply the actor's action postprocessor before sending up to 20 steps to the robot.
 ```
 
-The [benchmark driver](scripts/benchmark_value_readout.py) shows how the policy, critic, observation processor and noise tensors are initialized. Full simulation uses the archived evaluator and assets described in the [reproduction notes](docs/REPRODUCIBILITY.md); a fresh-machine end-to-end run remains unverified.
+The [benchmark driver](scripts/benchmark_value_readout.py) shows how the policy, critic, observation processor and noise tensors are initialized. The standalone evaluator completed two full Object episodes in a freshly installed server environment using cached packages and pinned assets. The historical headline cohorts and their exact controls are documented in the [reproduction notes](docs/REPRODUCIBILITY.md).
 
-## Closed-loop results
+## Compute per episode
 
-| Question | Paired result | Success-rate difference |
-|---|---|---:|
-| Four proposals vs one · Object, ten tasks | 144 → 169 successes / 300 | +8.33 pp [1.67, 15.00] |
-| Four proposals vs one · Long, Task2 | 93 → 124 / 256 | +12.11 pp [5.86, 18.75] |
-| Four proposals vs one · Object with fixed Plus lighting | 100 → 123 / 300 | +7.67 pp, adjusted interval [−1.67, 17.00] |
-| Shared vs original implementation · Object, four proposals in both | 170 → 169 / 300 | −0.33 pp [−5.00, 4.33] |
+| Suite and arm | Candidates per query | Additional critic parameters | Mean decision time | Mean queries per episode |
+|---|---:|---:|---:|---:|
+| Object · SmolVLA | 1 | 0 | 210.57 ms | 10.84 |
+| Object · original Bo4 | 4 | 43,756,674 | 271.64 ms | 10.32 |
+| Object · shared Bo4 | 4 | 43,756,674 | 216.78 ms | 10.33 |
+| Long Task2 · SmolVLA | 1 | 0 | 245.30 ms | 21.05 |
+| Long Task2 · shared Bo4 | 4 | 43,756,674 | 250.01 ms | 19.33 |
 
-On Object the shared implementation saved **20.2%** of mean A100 decision time at four candidates. Timing includes encoding, generation and scoring. Action postprocessing and simulation are outside that timer. The success interval still allows several percentage points of difference. Long Task2 was selected in development and uses 128 historical layouts with two noise repeats each. All evaluations use LIBERO simulation. Target-chip latency and power remain unmeasured.
+The same four proposals form one batch. Prefix/KV reuse has precedents in language models and robotics. Our contribution is a system-level characterization of shared observation encoding for flow-generated actions ranked by a learned critic, including its closed-loop outcomes and candidate scaling on A100. [Related systems and attribution](docs/HARDWARE_ANALYSIS.md).
 
 ## How we arrived here
 
@@ -49,3 +89,19 @@ Matched replanning and zero-gradient controls narrowed what we could attribute t
 ## Simulation demos
 
 [View paired Object rollouts and original MP4 recordings](docs/DEMOS.md).
+
+## Citation and acknowledgments
+
+The software citation below identifies this artifact while the manuscript is in preparation. The repository preserves the upstream weights and evaluation provenance in its [third-party notices](THIRD_PARTY_NOTICES.md).
+
+```bibtex
+@software{sharedprefix_smolvla_2026,
+  author  = {{Shared-prefix SmolVLA contributors}},
+  title   = {Shared-prefix inference for VGAS on SmolVLA},
+  year    = {2026},
+  version = {0.1.0},
+  url     = {https://github.com/Tony1984creator/smolvla-shared-prefix-vgas}
+}
+```
+
+This artifact uses [Xu et al., VGAS](https://ijcai.org/proceedings/2026/569), [LeRobot](https://github.com/huggingface/lerobot) and [Liu et al., LIBERO](https://arxiv.org/abs/2306.03310). The [workshop technical-report draft](workshop/README.md) documents the earlier [VLA-Corrector](https://github.com/ZJU-OmniAI/vla-corrector) and [Q-Guided Flow](https://github.com/zhouzypaul/qgf) reproductions. Original project code is available under the [MIT license](LICENSE).
