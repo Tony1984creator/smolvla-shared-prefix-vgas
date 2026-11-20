@@ -1,50 +1,67 @@
 # Shared-prefix inference for VGAS on SmolVLA
 
-This research artifact evaluates the released VGAS action selector and implements shared observation encoding for batched inference. The SmolVLA actor samples four action chunks from independent noise. The released critic ranks them. Our implementation computes the vision-language prefix once per query and reuses its attention cache and critic features across candidates.
+How much extra time does it cost a small robot policy to choose among four possible actions? On LIBERO-Object, the released VGAS four-candidate pipeline took **271.64 ms** per decision on A100. Encoding the same camera views, instruction and robot state once brought that down to **216.78 ms**. Single-sample SmolVLA took **210.57 ms** in the same experiment.
 
-**Hardware contribution.** On the same A100 and at four candidates per decision, sharing the actor prefix reduces mean decision time from 271.64 to 216.78 ms. The single-sample control and the equal-candidate control answer different questions. The first measures task benefit from selection; the second measures implementation cost.
+[Method and code](method/shared_prefix_selection.py) · [Reproduce the numbers](docs/REPRODUCIBILITY.md) · [Research path](docs/RESEARCH_PATH.md) · [Hardware analysis](docs/HARDWARE_ANALYSIS.md) · [中文汇报图](docs/briefing.png)
 
-```text
-two cameras + instruction + robot state
-                 │
-       one shared observation encoding ─────────────┐
-                 │                                  │
-       four independent action proposals            │
-                 └──── released twin critic ◄───────┘
-                             │
-                 execute the highest-scoring
-                 proposal for up to 20 steps
-                             │
-                        observe again
+## What selection looks like
+
+Two archived LIBERO-Object rollouts show why we count both recoveries and harms. Within each row the actor starts from the same physical layout with the same policy-noise index. The clips show recorded camera observations at policy queries; their durations differ because episodes can finish early.
+
+| Paired Object case | SmolVLA · execute one proposal | VGAS · score four and execute the winner |
+|---|---|---|
+| **Recovery** · task 0, layout 22, noise 1 | ![Single proposal, unsuccessful](docs/media/object_rescues_0_BC.gif) | ![Four proposals, successful](docs/media/object_rescues_0_Bo4.gif) |
+| **Harm** · task 1, layout 22, noise 0 | ![Single proposal, successful](docs/media/object_damages_0_BC.gif) | ![Four proposals, unsuccessful](docs/media/object_damages_0_Bo4.gif) |
+
+These clips come from the earlier **native VGAS** comparison. They illustrate the selection mechanism. The matched benchmark below measures our shared-prefix implementation.
+
+## One decision, from observation to robot action
+
+```mermaid
+flowchart LR
+    O["Two cameras, instruction, robot state"] --> E["Encode once"]
+    E -->|attention cache| A["SmolVLA generates four 50-step chunks"]
+    N["Four independent noise samples"] --> A
+    E -->|observation features| Q["Released VGAS critic scores each chunk"]
+    A --> Q
+    Q --> X["Execute up to 20 steps of the highest-scoring chunk"]
+    X -->|still running: observe again| O
 ```
 
-[Hardware analysis and related work](docs/HARDWARE_ANALYSIS.md) · [Reference implementation](method/shared_prefix_selection.py) · [Reproducibility](docs/REPRODUCIBILITY.md) · [Workshop report](workshop/README.md)
+**VGAS supplies** the frozen actor, the suite-specific critic and the selection rule. **Our implementation** shares the observation encoding across generation and scoring, preserves separate noise for each proposal, and dispatches the winning chunk. Both critic heads evaluate the first 32 proposed steps on Object or all 50 on Long. The smaller of the two scores ranks each proposal. An episode that succeeds during execution stops immediately. [VGAS source](https://github.com/Jyugo-15/VGAS) · [Pinned weights and evaluation settings](docs/REPRODUCIBILITY.md)
 
-## Main results
+## Run a real example
 
-| Evaluation | Paired comparison | Success | Change |
-|---|---|---:|---:|
-| LIBERO-Object, all 10 tasks | Single sample → shared-prefix Bo4 | 144/300 → 169/300 | +8.33 pp [1.67, 15.00] |
-| LIBERO-Long, Task2 | Single sample → shared-prefix Bo4 | 93/256 → 124/256 | +12.11 pp [5.86, 18.75] |
-| LIBERO-Plus, fixed Object lighting variants | Single sample → shared-prefix Bo4 | 100/300 → 123/300 | +7.67 pp, adjusted interval [−1.67, 17.00] |
-
-On Object, the authors’ original Bo4 implementation took **271.64 ms** per decision on A100. Our shared-prefix Bo4 took **216.78 ms** (−20.2%). The same-run single-sample baseline took 210.57 ms. Original and shared Bo4 both use four candidates and had 170/300 and 169/300 successes. The paired shared-minus-original interval was [−5.00, 4.33] pp. The comparison is descriptive. Timing covers encoding, generation and scoring, excluding action postprocessing and simulation.
-
-Task2 was selected using development data. The replay uses 128 historical physical layouts with two noise repeats per layout. All settings use LIBERO simulation. The lighting result is a perturbation check. Target-chip latency, memory placement and power remain to be measured.
-
-## Verify and reproduce
+From the repository root, Python 3 is sufficient to inspect a recorded decision and verify the benchmark arithmetic.
 
 ```bash
+python examples/inspect_decision.py --task 0 --query first
 python scripts/verify_results.py
 ```
 
-The command verifies the released paired outcomes and recomputes headline success counts and same-run A100 means without simulator or weights. The inference implementation is in [method/shared_prefix_selection.py](method/shared_prefix_selection.py). [Reproduction notes](docs/REPRODUCIBILITY.md) map each result to its evaluator, weights, server environment and trial configuration. A fresh-machine end-to-end run remains to be validated.
+In that recorded query, the four scores are **−59.346, −61.862, −56.383 and −57.653**. Candidate **2** (zero-based) wins. Scores express relative preference among chunks at this observation; they have no percentage interpretation. The corresponding call inside a loaded evaluation environment is:
 
-- [Workshop-style report on Corrector, QGF and VGAS](workshop/README.md)
-- [Experiment archive](docs/EXPERIMENT_ARCHIVE.md)
-- [Briefing figure](docs/briefing.png)
-- [Third-party attribution](docs/ATTRIBUTION.md)
+```python
+from method.shared_prefix_selection import select, selected_action
 
-## What else can hardware skip?
+pool, scores, winner, _ = select(policy, trainer, batch, noise)
+normalized_chunk = selected_action(pool, winner)  # keep batch dimension
+# Apply the actor's action postprocessor before sending up to 20 steps to the robot.
+```
 
-A replay on 20 recorded Object observations tests a value-token-only readout in the critic's final layer. The four-way winner stayed the same in all 20 pairs. The isolated critic median went from 4.79 to 4.92 ms. The experiment identifies removable computation and the A100 timing bounds its practical benefit. [Code, prior art and paired measurements](docs/HARDWARE_ANALYSIS.md).
+The [benchmark driver](scripts/benchmark_value_readout.py) shows how the policy, critic, observation processor and noise tensors are initialized. Full simulation uses the archived evaluator and assets described in the [reproduction notes](docs/REPRODUCIBILITY.md); a fresh-machine end-to-end run remains unverified.
+
+## Closed-loop results
+
+| Question | Paired result | Success-rate difference |
+|---|---|---:|
+| Four proposals vs one · Object, ten tasks | 144 → 169 successes / 300 | +8.33 pp [1.67, 15.00] |
+| Four proposals vs one · Long, Task2 | 93 → 124 / 256 | +12.11 pp [5.86, 18.75] |
+| Four proposals vs one · Object with fixed Plus lighting | 100 → 123 / 300 | +7.67 pp, adjusted interval [−1.67, 17.00] |
+| Shared vs original implementation · Object, four proposals in both | 170 → 169 / 300 | −0.33 pp [−5.00, 4.33] |
+
+On Object the shared implementation saved **20.2%** of mean A100 decision time at four candidates. Timing includes encoding, generation and scoring. Action postprocessing and simulation are outside that timer. The success interval still allows several percentage points of difference. Long Task2 was selected in development and uses 128 historical layouts with two noise repeats each. All evaluations use LIBERO simulation. Target-chip latency and power remain unmeasured.
+
+## How we arrived here
+
+Matched replanning and zero-gradient controls narrowed what we could attribute to visual alerts and gradient guidance. Comparing completed candidates then gave us a way to test task value separately from execution cost. A later readout experiment kept the selected action on 20/20 replayed observations, but the A100 timing supported keeping the original critic readout. [Exploration, controls and candidate-budget figure](docs/RESEARCH_PATH.md) · [Corrector and QGF workshop draft](workshop/README.md) · [Raw results](results/) · [Attribution](docs/ATTRIBUTION.md)
