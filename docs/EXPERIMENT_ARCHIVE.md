@@ -17,3 +17,8 @@ The local and server research trees retain their original relative paths. Use th
 - `outputs/p4_closed_loop_20261117` is a historical invalid run. The wrapper executed candidate zero regardless of the scorer. Use the corrected run above for conclusions.
 
 Corrector public-data self-training is a method reproduction. The matched shorter-horizon control did not establish a separate trigger benefit. QGF reproduced positive results in selected official configurations. The visual VLA transfer did not establish stable gain. The final shared-prefix selector is the paper artifact.
+
+## Workspace layout after 2026-11-20
+
+- Local loose historical method implementations and tests are under `work/archive-20261120/early-method-staging`; generated report previews are under `work/archive-20261120/document-previews`. The relocation map is `work/archive-20261120/RELOCATION_MAP.json`.
+- Research notes relocated from the official reproduction root are grouped in `archives/research-notes` in both copies. Each copy has its own relocation manifest because the notes and references differ. Canonical run outputs and models remain at their original locations.

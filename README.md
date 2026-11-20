@@ -22,6 +22,7 @@ python scripts/verify_results.py
 
 The command verifies the released paired outcomes and recomputes headline success counts and same-run A100 means without simulator or weights. The inference implementation is in [method/shared_prefix_selection.py](method/shared_prefix_selection.py). [Reproduction notes](docs/REPRODUCIBILITY.md) map each result to its evaluator, weights, server environment and trial configuration. A fresh-machine end-to-end run remains to be validated.
 
+- [Workshop-style report on Corrector, QGF and VGAS](workshop/README.md)
 - [Experiment archive](docs/EXPERIMENT_ARCHIVE.md)
 - [Briefing figure](docs/briefing.png)
 - [Third-party attribution](docs/ATTRIBUTION.md)
