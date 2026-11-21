@@ -1,0 +1,42 @@
+% Algorithm and evaluation section for the hardware manuscript.
+% Include from a parent document after resolving table paths.
+\subsection{Action selection on a shared observation}
+At each control query, a frozen SmolVLA actor samples four candidate action
+chunks using independent noise. The released VGAS critic ranks these chunks.
+For each candidate it uses the lower of its two value estimates; the executor
+dispatches the highest-ranked chunk. Our implementation encodes the observation
+once per query, shares its attention cache across the four denoising branches,
+and passes its features to the critic. Cross-candidate prefix reuse has
+precedents in language-model inference and VLA systems, including Zora and
+PACT-VLA. Our contributions are the integration for a flow actor and learned
+critic, the system-level timing measurements, and the evaluation of per-channel
+INT8 storage for the frozen critic.
+
+\subsection{Closed-loop and hardware evaluation}
+The actor generates 50 steps, the Object critic scores the first 32 and the
+Long critic scores all 50. The executor commits up to 20 actions before a new
+observation. The single-candidate control and the original four-candidate
+implementation respectively isolate the task effect of selection and the
+systems effect of observation reuse. Object covers ten tasks; Long covers
+Task2, selected during development, with two noise repeats per physical layout.
+Both suites use the same LIBERO simulator. Fixed lighting variants provide a
+separate perturbation check. GPU measurements use an A100; deployment latency,
+energy and bandwidth on the intended chip remain open.
+
+On Object, the critic matrices are also stored as signed eight-bit integers
+with per-channel scales and unpacked to the original arithmetic precision on
+access. Reported bytes count persistent critic tensors including scales.
+The paired success interval describes uncertainty in the observed difference;
+formal equivalence requires a prespecified margin and an equivalence test.
+
+\subsection{Replay of the ten-step denoising loop}
+On a fixed Object observation, we captured the ten action-expert iterations
+with CUDA Graphs and refreshed the prefix cache and noise for every replay.
+At four candidates, warm replay reduced the median expert time from 189.84
+to 47.38 ms and full decision time from 225.74 to 80.54 ms on A100.
+After capture, raising the candidate count from one to sixteen increased
+full decision latency from 69.22 to 119.78 ms. The weak dependence on batch
+size observed in eager execution therefore depends on its scheduling regime.
+Measurements exclude one-time capture. On nine strict FP32 comparisons,
+the returned candidate actions, critic scores and selected indices agreed.
+Closed-loop success was measured for the eager implementation.

@@ -35,6 +35,10 @@ On Object the shared implementation saved **20.2%** of mean A100 decision time a
 
 The ten action-expert steps took 188.68 ms at one candidate and 191.86 ms at sixteen in the stage profile. [Stage breakdown and roofline](docs/PROFILE.md).
 
+### What changes with CUDA Graph replay?
+
+With four candidates on a fixed real Object observation, capturing the ten action-expert steps reduced their median latency from **189.84 to 47.38 ms** and the complete decision from **225.74 to 80.54 ms**. Once dispatch overhead fell, batch size mattered again: the complete replay decision took **69.22 ms at one candidate** and **119.78 ms at sixteen**. Measurements include refreshing the inputs for each replay and exclude one-time capture. This is a timing and numerical-equivalence experiment on A100; closed-loop success above was measured with eager execution. [Protocol and raw timing samples](docs/PROFILE.md).
+
 ## Architecture
 
 ![One shared observation encoding feeds the four-proposal actor and the twin critic. The winner supplies up to twenty actions before the next observation.](docs/media/shared-prefix-architecture.svg)
@@ -84,11 +88,15 @@ On Object, per-channel INT8 storage reduced the frozen critic's persistent tenso
 | Long Task2 · SmolVLA | 1 | 0 | 245.30 ms | 21.05 |
 | Long Task2 · shared Bo4 | 4 | 43,756,674 | 250.01 ms | 19.33 |
 
-The same four proposals form one batch. Prefix/KV reuse has precedents in language models and robotics. Our contribution is a system-level characterization of shared observation encoding for flow-generated actions ranked by a learned critic, including its closed-loop outcomes and candidate scaling on A100. [Related systems and attribution](docs/HARDWARE_ANALYSIS.md).
+The same four proposals form one batch. Prefix/KV reuse has precedents in language models and robotics. Our contributions are the shared-prefix inference implementation, the system-level latency characterization on A100, and the evaluation of INT8 critic weight storage in closed-loop simulation. [Related systems and attribution](docs/HARDWARE_ANALYSIS.md).
 
 ## How we arrived here
 
 Matched replanning and zero-gradient controls narrowed what we could attribute to visual alerts and gradient guidance. Comparing completed candidates then gave us a way to test task value separately from execution cost. A later readout experiment kept the selected action on 20/20 replayed observations, but the A100 timing supported keeping the original critic readout. [Exploration, controls and candidate-budget figure](docs/RESEARCH_PATH.md) · [Corrector and QGF workshop draft](workshop/README.md) · [Raw results](results/) · [Attribution](docs/ATTRIBUTION.md)
+
+## Paper materials
+
+[Algorithm and evaluation text](paper/algorithm.tex) · [Generated LaTeX tables](paper/tables/) · [Table generator](scripts/make_paper_tables.py).
 
 ## Simulation demos
 

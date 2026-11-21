@@ -2,11 +2,15 @@
 
 The question for a small accelerator is which work must scale with four proposed actions. At one control query the camera images, instruction and robot state are identical across all proposals. Each proposal still needs independent noise, action generation and a score. Our deployed-in-simulation path encodes the observation once, reuses its actor attention cache and supplies its features to the released critic. The next control query starts from a new observation.
 
+The four-candidate selection rule and pretrained networks come from VGAS. We implemented shared observation encoding, characterized decision latency on A100, and evaluated INT8 critic weight storage. Object and Long use the same LIBERO simulator; Long Task2 was selected during development. Target-chip latency and energy remain unmeasured. [Precision measurements](PRECISION.md).
+
 ## Candidate scaling on A100
 
 ![Four inference stages and their model-based roofline positions](media/profile.png)
 
 At one candidate, vision and prefix encoding represent 79% of the counted FLOPs, while the ten-step action expert accounts for 84% of stage latency. At sixteen candidates, expert latency rose from 188.68 to 191.86 ms. These stage timings document batching behavior; bandwidth saturation requires hardware counters. [Measurements, byte accounting and replay input](PROFILE.md).
+
+At four candidates, a warm CUDA Graph replay of the ten expert steps saved 75.0% of expert time versus matched eager execution. After replay the expert takes 37.37 ms at one candidate and 83.29 ms at sixteen. This isolates a substantial graph-removable execution cost in the eager implementation; it does not separately identify Python dispatch, driver launch overhead or device idle time. [A3 protocol and results](PROFILE.md).
 
 ## What prior work establishes
 

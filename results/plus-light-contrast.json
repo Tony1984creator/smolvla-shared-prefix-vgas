@@ -1,0 +1,16 @@
+{
+  "source": "deliverables/hardware_paper_algo_20261114/protocol_confirmation_20261118/FINAL_CONTRASTS.json",
+  "source_sha256": "83595a93033871a816860649ab2e7abbfce2e092b3070f2150845b3f9146506a",
+  "comparison_key": "光照变体，四选一相对单候选",
+  "comparison": {
+    "delta_pp": 7.666666666666666,
+    "ci95_pp": [
+      1.3333333333333335,
+      14.333333333333334
+    ],
+    "familywise95_pp": [
+      -1.6666666666666667,
+      17.0
+    ]
+  }
+}

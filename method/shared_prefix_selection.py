@@ -15,7 +15,7 @@ def pool_diversity(pool):
     return float(torch.pdist(pool[:, :20, :7].float().flatten(1), p=1).mean() / 140)
 
 
-def select(policy, trainer, batch, noise, record_steps=(), score_final=True):
+def select(policy, trainer, batch, noise, record_steps=(), score_final=True, *, denoise_loop=None):
     import torch
     from models.smolvla.modeling_smolvla import make_att_2d_masks
     from qchunk.critic_adapters import PolicyEmbeddings
@@ -86,7 +86,11 @@ def select(policy, trainer, batch, noise, record_steps=(), score_final=True):
         )
         return torch.stack(heads).min(0).values[:, 0]
 
-    while t >= -dt / 2:
+    if denoise_loop is not None and record_steps:
+        raise ValueError('Custom denoising loop does not collect intermediate scores')
+    if denoise_loop is not None:
+        x = denoise_loop(expanded_pad, cache, x, t, dt)
+    while denoise_loop is None and t >= -dt / 2:
         v = model.denoise_step(expanded_pad, cache, x, t.expand(n))
         step += 1
         # Reverse-time convention is t:1->0, clean endpoint estimate x-t*v.

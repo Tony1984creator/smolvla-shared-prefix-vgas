@@ -42,3 +42,25 @@ export OBS_NPZ=examples/object_query/observation.npz EPISODE_JSON=examples/objec
 python scripts/profile_decision.py --loader profile_loader:load --output profile.json
 python scripts/profile_plot.py profile.json profile.png
 ```
+
+## A3. Capturing the ten-step action expert
+
+On one shared A100 80 GB PCIe with PyTorch 2.7.1+cu126, replaying the ten Euler updates reduced median expert latency by 56–80%. At N=4 the complete decision fell from 225.74 to 80.54 ms. Once replay removed much of the eager scheduling cost, widening the candidate pool had a visible cost: the graph expert took 37.37 ms at N=1 and 83.29 ms at N=16. [Raw paired samples and numerical checks](../results/cuda-graph.json)
+
+| N | Eager expert (ms) | Warm graph expert (ms) | Reduction | Eager decision (ms) | Warm graph decision (ms) | Reduction |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 187.02 | 37.37 | 80.0% | 222.91 | 69.22 | 68.9% |
+| 4 | 189.84 | 47.38 | 75.0% | 225.74 | 80.54 | 64.3% |
+| 16 | 188.91 | 83.29 | 55.9% | 226.23 | 119.78 | 47.1% |
+
+Both timed paths use the P5 model precision, exactly ten iterations and an equivalent device-created constant suffix attention mask. Each decision recomputes the vision-language prefix and scores the candidates with the twin-min critic. The graph copies fresh prefix KV, mask, noise and time scalars into fixed buffers. Expert CUDA events include those graph input copies. Synchronized host wall time for a full decision includes prefix computation, all updates and critic selection. The observation was the resident P5 Object task 0, initial state 20, query 0. Timings exclude graph setup/capture, noise generation, observation preprocessing, simulation and I/O.
+
+Each N used six warm-up pairs followed by 30 measured pairs with alternating order and fresh matched noise. The table gives medians per path. The reduction measures the elapsed time recovered by CUDA Graph execution on this software stack, including changes to host dispatch and device scheduling. Separating launch overhead from kernel execution would require a kernel-level trace.
+
+We compared every returned action chunk, every critic score and the winning index with the original shared eager implementation. For each N we used three noise banks and perturbed the preprocessed state in the third check to exercise refreshed prefix KV. Maximum absolute action and score errors were zero and all nine winners matched in each precision mode. The separate FP32 check casts actor and critic parameters to float32 and disables matmul and cuDNN TF32.
+
+With the same environment variables as the P5 profile above, run:
+
+```sh
+python scripts/benchmark_cuda_graph.py --reps 30 --output cuda-graph.json
+```
