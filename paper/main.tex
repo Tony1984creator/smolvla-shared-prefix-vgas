@@ -1,0 +1,154 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[letterpaper,margin=.72in,columnsep=.23in]{geometry}
+\usepackage{amsmath,graphicx,hyperref}
+\IfFileExists{paper/metrics.tex}{\newcommand{\paperdir}{paper/}}{\newcommand{\paperdir}{}}
+\input{\paperdir metrics.tex}
+\newcommand{\placeholder}[1]{\texttt{[#1]}}
+\title{Shared-Prefix Inference for Value-Guided Action Selection in SmolVLA}
+\author{\placeholder{Author list}\\\placeholder{Affiliations}}
+\date{\placeholder{Target venue and submission format}}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Value-guided action selection lets a frozen robot policy compare multiple
+proposals at each control query. We implement released VGAS selection on a
+frozen SmolVLA actor and reuse one observation encoding for generation and
+scoring. In paired LIBERO evaluation, success improves by \ObjectGain{}
+percentage points on Object and \LongGain{} on Long Task2 relative to a single
+proposal. Prefix sharing reduces the four-candidate latency overhead relative
+to one proposal from \OriginalOverhead\% to \SharedOverhead\% on A100.
+Separately, per-channel INT8 storage reduces persistent critic tensors from
+\FullPrecisionMB{} to \PackedMB{} MB with similar outcomes on the paired Object
+cohort. At four candidates, warm CUDA Graph replay reduces expert time from
+\ExpertEager{} to \ExpertGraph{} ms and full decision time from \DecisionEager{}
+to \DecisionGraph{} ms on a fixed observation. Replay exposes candidate-dependent
+work that eager scheduling had largely masked.
+\end{abstract}
+
+\section{Introduction}
+A vision-language-action policy turns camera images, an instruction and robot
+state into a sequence of actions. Under limited adaptation data, different
+proposals from the same actor can lead to different outcomes. A critic can
+choose among them. An efficient implementation must account for both proposal
+generation and scoring. The observation stays fixed within a query, while each
+proposal starts from independent noise.
+
+Using the released SmolVLA/VGAS combination \cite{smolvla,vgas}, we contribute
+(i) a frozen-policy implementation and paired closed-loop evaluation of VGAS
+selection on Object and Long Task2,
+(ii) a shared-prefix implementation and a separate evaluation of per-channel
+INT8 storage for the critic, and
+(iii) a stage profile and matched CUDA Graph experiment that quantify
+graph-removable execution cost in the action expert.
+
+\section{Related Work}
+Value-Guided Policy Steering reranks actions using an offline-trained value
+function \cite{vgps}. RoboMonkey studies test-time sampling and verification
+for robot policies \cite{robomonkey}. VGAS provides the action-chunk critic
+and scoring rule that we use \cite{vgas}. Q-Guided Flow and Guided Action
+Flow use critic gradients during action generation \cite{qgf,gaf}.
+Our evaluation compares completed chunks under a frozen selection rule.
+
+Zora shares attention keys and values for autoregressive proposal verification.
+PACT-VLA shares context while scoring proposals under a newer observation
+\cite{zora,pact}. Adaptive decoding in diffusion driving VLAs targets the
+denoising budget itself \cite{early}. CUDA Graphs can reduce repeated host
+dispatch by replaying captured diffusion workloads \cite{graphs}. These
+precedents motivate our measurement of how execution scheduling and proposal
+batch size interact when a flow actor feeds a learned critic.
+
+\section{Method}
+\input{\paperdir algorithm.tex}
+
+\section{System Design and Measurement}
+The shared encoding produces attention keys and values for the actor and
+observation features for the twin critic. Each candidate retains its own
+denoising trajectory through the Euler updates. The critic evaluates the pool
+as a batch and the executor slices out and postprocesses the selected candidate.
+A new observation refreshes the prefix.
+
+For the fixed-shape experiment we capture the denoising loop and refresh its KV
+cache, mask, noise and time scalars before each replay. The surrounding decision
+remains eager. Full-decision timing includes encoding, generation, scoring and
+selection. The fixed-observation replay scope excludes preprocessing,
+postprocessing, simulation and one-time capture. The experiment alternates
+matched eager and replay runs after warm-up. Strict FP32 checks disable TF32
+and compare returned actions, critic scores and winner indices.
+
+\section{Evaluation}
+\subsection{Closed-loop outcomes}
+We pair by physical layout and policy noise. Layout-level resampling keeps
+repeated noises together within a physical layout. Table~\ref{tab:closed-loop}
+compares shared Bo4 with the single-proposal and same-width original comparators.
+The lighting condition is a secondary perturbation check. Its familywise
+interval spans zero. The confirmed Object cohort comes from the corrected
+executor. An earlier wrapper always dispatched candidate zero, so that batch
+is excluded from the evidence.
+
+\subsection{Decision latency and critic storage}
+Across Object rollout decisions, mean latency is \BaselineTime{} ms for one
+proposal, \OriginalTime{} ms for original Bo4 and \SharedTime{} ms for shared
+Bo4. Table~\ref{tab:scaling} uses a separate fixed-observation protocol with
+the critic active at every candidate count. Table~\ref{tab:precision} reports
+winner agreement and paired Object outcomes with packed critic matrices.
+The storage counts include scales. Computation uses unpacked weights.
+
+\subsection{Denoising schedule}
+Figure~\ref{fig:stages} and Table~\ref{tab:profile} show that action generation
+dominates eager stage time, while vision and prefix account for a substantial
+fraction of registered FLOPs. Logical activation and parameter bytes provide
+modeling inputs. Physical DRAM traffic remains unmeasured.
+
+Graph replay reduces expert time by \ExpertReduction\% at four candidates.
+Figure~\ref{fig:decision} and Table~\ref{tab:graph} show that the latency
+increase with candidate count is more visible after replay. The reduction
+captures graph-removable elapsed time on this software stack, including host
+dispatch and device scheduling effects. In the \FpChecks{} strict FP32
+comparisons, actions, scores and selected indices agreed.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\columnwidth]{\paperdir figures/decision-latency.pdf}
+\caption{Matched eager and CUDA Graph decisions on a fixed Object observation.
+Input refresh is included. One-time capture is excluded.}
+\label{fig:decision}
+\end{figure}
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\columnwidth]{\paperdir figures/stage-latency.pdf}
+\caption{Eager stage profile on A100. Stacks sum separately measured stage medians.}
+\label{fig:stages}
+\end{figure}
+\input{\paperdir tables/closed-loop.tex}
+\input{\paperdir tables/scaling.tex}
+\input{\paperdir tables/profile.tex}
+\input{\paperdir tables/precision.tex}
+\input{\paperdir tables/graph.tex}
+
+\section{Discussion and Limitations}
+The flat eager curve describes the measured execution regime. Replay removes
+substantial scheduling cost and reveals increased incremental cost for wider
+batches. Determining how much comes from individual launches would require
+kernel-level traces. All timing is on A100. Target-chip latency, bandwidth
+and energy remain open. Closed-loop success measurements use eager execution.
+VGAS supplies the actor, critic and selection rule. Object and Long use the
+same LIBERO simulator \cite{libero}. Long is scoped to Task2 selected in
+development. Paired intervals are descriptive. Formal equivalence requires a
+prespecified margin and its corresponding test.
+
+\section{Conclusion}
+Shared observation encoding lowers the cost of critic-ranked SmolVLA
+inference. Paired simulation documents gains over one proposal. Packed critic
+weights yield similar Object outcomes, and denoising replay shows how
+scheduling changes the measured cost of widening the candidate batch.
+
+\input{\paperdir references.tex}
+\section*{Author review checklist}
+\begin{itemize}
+\item Finalize author list, affiliations and funding.
+\item Choose a venue, format and anonymity policy.
+\item Decide the arXiv timing and submitting account, and the v1.0 release timing.
+\item Review the A100 measurement scope. Target-chip timing, traffic and energy are open.
+\end{itemize}
+\end{document}

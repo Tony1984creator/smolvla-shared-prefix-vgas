@@ -28,15 +28,3 @@ with per-channel scales and unpacked to the original arithmetic precision on
 access. Reported bytes count persistent critic tensors including scales.
 The paired success interval describes uncertainty in the observed difference;
 formal equivalence requires a prespecified margin and an equivalence test.
-
-\subsection{Replay of the ten-step denoising loop}
-On a fixed Object observation, we captured the ten action-expert iterations
-with CUDA Graphs and refreshed the prefix cache and noise for every replay.
-At four candidates, warm replay reduced the median expert time from 189.84
-to 47.38 ms and full decision time from 225.74 to 80.54 ms on A100.
-After capture, raising the candidate count from one to sixteen increased
-full decision latency from 69.22 to 119.78 ms. The weak dependence on batch
-size observed in eager execution therefore depends on its scheduling regime.
-Measurements exclude one-time capture. On nine strict FP32 comparisons,
-the returned candidate actions, critic scores and selected indices agreed.
-Closed-loop success was measured for the eager implementation.
