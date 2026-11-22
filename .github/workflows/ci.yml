@@ -10,3 +10,10 @@ jobs:
           python-version: "3.10"
       - run: python scripts/verify_results.py
       - run: python -m unittest discover -s tests -p test_results.py
+      - name: Rebuild manuscript numbers from released results
+        run: |
+          python -m pip install numpy==1.26.4
+          python scripts/make_paper_tables.py
+          python scripts/summarize_query_budget.py
+          python paper/make_figures.py --numbers-only
+          git diff --exit-code -- paper/metrics.tex paper/tables/

@@ -1,9 +1,8 @@
 """Generate paper figures, headline macros and the CUDA Graph table from results."""
+import argparse
 from pathlib import Path
 from statistics import mean, median
 import sys
-
-import matplotlib.pyplot as plt
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from make_paper_tables import ROOT, load, table
@@ -13,12 +12,10 @@ FIGURES = PAPER / "figures"
 COLORS = ("#48709a", "#59a2a0", "#d58b44", "#8e77ac")
 
 
-def save(fig, name):
-    fig.savefig(FIGURES / f"{name}.pdf")
-    plt.close(fig)
-
-
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--numbers-only", action="store_true", help="Regenerate TeX evidence without rendering plots")
+    args = parser.parse_args()
     FIGURES.mkdir(parents=True, exist_ok=True)
     obj = load("object-paired")
     long = load("long-task2-paired")
@@ -40,6 +37,11 @@ def main():
                    for r in rows]
     base_expert, graph_expert, base_full, graph_full = graph_times[ns.index(4)]
     values = {
+        "ObjectEpisodes": str(len(obj["B-BC"])),
+        "SingleWins": str(sum(r["success"] for r in obj["B-BC"])),
+        "SharedWins": str(sum(r["success"] for r in obj["B-Bo4"])),
+        "OriginalWins": str(sum(r["success"] for r in obj["B-OrigBo4"])),
+        "SharingReduction": f"{100*(1-shared/original):.1f}",
         "ObjectGain": f"{effect(obj, 'B-BC', 'B-Bo4'):.2f}",
         "LongGain": f"{effect(long, 'Z', 'SharedBo4'):.2f}",
         "BaselineTime": f"{bc:.2f}", "OriginalTime": f"{original:.2f}", "SharedTime": f"{shared:.2f}",
@@ -62,13 +64,18 @@ def main():
           "$N$ & Expert eager (ms) & Expert graph (ms) & Decision eager (ms) & Decision graph (ms)",
           "rrrrr", [[n, *[f"{t:.2f}" for t in times]] for n, times in zip(ns, graph_times)])
 
+    if args.numbers_only:
+        return
+    import matplotlib.pyplot as plt
+
     fig, ax = plt.subplots(figsize=(4.5, 2.7), layout="constrained")
     for index, label, marker in ((2, "Matched eager", "o"), (3, "Warm CUDA Graph", "s")):
         ax.plot(ns, [t[index] for t in graph_times], marker=marker, label=label)
     ax.set(xlabel="Number of candidates", ylabel="Median decision time (ms)", xticks=ns)
     ax.grid(axis="y", alpha=.2)
     ax.legend(frameon=False)
-    save(fig, "decision-latency")
+    fig.savefig(FIGURES / "decision-latency.pdf")
+    plt.close(fig)
 
     profile = [r for r in load("profile")["rows"] if r["n"] in ns]
     fig, ax = plt.subplots(figsize=(4.5, 2.7), layout="constrained")
@@ -81,7 +88,8 @@ def main():
     ax.set(xlabel="Number of candidates", ylabel="Sum of stage medians (ms)",
            xticks=range(len(profile)), xticklabels=[r["n"] for r in profile], ylim=(0, 310))
     ax.legend(frameon=False, ncol=2, loc="upper center")
-    save(fig, "stage-latency")
+    fig.savefig(FIGURES / "stage-latency.pdf")
+    plt.close(fig)
 
 
 if __name__ == "__main__":

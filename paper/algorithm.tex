@@ -1,14 +1,16 @@
 % Algorithm and evaluation section for the hardware manuscript.
 % Include from a parent document after resolving table paths.
 \subsection{Action selection on a shared observation}
-At each control query, a frozen SmolVLA actor samples four candidate action
+We load the released five-shot SmolVLA policy fine-tuned on demonstrations
+and its separately trained VGAS critic. Both remain frozen at inference.
+At each control query, the actor samples four candidate action
 chunks using independent noise. The released VGAS critic ranks these chunks.
 For each candidate it uses the lower of its two value estimates; the executor
 dispatches the highest-ranked chunk. Our implementation encodes the observation
 once per query, shares its attention cache across the four denoising branches,
 and passes its features to the critic. Cross-candidate prefix reuse has
 precedents in language-model inference and VLA systems, including Zora and
-PACT-VLA. Our contributions are the integration for a flow actor and learned
+PACT-VLA \cite{zora,pact}. Our contributions are the integration for a flow actor and learned
 critic, the system-level timing measurements, and the evaluation of per-channel
 INT8 storage for the frozen critic.
 

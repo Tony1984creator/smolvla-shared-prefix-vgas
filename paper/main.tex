@@ -4,26 +4,28 @@
 \IfFileExists{paper/metrics.tex}{\newcommand{\paperdir}{paper/}}{\newcommand{\paperdir}{}}
 \input{\paperdir metrics.tex}
 \newcommand{\placeholder}[1]{\texttt{[#1]}}
-\title{Shared-Prefix Inference for Value-Guided Action Selection in SmolVLA}
+\title{Allocating Test-Time Compute in SmolVLA: Shared-Prefix Inference and Episode-Level Proposal Budgets}
 \author{\placeholder{Author list}\\\placeholder{Affiliations}}
 \date{\placeholder{Target venue and submission format}}
+\renewcommand{\dbltopfraction}{.85}
+\setcounter{dbltopnumber}{3}
+\raggedbottom
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Value-guided action selection lets a frozen robot policy compare multiple
-proposals at each control query. We implement released VGAS selection on a
-frozen SmolVLA actor and reuse one observation encoding for generation and
-scoring. In paired LIBERO evaluation, success improves by \ObjectGain{}
-percentage points on Object and \LongGain{} on Long Task2 relative to a single
-proposal. Prefix sharing reduces the four-candidate latency overhead relative
-to one proposal from \OriginalOverhead\% to \SharedOverhead\% on A100.
-Separately, per-channel INT8 storage reduces persistent critic tensors from
-\FullPrecisionMB{} to \PackedMB{} MB with similar outcomes on the paired Object
-cohort. At four candidates, warm CUDA Graph replay reduces expert time from
-\ExpertEager{} to \ExpertGraph{} ms and full decision time from \DecisionEager{}
-to \DecisionGraph{} ms on a fixed observation. Replay exposes candidate-dependent
-work that eager scheduling had largely masked.
+A robot policy can sample several actions for the same observation, but repeated
+observation encoding makes selection costly. We retain the released VGAS actor,
+critic and four-proposal selection rule, and reuse a single SmolVLA observation
+encoding and its attention cache. On paired LIBERO-Object episodes, single-proposal
+SmolVLA succeeds in \SingleWins/\ObjectEpisodes{} cases and shared four-proposal
+selection in \SharedWins/\ObjectEpisodes{} (\ObjectGain{} percentage points gained).
+Holding the pool size at four, sharing reduces mean A100 decision time from
+\OriginalTime{} to \SharedTime{} ms (\SharingReduction\%). The original and shared
+implementations succeed in \OriginalWins{} and \SharedWins{} cases, respectively.
+A second way to reduce work is to limit selection within an episode. On the
+same Object cohort, selecting at the first seven queries succeeded on 170 layouts
+and reduced four-way scoring calls from 3,099 to 2,081.
 \end{abstract}
 
 \section{Introduction}
@@ -36,7 +38,7 @@ proposal starts from independent noise.
 
 Using the released SmolVLA/VGAS combination \cite{smolvla,vgas}, we contribute
 (i) a frozen-policy implementation and paired closed-loop evaluation of VGAS
-selection on Object and Long Task2,
+selection on Object and Long Task2, including an episode-level allocation study on Object,
 (ii) a shared-prefix implementation and a separate evaluation of per-channel
 INT8 storage for the critic, and
 (iii) a stage profile and matched CUDA Graph experiment that quantify
@@ -59,7 +61,20 @@ precedents motivate our measurement of how execution scheduling and proposal
 batch size interact when a flow actor feeds a learned critic.
 
 \section{Method}
+Figure~\ref{fig:overview} follows one control query from observation to execution.
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{\paperdir figures/method-overview.pdf}
+\caption{Shared-prefix selection at inference. Camera views come from a released
+LIBERO-Object query. One prefix supplies both the actor's attention cache and the
+critic's observation features. Four independent noise draws produce four action
+chunks. Scores are the lower of two critic estimates from the recorded query. The lower panel shows the horizons used by the released checkpoints and
+our executor.}
+\label{fig:overview}
+\end{figure*}
 \input{\paperdir algorithm.tex}
+
+\input{\paperdir tables/closed-loop.tex}
 
 \section{System Design and Measurement}
 The shared encoding produces attention keys and values for the actor and
@@ -86,6 +101,43 @@ interval spans zero. The confirmed Object cohort comes from the corrected
 executor. An earlier wrapper always dispatched candidate zero, so that batch
 is excluded from the evidence.
 
+\input{\paperdir tables/scaling.tex}
+
+\subsection{How often is selection useful?}
+We kept the actor, critic and 20-step execution horizon fixed and varied the
+number of proposals across queries. Object episodes allow up to 14 queries.
+The front-loaded policy uses four proposals for queries 1--7 and a single
+proposal thereafter. The random policy draws seven of the 14 positions
+uniformly without replacement before each episode. Both stop on termination.
+The first-seven rule was selected in a 50-layout development run. The comparison
+reuses the original 300 layouts and noise seeds, with some development layouts
+also present here. All 2,081 pre-switch queries matched the full-time policy's
+executed actions.
+
+\begin{table}[t]
+\centering\small
+\caption{Allocation of four-proposal selection on LIBERO-Object.
+Wins are out of 300. Calls count four-way critic batches. Chunks count
+all generated proposals, including single-proposal queries.}
+\label{tab:query-budget}
+\input{\paperdir tables/query-budget.tex}
+\end{table}
+
+Relative to full-time selection, the first-seven policy generated 24.69\%
+fewer chunks and used 32.85\% fewer four-way scoring calls
+(Table~\ref{tab:query-budget}). Of the 207 episodes still running after query
+seven, 77 subsequently succeeded with single-proposal control. Only one layout
+changed its terminal outcome relative to full-time selection, from failure to
+success. Relative to single-proposal control throughout, 65 failures became
+successes and 39 successes became failures. The net change was $+8.67$ points
+(task-stratified paired bootstrap 95\% interval $[2.00,15.00]$, 10,000 draws).
+
+First-seven exceeded random-seven by 11 successes ($+3.67$ points,
+$[-2.00,9.33]$). Early termination left the random policy with 514 fewer
+realized calls. This comparison estimates the effect of assigning seven slots
+in advance; it leaves the effect of timing at equal realized cost unresolved.
+The workload counts do not establish an episode latency or energy reduction.
+
 \subsection{Decision latency and critic storage}
 Across Object rollout decisions, mean latency is \BaselineTime{} ms for one
 proposal, \OriginalTime{} ms for original Bo4 and \SharedTime{} ms for shared
@@ -93,6 +145,12 @@ Bo4. Table~\ref{tab:scaling} uses a separate fixed-observation protocol with
 the critic active at every candidate count. Table~\ref{tab:precision} reports
 winner agreement and paired Object outcomes with packed critic matrices.
 The storage counts include scales. Computation uses unpacked weights.
+
+\input{\paperdir tables/graph.tex}
+
+\input{\paperdir tables/profile.tex}
+
+\input{\paperdir tables/precision.tex}
 
 \subsection{Denoising schedule}
 Figure~\ref{fig:stages} and Table~\ref{tab:profile} show that action generation
@@ -120,11 +178,6 @@ Input refresh is included. One-time capture is excluded.}
 \caption{Eager stage profile on A100. Stacks sum separately measured stage medians.}
 \label{fig:stages}
 \end{figure}
-\input{\paperdir tables/closed-loop.tex}
-\input{\paperdir tables/scaling.tex}
-\input{\paperdir tables/profile.tex}
-\input{\paperdir tables/precision.tex}
-\input{\paperdir tables/graph.tex}
 
 \section{Discussion and Limitations}
 The flat eager curve describes the measured execution regime. Replay removes
@@ -140,15 +193,11 @@ prespecified margin and its corresponding test.
 \section{Conclusion}
 Shared observation encoding lowers the cost of critic-ranked SmolVLA
 inference. Paired simulation documents gains over one proposal. Packed critic
-weights yield similar Object outcomes, and denoising replay shows how
-scheduling changes the measured cost of widening the candidate batch.
+weights yield similar Object outcomes. Limiting selection to the first seven
+queries cut four-way scoring calls by roughly one third on Object, with one
+additional success on the paired cohort. This episode-level allocation and
+within-query sharing address different costs. Measuring their combined effect
+on end-to-end latency is a concrete next step for deployment.
 
 \input{\paperdir references.tex}
-\section*{Author review checklist}
-\begin{itemize}
-\item Finalize author list, affiliations and funding.
-\item Choose a venue, format and anonymity policy.
-\item Decide the arXiv timing and submitting account, and the v1.0 release timing.
-\item Review the A100 measurement scope. Target-chip timing, traffic and energy are open.
-\end{itemize}
 \end{document}

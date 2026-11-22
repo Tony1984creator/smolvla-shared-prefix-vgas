@@ -2,6 +2,7 @@
 import argparse
 import json
 import os
+from random import Random
 import sys
 import tempfile
 from pathlib import Path
@@ -119,12 +120,20 @@ def run(args):
         np.random.seed(seed)
         env, obs = initial(args.suite, args.task_id, index, seed)
         steps = queries = 0
+        case_id = f"object_t{args.task_id}_init{index}_policy2"
+        slots = None
+        if args.schedule == "first-seven":
+            slots = range(7)
+        elif args.schedule == "random-seven":
+            slots = Random("p4-random7-v1/" + case_id).sample(range(14), 7)
+        four_way_calls = 0
         success = False
         try:
             policy.reset()
             while steps < budget:
                 batch = prepare(pre, env, obs)
-                if args.candidates > 1 and trainer is None:
+                width = args.candidates if slots is None or queries in slots else 1
+                if width > 1 and trainer is None:
                     trainer = critic(policy, batch, args.assets, args.suite, args.candidates)
                     if args.critic_storage == "int8":
                         from method.precision import pack_weights
@@ -132,16 +141,17 @@ def run(args):
                 query_seed = seed + steps if args.suite == "object" else (seed << 12) + queries + 1
                 rng = torch.Generator(device="cuda").manual_seed(query_seed)
                 bank = torch.randn(16, policy.config.chunk_size, policy.config.max_action_dim,
-                                   device="cuda", generator=rng)[:args.candidates]
+                                   device="cuda", generator=rng)[:width]
                 with torch.inference_mode():
-                    if args.candidates == 1:
+                    if width == 1 and slots is None:
                         chosen = policy._get_action_chunk(batch, noise=bank)
                     elif args.impl == "original":
                         _, _, chosen = original(policy, trainer, batch, bank)
                     else:
-                        pool, _, best, _ = select(policy, trainer, batch, bank)
+                        pool, _, best, _ = select(policy, trainer, batch, bank, score_final=width > 1)
                         chosen = selected_action(pool, best)
                     actions = post(chosen)[0].cpu().numpy()
+                four_way_calls += int(width == 4)
                 queries += 1
                 for action in actions[:min(20, budget-steps)]:
                     obs, _, terminated, truncated, info = env.step(action)
@@ -155,7 +165,7 @@ def run(args):
             env.close()
         print(json.dumps(dict(suite=args.suite, task=args.task_id, init=index, seed=seed,
                               candidates=args.candidates, impl=args.impl, critic_storage=args.critic_storage, steps=steps,
-                              queries=queries, success=success)), flush=True)
+                              queries=queries, schedule=args.schedule, four_way_calls=four_way_calls, success=success)), flush=True)
 
 
 if __name__ == "__main__":
@@ -165,12 +175,15 @@ if __name__ == "__main__":
     parser.add_argument("--candidates", type=int, choices=[1,2,4,8,16], default=4)
     parser.add_argument("--critic-storage", choices=["original", "int8"], default="original",
                         help="INT8 packs critic weights; arithmetic uses the checkpoint dtype.")
+    parser.add_argument("--schedule", choices=["dense", "first-seven", "random-seven"], default="dense")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--task-id", type=int, default=None)
     parser.add_argument("--init-id", type=int, default=0)
     parser.add_argument("--episodes", type=int, default=1)
     parser.add_argument("--assets", type=Path, default=ROOT/"assets")
     args = parser.parse_args()
+    if args.schedule != "dense" and (args.suite, args.impl, args.candidates) != ("object", "shared", 4):
+        parser.error("Seven-query schedules use shared four-proposal selection on Object.")
     if args.candidates == 1 and args.critic_storage == "int8":
         parser.error("Single-proposal BC has no critic to pack.")
     if args.task_id is None:

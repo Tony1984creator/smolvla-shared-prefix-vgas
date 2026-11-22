@@ -12,6 +12,19 @@ Left: marginal 95% bootstrap intervals resample physical layouts, keeping noise 
 - **System cost.** At four candidates, sharing reduced the mean A100 decision time in Object rollouts from 271.64 to 216.78 ms. Single-proposal SmolVLA took 210.57 ms.
 - **Scaling.** Increasing the candidate batch from one to sixteen raised fixed-observation median latency from 252.21 to 331.13 ms in original VGAS and from 216.97 to 219.66 ms with sharing.
 
+## How often does the robot need four proposals?
+
+On LIBERO-Object, we spent the four-proposal budget on the **first seven control queries** of each episode. At subsequent queries the same actor produced one chunk and the critic was skipped. Each query committed up to 20 environment steps.
+
+| Policy on the same 300 layouts | Successes | Four-way scoring calls | Generated chunks |
+|---|---:|---:|---:|
+| One proposal throughout | 144 | 0 | 3,251 |
+| Four proposals throughout | 169 | 3,099 | 12,396 |
+| **Four at the first seven queries** | **170** | **2,081** | **9,336** |
+| Four at seven randomly assigned queries | 159 | 1,567 | 7,838 |
+
+The first-seven policy used **32.85% fewer four-way calls** than full-time selection. The two policies agreed on the outcome of 299 layouts. Compared with one proposal throughout, first-seven rescued 65 episodes and lost 39, a net gain of **8.67 percentage points** (paired 95% interval 2.00 to 15.00). The random schedule also allowed seven calls, but early termination reduced its realized use. The timing advantage over random remains uncertain. These counts measure inference workload on a previously evaluated cohort. [Paired episode data](results/object-query-budget.csv) · [Recompute the comparison](scripts/summarize_query_budget.py) · [Paper PDF](paper/main.pdf)
+
 ## Closed-loop results
 
 | Question | Paired result | Success-rate difference |
