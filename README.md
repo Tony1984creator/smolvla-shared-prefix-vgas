@@ -12,18 +12,25 @@ Left: marginal 95% bootstrap intervals resample physical layouts, keeping noise 
 - **System cost.** At four candidates, sharing reduced the mean A100 decision time in Object rollouts from 271.64 to 216.78 ms. Single-proposal SmolVLA took 210.57 ms.
 - **Scaling.** Increasing the candidate batch from one to sixteen raised fixed-observation median latency from 252.21 to 331.13 ms in original VGAS and from 216.97 to 219.66 ms with sharing.
 
-## How often does the robot need four proposals?
+## Four-way selection at early queries
 
-On LIBERO-Object, we spent the four-proposal budget on the **first seven control queries** of each episode. At subsequent queries the same actor produced one chunk and the critic was skipped. Each query committed up to 20 environment steps.
+We use four proposals at the first few control queries and one thereafter.
+Each query commits up to 20 environment steps. On the 300-layout Object
+sweep, five was the smallest tested cutoff within 3 percentage points of
+full selection by point estimate. Each suite uses a separately set cutoff.
 
-| Policy on the same 300 layouts | Successes | Four-way scoring calls | Generated chunks |
-|---|---:|---:|---:|
-| One proposal throughout | 144 | 0 | 3,251 |
-| Four proposals throughout | 169 | 3,099 | 12,396 |
-| **Four at the first seven queries** | **170** | **2,081** | **9,336** |
-| Four at seven randomly assigned queries | 159 | 1,567 | 7,838 |
+| Paired cohort | Schedule | Single | Full Bo4 | Early window | Four-way calls, full to early |
+|---|---|---:|---:|---:|---:|
+| Object calibration (300) | First five | 144 | 169 | 167 | 3,099 → 1,500 |
+| Object new layouts (200) | First five | 98 | 110 | 110 | 2,061 → 1,000 |
+| Long Task2 (256) | First eight | 93 | 124 | 127 | 4,949 → 2,048 |
 
-The first-seven policy used **32.85% fewer four-way calls** than full-time selection. The two policies agreed on the outcome of 299 layouts. Compared with one proposal throughout, first-seven rescued 65 episodes and lost 39, a net gain of **8.67 percentage points** (paired 95% interval 2.00 to 15.00). The random schedule also allowed seven calls, but early termination reduced its realized use. The timing advantage over random remains uncertain. These counts measure inference workload on a previously evaluated cohort. [Paired episode data](results/object-query-budget.csv) · [Recompute the comparison](scripts/summarize_query_budget.py) · [Paper PDF](paper/main.pdf)
+The early-window differences from full Bo4 were −0.67 pp [−2.67, 1.33],
+0.00 pp [−2.00, 2.00], and +1.17 pp [−5.08, 7.42], respectively.
+The fresh Object difference from one proposal was +6.00 pp [−2.00, 14.00].
+The interval widths describe uncertainty, and the counts measure workload.
+[Data and protocol](results/scheduled_selection/README.md) · [Recompute the
+comparisons](scripts/summarize_scheduled_selection.py) · [Paper PDF](paper/main.pdf)
 
 ## Closed-loop results
 
@@ -101,7 +108,7 @@ On Object, per-channel INT8 storage reduced the frozen critic's persistent tenso
 | Long Task2 · SmolVLA | 1 | 0 | 245.30 ms | 21.05 |
 | Long Task2 · shared Bo4 | 4 | 43,756,674 | 250.01 ms | 19.33 |
 
-The same four proposals form one batch. Prefix/KV reuse has precedents in language models and robotics. Our contributions are the shared-prefix inference implementation, the system-level latency characterization on A100, and the evaluation of INT8 critic weight storage in closed-loop simulation. [Related systems and attribution](docs/HARDWARE_ANALYSIS.md).
+The same four proposals form one batch. Prefix/KV reuse has precedents in language models and robotics. Our contributions are the shared-prefix inference implementation, the A100 measurements, and the paired evaluation of when to spend the proposal budget. We also evaluate INT8 critic weight storage in closed-loop simulation. [Related systems and attribution](docs/HARDWARE_ANALYSIS.md).
 
 ## How we arrived here
 

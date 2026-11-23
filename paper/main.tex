@@ -23,9 +23,12 @@ selection in \SharedWins/\ObjectEpisodes{} (\ObjectGain{} percentage points gain
 Holding the pool size at four, sharing reduces mean A100 decision time from
 \OriginalTime{} to \SharedTime{} ms (\SharingReduction\%). The original and shared
 implementations succeed in \OriginalWins{} and \SharedWins{} cases, respectively.
-A second way to reduce work is to limit selection within an episode. On the
-same Object cohort, selecting at the first seven queries succeeded on 170 layouts
-and reduced four-way scoring calls from 3,099 to 2,081.
+We observe that four-way selection can be limited to early queries.
+First-five selection used 51.6\% fewer scoring batches on the Object sweep
+and matched the full schedule's 110 successes on 200 new Object layouts.
+On Long Task2, first-eight selection used 58.6\% fewer scoring batches and
+succeeded on 127/256 paired episodes versus 124/256 for full selection.
+These episode-level comparisons measure proposal and scoring workload.
 \end{abstract}
 
 \section{Introduction}
@@ -36,13 +39,13 @@ choose among them. An efficient implementation must account for both proposal
 generation and scoring. The observation stays fixed within a query, while each
 proposal starts from independent noise.
 
-Using the released SmolVLA/VGAS combination \cite{smolvla,vgas}, we contribute
-(i) a frozen-policy implementation and paired closed-loop evaluation of VGAS
-selection on Object and Long Task2, including an episode-level allocation study on Object,
-(ii) a shared-prefix implementation and a separate evaluation of per-channel
-INT8 storage for the critic, and
-(iii) a stage profile and matched CUDA Graph experiment that quantify
-graph-removable execution cost in the action expert.
+Using the released SmolVLA/VGAS combination \cite{smolvla,vgas}, we
+implement shared-prefix inference for the frozen actor and critic and
+measure its latency with paired closed-loop controls. We observe a
+front-loaded dose--response on Object and verify fixed early windows
+on new Object initial states and Long Task2 using a point-estimate
+tolerance. Supporting system measurements characterize critic storage
+and graph-removable action-expert costs.
 
 \section{Related Work}
 Value-Guided Policy Steering reranks actions using an offline-trained value
@@ -103,40 +106,56 @@ is excluded from the evidence.
 
 \input{\paperdir tables/scaling.tex}
 
-\subsection{How often is selection useful?}
-We kept the actor, critic and 20-step execution horizon fixed and varied the
-number of proposals across queries. Object episodes allow up to 14 queries.
-The front-loaded policy uses four proposals for queries 1--7 and a single
-proposal thereafter. The random policy draws seven of the 14 positions
-uniformly without replacement before each episode. Both stop on termination.
-The first-seven rule was selected in a 50-layout development run. The comparison
-reuses the original 300 layouts and noise seeds, with some development layouts
-also present here. All 2,081 pre-switch queries matched the full-time policy's
-executed actions.
+\subsection{Early-window scheduled selection}
+\label{sec:scheduled}
+We keep the actor, critic and execution horizon fixed. As an episode
+progresses, fewer control steps remain to recover from an earlier
+decision. This motivates spending the selection budget early. At queries
+$1,\ldots,K$ we sample four proposals and score them with VGAS.
+Subsequent queries use one proposal and skip the critic. Each query
+executes up to 20 environment steps. Episodes allow up to 14 queries
+on Object and 26 on Long Task2.
 
-\begin{table}[t]
-\centering\small
-\caption{Allocation of four-proposal selection on LIBERO-Object.
-Wins are out of 300. Calls count four-way critic batches. Chunks count
-all generated proposals, including single-proposal queries.}
-\label{tab:query-budget}
-\input{\paperdir tables/query-budget.tex}
-\end{table}
+\input{\paperdir tables/scheduled-selection.tex}
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\columnwidth]{\paperdir figures/scheduled-dose.pdf}
+\caption{LIBERO-Object dose sweep on 300 paired layouts. Error bars are
+descriptive paired 95\% intervals. The dashed line scales the full
+schedule's gain by $K/14$. The random-seven policy samples seven
+positions before acting and stops on episode termination.}
+\label{fig:scheduled-dose}
+\end{figure}
 
-Relative to full-time selection, the first-seven policy generated 24.69\%
-fewer chunks and used 32.85\% fewer four-way scoring calls
-(Table~\ref{tab:query-budget}). Of the 207 episodes still running after query
-seven, 77 subsequently succeeded with single-proposal control. Only one layout
-changed its terminal outcome relative to full-time selection, from failure to
-success. Relative to single-proposal control throughout, 65 failures became
-successes and 39 successes became failures. The net change was $+8.67$ points
-(task-stratified paired bootstrap 95\% interval $[2.00,15.00]$, 10,000 draws).
+Table~\ref{tab:scheduled} summarizes the paired outcomes. On the
+300-layout calibration cohort, we chose the smallest tested
+$K$ whose success-rate point estimate fell within 3 percentage points
+of full selection. This cohort overlaps with a 50-layout pilot that
+motivated the sweep. Gains flattened after the first few queries
+(Fig.~\ref{fig:scheduled-dose}). The first five reached 167/300
+successes versus 169/300 with full Bo4 and 144/300 with one proposal.
+Four-way calls fell from 3,099 to 1,500 (51.6\%) and generated chunks
+from 12,396 to 7,608 (38.6\%). First-ten agreed with full Bo4 on all
+300 terminal outcomes. First-seven versus random-seven was
+$+3.67$ pp $[-2.00,9.33]$. Those policies realized 2,081 and 1,567
+calls, respectively, leaving timing effects at equal realized cost
+unresolved.
 
-First-seven exceeded random-seven by 11 successes ($+3.67$ points,
-$[-2.00,9.33]$). Early termination left the random policy with 514 fewer
-realized calls. This comparison estimates the effect of assigning seven slots
-in advance; it leaves the effect of timing at equal realized cost unresolved.
-The workload counts do not establish an episode latency or energy reduction.
+On 200 new Object layouts disjoint from both the pilot and calibration
+cohorts, first-five and full Bo4 each succeeded 110 times
+($0.00$ pp $[-2.00,2.00]$), with two outcome changes in each direction.
+Calls fell from 2,061 to 1,000. Relative to the single-proposal control
+(98/200), the difference was $+6.00$ pp $[-2.00,14.00]$.
+
+For Long Task2 we set a separate eight-query window from development
+observations of the longer task horizon. First-eight and full Bo4
+succeeded in 127/256 and 124/256 episodes, respectively
+($+1.17$ pp $[-5.08,7.42]$). Relative to the single-proposal control
+(93/256), the difference was $+13.28$ pp $[7.03,19.53]$. Calls fell
+from 4,949 to 2,048 (58.6\%) and chunks from 19,796 to 11,077
+(44.0\%). Both confirmation comparisons are within the 3 pp
+point-estimate tolerance. The schedule reduces the number of
+four-way queries, and prefix sharing reduces work within a query.
 
 \subsection{Decision latency and critic storage}
 Across Object rollout decisions, mean latency is \BaselineTime{} ms for one
@@ -187,17 +206,25 @@ kernel-level traces. All timing is on A100. Target-chip latency, bandwidth
 and energy remain open. Closed-loop success measurements use eager execution.
 VGAS supplies the actor, critic and selection rule. Object and Long use the
 same LIBERO simulator \cite{libero}. Long is scoped to Task2 selected in
-development. Paired intervals are descriptive. Formal equivalence requires a
-prespecified margin and its corresponding test.
+development. Object and Long use separately calibrated windows. Paired
+intervals are descriptive. The 3 pp point-estimate rule guides schedule
+selection, while formal equivalence requires a prespecified margin and test.
+The scheduled arms establish changes in calls and chunks. Episode latency and
+energy are unmeasured. In an offline Object probe of 150 four-proposal
+queries, step-four estimates matched the winner from the complete ten-step
+denoising run in 52\% of cases, below the 80\% screening threshold. The
+reported workload therefore retains all ten denoising steps per proposal.
 
 \section{Conclusion}
-Shared observation encoding lowers the cost of critic-ranked SmolVLA
-inference. Paired simulation documents gains over one proposal. Packed critic
-weights yield similar Object outcomes. Limiting selection to the first seven
-queries cut four-way scoring calls by roughly one third on Object, with one
-additional success on the paired cohort. This episode-level allocation and
-within-query sharing address different costs. Measuring their combined effect
-on end-to-end latency is a concrete next step for deployment.
+Shared observation encoding reduces A100 decision time for frozen VGAS
+selection. We observed that using four proposals only at early queries
+retained the full schedule's observed success within the specified
+point-estimate tolerance on new Object layouts and on Long Task2. Prefix
+reuse and early-window selection address work within a query and across
+queries, respectively. Measuring their combined effect on episode latency
+would characterize the deployment impact.
 
+\begingroup\small
 \input{\paperdir references.tex}
+\endgroup
 \end{document}

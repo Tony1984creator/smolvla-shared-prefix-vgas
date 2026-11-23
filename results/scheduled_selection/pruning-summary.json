@@ -1,0 +1,30 @@
+{
+  "queries": 150,
+  "candidates": 4,
+  "summary": {
+    "2": {
+      "top1_matches": 58,
+      "top1_rate": 0.38666666666666666,
+      "mean_spearman": 0.27199999999999996,
+      "spearman_defined": 150
+    },
+    "4": {
+      "top1_matches": 78,
+      "top1_rate": 0.52,
+      "mean_spearman": 0.5586666666666665,
+      "spearman_defined": 150
+    },
+    "6": {
+      "top1_matches": 109,
+      "top1_rate": 0.7266666666666667,
+      "mean_spearman": 0.7719999999999999,
+      "spearman_defined": 150
+    },
+    "10": {
+      "top1_matches": 150,
+      "top1_rate": 1.0,
+      "mean_spearman": 1.0,
+      "spearman_defined": 150
+    }
+  }
+}
