@@ -22,3 +22,5 @@ The paired percentile bootstrap resamples within each Object task (10,000
 draws, seed 20261122 for the sweep and 20261123 for the fresh cohort). Long
 resamples physical layouts and keeps both noise repeats together (20,000
 draws, seed 42). The 3 pp rule applies to point estimates.
+
+The four-arm Late control reuses all three archived fresh Object arms and adds Bo4 from query 6 onward on the same 200 starts. The episode ledger and task-stratified comparisons are in late-object.csv and late-object.json, exported from outputs/p8_late_object_20261123/. The q0-by-query.csv and q0-gates.json files aggregate the repaired shared full-Bo4 Object archive in outputs/p4_fixed_closed_loop_20261118/. The q0 diagnostic is retrospective and conditions on queries reached by full Bo4.

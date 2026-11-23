@@ -4,7 +4,7 @@
 \IfFileExists{paper/metrics.tex}{\newcommand{\paperdir}{paper/}}{\newcommand{\paperdir}{}}
 \input{\paperdir metrics.tex}
 \newcommand{\placeholder}[1]{\texttt{[#1]}}
-\title{Allocating Test-Time Compute in SmolVLA: Shared-Prefix Inference and Episode-Level Proposal Budgets}
+\title{Test-Time Compute in SmolVLA: A100 System Characterization and Early-Window Selection}
 \author{\placeholder{Author list}\\\placeholder{Affiliations}}
 \date{\placeholder{Target venue and submission format}}
 \renewcommand{\dbltopfraction}{.85}
@@ -147,6 +147,15 @@ cohorts, first-five and full Bo4 each succeeded 110 times
 Calls fell from 2,061 to 1,000. Relative to the single-proposal control
 (98/200), the difference was $+6.00$ pp $[-2.00,14.00]$.
 
+On the same 200 starts, a delayed control used one proposal at queries
+1--5 and four thereafter. It succeeded 98 times, matching the
+single-proposal count ($0.00$ pp $[-2.00,2.00]$), and made 1,136
+four-way calls versus 1,000 for first-five. First-five exceeded the
+delayed arm by $+6.00$ pp $[-2.00,14.00]$. The observed gain favors
+earlier selection despite the delayed arm using more four-way calls.
+The paired interval spans zero. A difference at exactly equal
+realized workload remains unmeasured.
+
 For Long Task2 we set a separate eight-query window from development
 observations of the longer task horizon. First-eight and full Bo4
 succeeded in 127/256 and 124/256 episodes, respectively
@@ -204,10 +213,37 @@ substantial scheduling cost and reveals increased incremental cost for wider
 batches. Determining how much comes from individual launches would require
 kernel-level traces. All timing is on A100. Target-chip latency, bandwidth
 and energy remain open. Closed-loop success measurements use eager execution.
+Earlier visual-residual and critic-advantage gates showed no reliable
+incremental benefit in their tested settings. This evidence concerns
+the tested signals and budgets. Fixed early windows retained the
+observed gains of full selection in our paired evaluation.
+Figure~\ref{fig:q0-gate} shows how a score threshold can inherit
+episode timing. On 3,099 archived full-Bo4 Object queries, candidate
+zero's median twin-min score rose from $-56.41$ at query 1 to $-32.37$
+at query 6. A retrospective gate at the pooled lower quartile
+($-53.78$) marked 775 queries, of which 747 (96.4\%) were in the first
+five. Each per-index denominator includes only the episodes that
+reached that query, and the logged states come from full Bo4.
+This association does not establish closed-loop gate performance.
+ELASTIC studies joint sequential and parallel allocation under a
+learned policy \cite{elastic}. Our measurements concern fixed
+episode windows and the A100 cost of frozen VGAS selection.
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\columnwidth]{\paperdir figures/q0-gate.pdf}
+\caption{Candidate-zero score drift and retrospective low-score gate
+rates on shared full-Bo4 Object trajectories. Percentile thresholds
+are pooled over all 3,099 recorded queries. Gate rates condition on
+reaching each query index.}
+\label{fig:q0-gate}
+\end{figure}
+
 VGAS supplies the actor, critic and selection rule. Object and Long use the
 same LIBERO simulator \cite{libero}. Long is scoped to Task2 selected in
 development. Object and Long use separately calibrated windows. Paired
-intervals are descriptive. The 3 pp point-estimate rule guides schedule
+intervals are descriptive. On Long Task2, the single-proposal control
+succeeded in 38/128 and 55/128 episodes under the two noise banks. The 3 pp point-estimate rule guides schedule
 selection, while formal equivalence requires a prespecified margin and test.
 The scheduled arms establish changes in calls and chunks. Episode latency and
 energy are unmeasured. In an offline Object probe of 150 four-proposal

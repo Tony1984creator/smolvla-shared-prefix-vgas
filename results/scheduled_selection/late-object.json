@@ -1,0 +1,67 @@
+{
+  "groups": {
+    "single": {
+      "success": 98,
+      "queries": 2140,
+      "calls": 0,
+      "candidates": 2140
+    },
+    "dense": {
+      "success": 110,
+      "queries": 2061,
+      "calls": 2061,
+      "candidates": 8244
+    },
+    "front": {
+      "success": 110,
+      "queries": 2061,
+      "calls": 1000,
+      "candidates": 5061
+    },
+    "late": {
+      "success": 98,
+      "queries": 2136,
+      "calls": 1136,
+      "candidates": 5544
+    }
+  },
+  "comparisons": {
+    "late_vs_single": {
+      "pp": 0.0,
+      "ci": [
+        -2.0,
+        2.0
+      ],
+      "rescues": 2,
+      "harms": 2
+    },
+    "front_vs_single": {
+      "pp": 6.0,
+      "ci": [
+        -1.9999999999999998,
+        13.999999999999998
+      ],
+      "rescues": 40,
+      "harms": 28
+    },
+    "front_vs_late": {
+      "pp": 6.0,
+      "ci": [
+        -2.0,
+        14.000000000000002
+      ],
+      "rescues": 41,
+      "harms": 29
+    },
+    "late_vs_dense": {
+      "pp": -6.0,
+      "ci": [
+        -13.999999999999998,
+        2.0
+      ],
+      "rescues": 28,
+      "harms": 40
+    }
+  },
+  "executed_prefix_matches": 1000
+}

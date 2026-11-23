@@ -9,6 +9,7 @@ From the repository root, regenerate the tables and figures with NumPy, Matplotl
 
     python scripts/make_paper_tables.py
     python scripts/summarize_scheduled_selection.py
+    python scripts/plot_q0_gate.py
     python paper/make_overview.py
     python paper/make_figures.py
     tectonic --outdir paper paper/main.tex
