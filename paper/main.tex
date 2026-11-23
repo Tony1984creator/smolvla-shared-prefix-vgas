@@ -14,21 +14,8 @@
 \maketitle
 
 \begin{abstract}
-A robot policy can sample several actions for the same observation, but repeated
-observation encoding makes selection costly. We retain the released VGAS actor,
-critic and four-proposal selection rule, and reuse a single SmolVLA observation
-encoding and its attention cache. On paired LIBERO-Object episodes, single-proposal
-SmolVLA succeeds in \SingleWins/\ObjectEpisodes{} cases and shared four-proposal
-selection in \SharedWins/\ObjectEpisodes{} (\ObjectGain{} percentage points gained).
-Holding the pool size at four, sharing reduces mean A100 decision time from
-\OriginalTime{} to \SharedTime{} ms (\SharingReduction\%). The original and shared
-implementations succeed in \OriginalWins{} and \SharedWins{} cases, respectively.
-We observe that four-way selection can be limited to early queries.
-First-five selection used 51.6\% fewer scoring batches on the Object sweep
-and matched the full schedule's 110 successes on 200 new Object layouts.
-On Long Task2, first-eight selection used 58.6\% fewer scoring batches and
-succeeded on 127/256 paired episodes versus 124/256 for full selection.
-These episode-level comparisons measure proposal and scoring workload.
+Frozen VGAS four-proposal selection on SmolVLA improved observed paired success over a single proposal on LIBERO-Object and LIBERO-Long Task2. Using four proposals only at early queries retained observed full-selection success within a 3 percentage point tolerance on new Object starts and Long Task2, cutting four-way calls by 51.5\% and 58.6\%, respectively. Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls.
+On A100, prefix sharing reduced rollout mean decision time from 272 to 217 ms, CUDA Graph replay reduced a separate matched fixed-observation median from 226 to 81 ms, and per-channel INT8 packing reduced persistent critic storage from 175 to 44 MB.
 \end{abstract}
 
 \section{Introduction}
@@ -39,13 +26,8 @@ choose among them. An efficient implementation must account for both proposal
 generation and scoring. The observation stays fixed within a query, while each
 proposal starts from independent noise.
 
-Using the released SmolVLA/VGAS combination \cite{smolvla,vgas}, we
-implement shared-prefix inference for the frozen actor and critic and
-measure its latency with paired closed-loop controls. We observe a
-front-loaded dose--response on Object and verify fixed early windows
-on new Object initial states and Long Task2 using a point-estimate
-tolerance. Supporting system measurements characterize critic storage
-and graph-removable action-expert costs.
+Using the released SmolVLA actor and VGAS critic \cite{smolvla,vgas}, we observe paired success gains from four-way selection on Object and Long Task2 in the same LIBERO simulator. Fixed early windows retain the full schedule's observed success within the prespecified point-estimate tolerance while cutting scoring calls by about half, and the Late control measures the effect of delaying selection on Object. Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls.
+Our A100 measurements characterize shared-prefix inference and matched CUDA Graph replay, and our separate INT8 evaluation measures the reduction in persistent critic storage.
 
 \section{Related Work}
 Value-Guided Policy Steering reranks actions using an offline-trained value
@@ -123,7 +105,7 @@ on Object and 26 on Long Task2.
 \caption{LIBERO-Object dose sweep on 300 paired layouts. Error bars are
 descriptive paired 95\% intervals. The dashed line scales the full
 schedule's gain by $K/14$. The random-seven policy samples seven
-positions before acting and stops on episode termination.}
+positions before acting. Late schedules nine positions starting at query 6. Both stop on termination.}
 \label{fig:scheduled-dose}
 \end{figure}
 
@@ -147,14 +129,9 @@ cohorts, first-five and full Bo4 each succeeded 110 times
 Calls fell from 2,061 to 1,000. Relative to the single-proposal control
 (98/200), the difference was $+6.00$ pp $[-2.00,14.00]$.
 
-On the same 200 starts, a delayed control used one proposal at queries
-1--5 and four thereafter. It succeeded 98 times, matching the
-single-proposal count ($0.00$ pp $[-2.00,2.00]$), and made 1,136
-four-way calls versus 1,000 for first-five. First-five exceeded the
-delayed arm by $+6.00$ pp $[-2.00,14.00]$. The observed gain favors
-earlier selection despite the delayed arm using more four-way calls.
-The paired interval spans zero. A difference at exactly equal
-realized workload remains unmeasured.
+The delayed control used one proposal at queries 1--5 and Bo4 thereafter. On calibration, Late succeeded 141/300 times and used 1,757 four-way calls, versus 167/300 and 1,500 calls for first-five. Its change from single-proposal control was -1.00 pp [-2.67, 0.67]. First-five versus Late was +8.67 pp [2.33, 15.00]. On fresh starts, Late succeeded 98/200 times and used 1,136 calls, versus 110/200 and 1,000 for first-five. First-five versus Late was +6.00 pp [-2.00, 14.00]. Late showed no positive point-estimate gain over one proposal on either cohort.
+
+Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls. The combined percentile interval resamples physical layouts within task and cohort. Calibration helped choose the cutoff, and the fresh comparison is reported separately. Realized calls depend on episode termination. We did not match realized call counts exactly.
 
 For Long Task2 we set a separate eight-query window from development
 observations of the longer task horizon. First-eight and full Bo4

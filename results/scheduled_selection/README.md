@@ -24,3 +24,5 @@ resamples physical layouts and keeps both noise repeats together (20,000
 draws, seed 42). The 3 pp rule applies to point estimates.
 
 The four-arm Late control reuses all three archived fresh Object arms and adds Bo4 from query 6 onward on the same 200 starts. The episode ledger and task-stratified comparisons are in late-object.csv and late-object.json, exported from outputs/p8_late_object_20261123/. The q0-by-query.csv and q0-gates.json files aggregate the repaired shared full-Bo4 Object archive in outputs/p4_fixed_closed_loop_20261118/. The q0 diagnostic is retrospective and conditions on queries reached by full Bo4.
+
+The calibration Late arm is exported from outputs/p9_late_calibration_20261124/. It shares all 300 physical starts and strategy-noise seeds with the original Object sweep. It runs one proposal through query 5 and Bo4 thereafter. The combined first-five minus Late estimate pools 500 disjoint physical layouts. Its percentile interval resamples whole layouts within each task and cohort (20,000 draws, seed 20261124). The sweep was also used to choose K; the 200 fresh layouts provide a separate comparison.

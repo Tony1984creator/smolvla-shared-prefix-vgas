@@ -42,6 +42,12 @@
         "queries": 3137,
         "calls": 1567,
         "chunks": 7838
+      },
+      "late": {
+        "wins": 141,
+        "queries": 3257,
+        "calls": 1757,
+        "chunks": 8528
       }
     },
     "paired": {
@@ -184,7 +190,36 @@
           "rescues": 34,
           "harms": 44
         }
+      },
+      "late": {
+        "single": {
+          "pp": -1.0,
+          "ci": [
+            -2.666666666666667,
+            0.6666666666666666
+          ],
+          "rescues": 2,
+          "harms": 5
+        },
+        "dense": {
+          "pp": -9.333333333333334,
+          "ci": [
+            -15.666666666666668,
+            -2.666666666666667
+          ],
+          "rescues": 38,
+          "harms": 66
+        }
       }
+    },
+    "first_five_vs_late": {
+      "pp": 8.666666666666668,
+      "ci": [
+        2.3333333333333326,
+        15.0
+      ],
+      "rescues": 64,
+      "harms": 38
     },
     "first_seven_vs_random": {
       "pp": 3.6666666666666665,
@@ -217,6 +252,12 @@
         "queries": 2061,
         "calls": 1000,
         "chunks": 5061
+      },
+      "late": {
+        "wins": 98,
+        "queries": 2136,
+        "calls": 1136,
+        "chunks": 5544
       }
     },
     "paired": {
@@ -279,7 +320,36 @@
           "rescues": 2,
           "harms": 2
         }
+      },
+      "late": {
+        "single": {
+          "pp": 0.0,
+          "ci": [
+            -2.0,
+            2.0
+          ],
+          "rescues": 2,
+          "harms": 2
+        },
+        "dense": {
+          "pp": -6.0,
+          "ci": [
+            -13.999999999999998,
+            2.0
+          ],
+          "rescues": 28,
+          "harms": 40
+        }
       }
+    },
+    "first_five_vs_late": {
+      "pp": 6.0,
+      "ci": [
+        -2.0,
+        14.000000000000002
+      ],
+      "rescues": 41,
+      "harms": 29
     }
   },
   "long-task2": {
@@ -364,6 +434,17 @@
           "harms": 30
         }
       }
+    }
+  },
+  "object-combined": {
+    "first_five_vs_late": {
+      "pp": 7.6,
+      "ci": [
+        2.6,
+        12.6
+      ],
+      "rescues": 105,
+      "harms": 67
     }
   }
 }

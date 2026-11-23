@@ -28,7 +28,8 @@ full selection by point estimate. Each suite uses a separately set cutoff.
 The early-window differences from full Bo4 were −0.67 pp [−2.67, 1.33],
 0.00 pp [−2.00, 2.00], and +1.17 pp [−5.08, 7.42], respectively.
 The fresh Object difference from one proposal was +6.00 pp [−2.00, 14.00].
-The interval widths describe uncertainty, and the counts measure workload.
+Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls.
+Late uses one proposal at queries 1–5 and four thereafter. The counts measure workload and depend on episode termination.
 [Data and protocol](results/scheduled_selection/README.md) · [Recompute the
 comparisons](scripts/summarize_scheduled_selection.py) · [Paper PDF](paper/main.pdf)
 
