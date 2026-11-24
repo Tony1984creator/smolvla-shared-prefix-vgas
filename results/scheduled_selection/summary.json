@@ -436,6 +436,207 @@
       }
     }
   },
+  "spatial-window": {
+    "totals": {
+      "single": {
+        "wins": 131,
+        "queries": 3147,
+        "calls": 0,
+        "chunks": 3147,
+        "mean_inference_ms": 2372.7401029411703
+      },
+      "dense": {
+        "wins": 142,
+        "queries": 3046,
+        "calls": 3046,
+        "chunks": 12184,
+        "mean_inference_ms": 2180.159705930079
+      },
+      "front": {
+        "wins": 141,
+        "queries": 3049,
+        "calls": 1491,
+        "chunks": 7522,
+        "mean_inference_ms": 2136.471427300324
+      },
+      "late": {
+        "wins": 131,
+        "queries": 3155,
+        "calls": 1663,
+        "chunks": 8144,
+        "mean_inference_ms": 2200.064535588026
+      }
+    },
+    "paired": {
+      "single": {
+        "single": {
+          "pp": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "rescues": 0,
+          "harms": 0
+        },
+        "dense": {
+          "pp": -3.6666666666666665,
+          "ci": [
+            -10.0,
+            2.6666666666666665
+          ],
+          "rescues": 42,
+          "harms": 53
+        }
+      },
+      "dense": {
+        "single": {
+          "pp": 3.6666666666666665,
+          "ci": [
+            -2.6666666666666665,
+            10.0
+          ],
+          "rescues": 53,
+          "harms": 42
+        },
+        "dense": {
+          "pp": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "rescues": 0,
+          "harms": 0
+        }
+      },
+      "front": {
+        "single": {
+          "pp": 3.3333333333333335,
+          "ci": [
+            -2.666666666666667,
+            9.333333333333334
+          ],
+          "rescues": 50,
+          "harms": 40
+        },
+        "dense": {
+          "pp": -0.33333333333333337,
+          "ci": [
+            -5.0,
+            4.333333333333334
+          ],
+          "rescues": 24,
+          "harms": 25
+        }
+      },
+      "late": {
+        "single": {
+          "pp": 0.0,
+          "ci": [
+            -4.0,
+            4.0
+          ],
+          "rescues": 19,
+          "harms": 19
+        },
+        "dense": {
+          "pp": -3.6666666666666665,
+          "ci": [
+            -10.333333333333332,
+            2.666666666666668
+          ],
+          "rescues": 44,
+          "harms": 55
+        }
+      }
+    }
+  },
+  "plus-light-window": {
+    "totals": {
+      "single": {
+        "wins": 100,
+        "queries": 3516,
+        "calls": 0,
+        "chunks": 3516,
+        "mean_inference_ms": 2387.9560068342835
+      },
+      "dense": {
+        "wins": 123,
+        "queries": 3376,
+        "calls": 3376,
+        "chunks": 13504,
+        "mean_inference_ms": 2364.6359456082187
+      },
+      "front": {
+        "wins": 123,
+        "queries": 3371,
+        "calls": 1500,
+        "chunks": 7871,
+        "mean_inference_ms": 2377.447743204733
+      }
+    },
+    "paired": {
+      "single": {
+        "single": {
+          "pp": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "rescues": 0,
+          "harms": 0
+        },
+        "dense": {
+          "pp": -7.666666666666666,
+          "ci": [
+            -14.333333333333332,
+            -1.333333333333333
+          ],
+          "rescues": 39,
+          "harms": 62
+        }
+      },
+      "dense": {
+        "single": {
+          "pp": 7.666666666666666,
+          "ci": [
+            1.333333333333333,
+            14.333333333333332
+          ],
+          "rescues": 62,
+          "harms": 39
+        },
+        "dense": {
+          "pp": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "rescues": 0,
+          "harms": 0
+        }
+      },
+      "front": {
+        "single": {
+          "pp": 7.666666666666666,
+          "ci": [
+            1.333333333333333,
+            14.333333333333332
+          ],
+          "rescues": 61,
+          "harms": 38
+        },
+        "dense": {
+          "pp": 0.0,
+          "ci": [
+            -2.0,
+            2.0
+          ],
+          "rescues": 5,
+          "harms": 5
+        }
+      }
+    }
+  },
   "object-combined": {
     "first_five_vs_late": {
       "pp": 7.6,

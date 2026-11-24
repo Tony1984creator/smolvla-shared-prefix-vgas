@@ -5,12 +5,20 @@ from pathlib import Path
 from statistics import mean
 
 ROOT = Path(__file__).resolve().parents[1]
-with (ROOT / "results/scheduled_selection/episode-cost.csv").open(newline="") as stream:
-    groups = defaultdict(dict)
+DATA = ROOT / "results/scheduled_selection"
+GENERALIZATION = {"LIBERO-Spatial": "spatial-window.csv", "Plus lighting": "plus-light-window.csv"}
+groups = defaultdict(dict)
+with (DATA / "episode-cost.csv").open(newline="") as stream:
     for row in csv.DictReader(stream):
         group = groups[row["cohort"], row["arm"]]
         assert row["case"] not in group
         group[row["case"]] = row
+for cohort, filename in GENERALIZATION.items():
+    with (DATA / filename).open(newline="") as stream:
+        for row in csv.DictReader(stream):
+            group = groups[cohort, row["arm"]]
+            assert row["layout"] not in group
+            group[row["layout"]] = row
 
 labels = {"single":"Single", "original":"Original Bo4", "dense":"Shared Bo4",
           "front5":"EWS-5", "front8":"EWS-8", "front":"EWS-5", "late":"Late-5"}
@@ -22,7 +30,9 @@ lines = [r"\begin{table*}[t]", r"\centering\small",
 for cohort, count, arms in [("Object calibration", 300, ("single","original","dense","front5")),
                             ("Object fresh", 200, ("single","dense","front5")),
                             ("Long Task2", 256, ("single","dense","front8")),
-                            ("LIBERO-Goal", 300, ("single","dense","front","late"))]:
+                            ("LIBERO-Goal", 300, ("single","dense","front","late")),
+                            ("LIBERO-Spatial", 300, ("single","dense","front","late")),
+                            ("Plus lighting", 300, ("single","dense","front"))]:
     for i, arm in enumerate(arms):
         records = groups[cohort,arm]
         assert len(records) == count and records.keys() == groups[cohort,"single"].keys()

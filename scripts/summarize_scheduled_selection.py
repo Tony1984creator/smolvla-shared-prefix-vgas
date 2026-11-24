@@ -29,6 +29,7 @@ def read_rows(name):
 
 def read_cohort(name, widths, tasks, layouts, repeats, horizon):
     records = defaultdict(dict)
+    episode_times = defaultdict(list)
     for row in read_rows(name):
         task, layout, arm = (row[k] for k in ("task", "layout", "arm"))
         key = task, int(layout) if repeats > 1 else layout, int(row["repeat"])
@@ -43,6 +44,8 @@ def read_cohort(name, widths, tasks, layouts, repeats, horizon):
         else:
             assert calls == limit
         records[key][arm] = (win, queries, calls, chunks)
+        if "inference_ms" in row:
+            episode_times[arm].append(float(row["inference_ms"]))
     grouped = defaultdict(list)
     keys = sorted(records)
     for task, layout, repeat in keys:
@@ -55,6 +58,9 @@ def read_cohort(name, widths, tasks, layouts, repeats, horizon):
     outcomes = {arm: array[:, 0] for arm, array in arrays.items()}
     totals = {arm: dict(zip(("wins", "queries", "calls", "chunks"), map(int, array.sum(axis=0))))
               for arm, array in arrays.items()}
+    for arm, times in episode_times.items():
+        assert len(times) == len(keys) and np.isfinite(times).all() and min(times) > 0
+        totals[arm]["mean_inference_ms"] = float(np.mean(times))
     return outcomes, totals
 
 
@@ -184,13 +190,21 @@ def main():
         ("long-task2", "Long Task2", {"Z": 0, "SharedBo4": 26, "front8": 8},
          1, 128, 2, 26, 42, 20000, "Z", "SharedBo4",
          {"Z": "Single", "SharedBo4": "Full Bo4", "front8": "First eight"}),
+        ("spatial-window", "Spatial", {"single": 0, "dense": 14, "front": 5, "late": 9},
+         10, 30, 1, 14, 20261124, 20000, "single", "dense",
+         {"single": "Single", "dense": "Full Bo4", "front": "First five", "late": "Late"}),
+        ("plus-light-window", "Plus lighting", {"single": 0, "dense": 14, "front": 5},
+         10, 30, 1, 14, 20261124, 20000, "single", "dense",
+         {"single": "Single", "dense": "Full Bo4", "front": "First five"}),
     ]
-    lines = [r"\begin{table*}[t]", r"\centering\small",
+    lines = [r"\begin{table*}[t]", r"\centering\small\setlength{\tabcolsep}{3.5pt}",
              r"\caption{Episode-level selection. Calls count four-way scoring batches. Chunks include single proposals. "
-             r"Paired 95\% percentile intervals resample within task on Object and by physical layout on Long, "
-             r"keeping both noise repeats together. The combined Object contrast resamples within cohort and task.}", r"\label{tab:scheduled}",
-             r"\begin{tabular}{llrrrll}\hline",
-             r"Cohort & Schedule & Wins & Calls & Chunks & vs.\ single (pp) & vs.\ full Bo4 (pp) \\ \hline"]
+             r"Paired 95\% percentile intervals resample within task; Long resamples physical layouts "
+             r"with both noise repeats together. The combined Object contrast resamples within cohort and task. "
+             r"Times shown for the two new cohorts are mean A100 core ms per episode. See Table~\ref{tab:episode-cost} for the full timing comparison.}",
+             r"\label{tab:scheduled}",
+             r"\begin{tabular}{llrrrrll}\hline",
+             r"Cohort & Schedule & Wins & Calls & Chunks & ms/episode & vs.\ single (pp) & vs.\ full Bo4 (pp) \\ \hline"]
     summaries = {}
     timing_deltas = {}
     for name, label, widths, tasks, layouts, repeats, horizon, seed, draws, single, dense, labels in configs:
@@ -204,8 +218,9 @@ def main():
             cohort = f"{label} ({tasks * layouts * repeats})" if index == 0 else ""
             bc_text = "--" if arm == single else pair_text(vs_single)
             dense_text = "--" if arm in (dense, "random") else pair_text(vs_dense)
+            time = f'{row["mean_inference_ms"]:,.2f}' if "mean_inference_ms" in row else "--"
             lines.append(f'{cohort} & {labels[arm]} & {row["wins"]} & {row["calls"]:,} & {row["chunks"]:,} & '
-                         f"{bc_text} & {dense_text} " + r"\\")
+                         f"{time} & {bc_text} & {dense_text} " + r"\\")
         lines.append(r"\hline")
         summaries[name] = {"totals": totals, "paired": comparisons}
         if name in ("object-sweep", "object-fresh"):
@@ -233,7 +248,7 @@ def main():
                    (("Object sweep (300)", "object-sweep"), ("Object fresh (200)", "object-fresh"),
                     ("Combined Object (500)", "object-combined"))]
     for label, outcome in comparisons:
-        lines.append(label + r" & \multicolumn{4}{l}{First five vs. Late (pp)} & \multicolumn{2}{l}{"
+        lines.append(label + r" & \multicolumn{5}{l}{First five vs. Late (pp)} & \multicolumn{2}{l}{"
                      + pair_text(outcome) + r"} \\")
     lines += [r"\end{tabular}", r"\end{table*}"]
     (PAPER / "tables/scheduled-selection.tex").write_text("\n".join(lines)+"\n", encoding="ascii")

@@ -17,16 +17,22 @@ Left: marginal 95% bootstrap intervals resample physical layouts, keeping noise 
 We use four proposals at the first few control queries and one thereafter.
 Each query commits up to 20 environment steps. On the 300-layout Object
 sweep, five was the smallest tested cutoff within 3 percentage points of
-full selection by point estimate. Each suite uses a separately set cutoff.
+full selection by point estimate. Goal and Spatial used the preregistered one-third rule. The Plus lighting cohort reused Object's cutoff.
 
 | Paired cohort | Schedule | Single | Full Bo4 | Early window | Four-way calls, full to early |
 |---|---|---:|---:|---:|---:|
 | Object calibration (300) | First five | 144 | 169 | 167 | 3,099 → 1,500 |
 | Object new layouts (200) | First five | 98 | 110 | 110 | 2,061 → 1,000 |
 | Long Task2 (256) | First eight | 93 | 124 | 127 | 4,949 → 2,048 |
+| LIBERO-Goal (300) | First five | 145 | 165 | 159 | 2,996 → 1,484 |
+| LIBERO-Spatial (300) | First five | 131 | 142 | 141 | 3,046 → 1,491 |
+| Plus lighting (300) | First five | 100 | 123 | 123 | 3,376 → 1,500 |
 
 The early-window differences from full Bo4 were −0.67 pp [−2.67, 1.33],
-0.00 pp [−2.00, 2.00], and +1.17 pp [−5.08, 7.42], respectively.
+0.00 pp [−2.00, 2.00], +1.17 pp [−5.08, 7.42], −2.00 pp [−6.00, 2.00],
+−0.33 pp [−5.00, 4.33], and 0.00 pp [−2.00, 2.00], respectively. Each point
+estimate is within the 3 pp tolerance. On Spatial, Late finished 131/300,
+with a paired difference from single of 0.00 pp [−4.00, 4.00].
 The fresh Object difference from one proposal was +6.00 pp [−2.00, 14.00].
 Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls.
 Late uses one proposal at queries 1–5 and four thereafter. The counts measure workload and depend on episode termination.
