@@ -15,7 +15,8 @@
 
 \begin{abstract}
 Frozen VGAS four-proposal selection on SmolVLA improved observed paired success over a single proposal on LIBERO-Object and LIBERO-Long Task2. Using four proposals only at early queries retained observed full-selection success within a 3 percentage point tolerance on new Object starts and Long Task2, cutting four-way calls by 51.5\% and 58.6\%, respectively. Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls.
-On A100, prefix sharing reduced rollout mean decision time from 272 to 217 ms, CUDA Graph replay reduced a separate matched fixed-observation median from 226 to 81 ms, and per-channel INT8 packing reduced persistent critic storage from 175 to 44 MB.
+On LIBERO-Goal, the preregistered one-third rule met both point-estimate criteria.
+Object calibration EWS averaged 2,201 ms of core inference per episode versus 2,282 ms for one proposal. On A100, prefix sharing reduced rollout mean decision time from 272 to 217 ms, CUDA Graph replay reduced a separate matched fixed-observation median from 226 to 81 ms, and per-channel INT8 packing reduced persistent critic storage from 175 to 44 MB.
 \end{abstract}
 
 \section{Introduction}
@@ -44,6 +45,11 @@ denoising budget itself \cite{early}. CUDA Graphs can reduce repeated host
 dispatch by replaying captured diffusion workloads \cite{graphs}. These
 precedents motivate our measurement of how execution scheduling and proposal
 batch size interact when a flow actor feeds a learned critic.
+
+ELASTIC learns how to vary denoising steps and candidate count with
+robot state \cite{elastic}. EWS allocates a fixed-size candidate pool
+across queries in an episode and can be combined with within-query
+compute allocation.
 
 \section{Method}
 Figure~\ref{fig:overview} follows one control query from observation to execution.
@@ -92,8 +98,8 @@ is excluded from the evidence.
 \label{sec:scheduled}
 We keep the actor, critic and execution horizon fixed. As an episode
 progresses, fewer control steps remain to recover from an earlier
-decision. This motivates spending the selection budget early. At queries
-$1,\ldots,K$ we sample four proposals and score them with VGAS.
+decision. This motivates spending the selection budget early. We call this rule early-window selection (EWS). At queries
+$1,\ldots,K$ it samples four proposals and ranks them with VGAS.
 Subsequent queries use one proposal and skip the critic. Each query
 executes up to 20 environment steps. Episodes allow up to 14 queries
 on Object and 26 on Long Task2.
@@ -112,7 +118,7 @@ positions before acting. Late schedules nine positions starting at query 6. Both
 Table~\ref{tab:scheduled} summarizes the paired outcomes. On the
 300-layout calibration cohort, we chose the smallest tested
 $K$ whose success-rate point estimate fell within 3 percentage points
-of full selection. This cohort overlaps with a 50-layout pilot that
+of full selection. This is EWS's cutoff calibration procedure. This cohort overlaps with a 50-layout pilot that
 motivated the sweep. Gains flattened after the first few queries
 (Fig.~\ref{fig:scheduled-dose}). The first five reached 167/300
 successes versus 169/300 with full Bo4 and 144/300 with one proposal.
@@ -133,8 +139,10 @@ The delayed control used one proposal at queries 1--5 and Bo4 thereafter. On cal
 
 Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls. The combined percentile interval resamples physical layouts within task and cohort. Calibration helped choose the cutoff, and the fresh comparison is reported separately. Realized calls depend on episode termination. We did not match realized call counts exactly.
 
+We evaluated the proportional rule prospectively on ten LIBERO-Goal tasks, using 300 official starts paired across all four arms. With a 300-step cap and at most 20 actions per query, the preregistered cutoff was $K=\operatorname{round}(15/3)=5$. We used the released Goal critic and the shared actor. The four arms (single, full Bo4, EWS-5 and Late-5) succeeded 145, 165, 159, 138/300 times, respectively. EWS-5 minus full was -2.00 pp [-6.00, 2.00], with 1,484 versus 2,996 four-way calls. Late minus single was -2.33 pp [-6.33, 1.67], with 1,751 four-way calls. The one-third rule met both prespecified point-estimate criteria on Goal. Together with the separately set Object and Long Task2 windows, this supports early windows across the three evaluated suite settings. The result does not establish a universal cutoff. Initial physics and seeds were identical across arms, while the first wrist image could differ by up to two pixel levels. EWS and full Bo4 chose the same first winner on 293/300 starts. Goal provides a paired schedule comparison, with rendering variability in the common prefixes.
+
 For Long Task2 we set a separate eight-query window from development
-observations of the longer task horizon. First-eight and full Bo4
+observations of the longer task horizon. The two cutoffs use roughly a third of their query caps (5/14 and 8/26). First-eight and full Bo4
 succeeded in 127/256 and 124/256 episodes, respectively
 ($+1.17$ pp $[-5.08,7.42]$). Relative to the single-proposal control
 (93/256), the difference was $+13.28$ pp $[7.03,19.53]$. Calls fell
@@ -142,6 +150,9 @@ from 4,949 to 2,048 (58.6\%) and chunks from 19,796 to 11,077
 (44.0\%). Both confirmation comparisons are within the 3 pp
 point-estimate tolerance. The schedule reduces the number of
 four-way queries, and prefix sharing reduces work within a query.
+
+\input{\paperdir tables/episode-cost.tex}
+Table~\ref{tab:episode-cost} sums the recorded core decision times within each episode. On the Object calibration cohort, sharing plus EWS used 2,201 ms of mean inference per episode versus 2,282 ms for one proposal ($-3.5$\%), with 167 versus 144 successes. On fresh Object starts the corresponding means were 2,184 and 2,260 ms with 110 and 98 successes. These totals also reflect changes in the number of queries reached. On Goal, EWS-5 used 2,943 ms of mean core inference per episode, 13.4\% above the single-proposal arm (2,595 ms). The Object result on core time did not transfer to Goal.
 
 \subsection{Decision latency and critic storage}
 Across Object rollout decisions, mean latency is \BaselineTime{} ms for one
@@ -190,21 +201,22 @@ substantial scheduling cost and reveals increased incremental cost for wider
 batches. Determining how much comes from individual launches would require
 kernel-level traces. All timing is on A100. Target-chip latency, bandwidth
 and energy remain open. Closed-loop success measurements use eager execution.
-Earlier visual-residual and critic-advantage gates showed no reliable
-incremental benefit in their tested settings. This evidence concerns
-the tested signals and budgets. Fixed early windows retained the
-observed gains of full selection in our paired evaluation.
-Figure~\ref{fig:q0-gate} shows how a score threshold can inherit
-episode timing. On 3,099 archived full-Bo4 Object queries, candidate
-zero's median twin-min score rose from $-56.41$ at query 1 to $-32.37$
-at query 6. A retrospective gate at the pooled lower quartile
-($-53.78$) marked 775 queries, of which 747 (96.4\%) were in the first
-five. Each per-index denominator includes only the episodes that
-reached that query, and the logged states come from full Bo4.
-This association does not establish closed-loop gate performance.
-ELASTIC studies joint sequential and parallel allocation under a
-learned policy \cite{elastic}. Our measurements concern fixed
-episode windows and the A100 cost of frozen VGAS selection.
+Three observations are consistent with a shorter opportunity to recover
+late in an episode. In a prior Long Task2 timing study, only one episode
+that reached query 16 ultimately succeeded. On Object, Late used more
+four-way calls than EWS-5 and yielded no positive gain over one proposal
+by point estimate. Candidate zero's median twin-min score rose from
+$-56.41$ at query 1 to $-32.37$ at query 6 on 3,099 archived full-Bo4
+queries (Fig.~\ref{fig:q0-gate}). A pooled lower-quartile gate at
+$-53.78$ would mark 747 of its 775 queries in the first five. Late
+samples condition on reaching that query. Compounding early errors can
+also make late trajectories harder to rescue. The remaining-horizon
+interpretation is consistent with the reach curve and the delayed
+control, and these observations do not isolate it from compounding
+error. Both mechanisms motivate testing fixed early windows. The score
+analysis is retrospective, and earlier visual-residual and
+critic-advantage gates showed no reliable incremental benefit in their
+tested settings.
 
 \begin{figure}[tb]
 \centering
@@ -222,8 +234,7 @@ development. Object and Long use separately calibrated windows. Paired
 intervals are descriptive. On Long Task2, the single-proposal control
 succeeded in 38/128 and 55/128 episodes under the two noise banks. The 3 pp point-estimate rule guides schedule
 selection, while formal equivalence requires a prespecified margin and test.
-The scheduled arms establish changes in calls and chunks. Episode latency and
-energy are unmeasured. In an offline Object probe of 150 four-proposal
+The measured inference totals omit environment execution and action postprocessing. Complete episode wall time and energy are unmeasured. In an offline Object probe of 150 four-proposal
 queries, step-four estimates matched the winner from the complete ten-step
 denoising run in 52\% of cases, below the 80\% screening threshold. The
 reported workload therefore retains all ten denoising steps per proposal.
@@ -234,8 +245,7 @@ selection. We observed that using four proposals only at early queries
 retained the full schedule's observed success within the specified
 point-estimate tolerance on new Object layouts and on Long Task2. Prefix
 reuse and early-window selection address work within a query and across
-queries, respectively. Measuring their combined effect on episode latency
-would characterize the deployment impact.
+queries, respectively. Measuring complete episode wall time would further characterize the deployment impact.
 
 \begingroup\small
 \input{\paperdir references.tex}

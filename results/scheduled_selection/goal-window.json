@@ -1,0 +1,109 @@
+{
+  "episodes": 300,
+  "query_cap": 15,
+  "cutoff": 5,
+  "totals": {
+    "single": {
+      "success": 145,
+      "queries": 3173,
+      "calls": 0,
+      "candidates": 3173,
+      "mean_inference_ms": 2594.9900570263467
+    },
+    "dense": {
+      "success": 165,
+      "queries": 2996,
+      "calls": 2996,
+      "candidates": 11984,
+      "mean_inference_ms": 2178.798617658516
+    },
+    "front": {
+      "success": 159,
+      "queries": 3049,
+      "calls": 1484,
+      "candidates": 7501,
+      "mean_inference_ms": 2942.9921547075114
+    },
+    "late": {
+      "success": 138,
+      "queries": 3230,
+      "calls": 1751,
+      "candidates": 8483,
+      "mean_inference_ms": 2374.9405664081373
+    }
+  },
+  "paired": {
+    "front_vs_dense": {
+      "pp": -2.0,
+      "ci": [
+        -6.0,
+        1.9999999999999998
+      ],
+      "rescues": 15,
+      "harms": 21
+    },
+    "late_vs_single": {
+      "pp": -2.3333333333333335,
+      "ci": [
+        -6.333333333333332,
+        1.666666666666667
+      ],
+      "rescues": 16,
+      "harms": 23
+    },
+    "front_vs_single": {
+      "pp": 4.666666666666667,
+      "ci": [
+        -1.333333333333333,
+        10.333333333333334
+      ],
+      "rescues": 49,
+      "harms": 35
+    },
+    "front_vs_late": {
+      "pp": 7.000000000000001,
+      "ci": [
+        0.9999999999999997,
+        13.000000000000004
+      ],
+      "rescues": 57,
+      "harms": 36
+    },
+    "dense_vs_single": {
+      "pp": 6.666666666666667,
+      "ci": [
+        1.0000000000000004,
+        12.333333333333332
+      ],
+      "rescues": 48,
+      "harms": 28
+    }
+  },
+  "prefix_diagnostics": {
+    "front_vs_dense": {
+      "comparable_queries": 1477,
+      "same_shape": 1405,
+      "action_exact": 143,
+      "first_action_exact": 66,
+      "first_action_max_abs_lt_0_05": 293,
+      "first_image_exact": 160,
+      "first_image_max_pixel_difference": 1,
+      "first_image2_exact": 111,
+      "first_image2_max_pixel_difference": 2,
+      "first_winner_agreement": 293,
+      "max_action_difference": 2.1254544258117676
+    },
+    "late_vs_single": {
+      "comparable_queries": 1476,
+      "same_shape": 1409,
+      "action_exact": 97,
+      "first_action_exact": 43,
+      "first_action_max_abs_lt_0_05": 300,
+      "first_image_exact": 151,
+      "first_image_max_pixel_difference": 1,
+      "first_image2_exact": 96,
+      "first_image2_max_pixel_difference": 2,
+      "max_action_difference": 2.085951805114746
+    }
+  }
+}
