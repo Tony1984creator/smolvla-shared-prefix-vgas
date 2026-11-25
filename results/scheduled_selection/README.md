@@ -44,3 +44,9 @@ score feature and the failure-precision thresholds. On the pooled holdout
 with at least 90% failure precision. Query count alone had AUC 0.994. The
 source is outputs/ews_generalize_20261124/self-assessment.json, with feature
 definitions in its companion SELF_ASSESSMENT.md.
+
+[Marginal-value CSV](marginal-value.csv) and [JSON](marginal-value.json) compare adjacent
+Object prefix arms on matched layouts. Run python scripts/summarize_marginal_value.py
+after regenerating the scheduled-selection summary. Cumulative capture divides by the
+observed full-Bo4 gain over single. Planned-slot means describe the blocks at their
+tested prefixes. Realized calls reflect termination.

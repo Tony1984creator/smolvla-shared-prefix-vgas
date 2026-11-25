@@ -9,6 +9,7 @@ From the repository root, regenerate the tables and figures with NumPy, Matplotl
 
     python scripts/make_paper_tables.py
     python scripts/summarize_scheduled_selection.py
+    python scripts/summarize_marginal_value.py
     python scripts/plot_q0_gate.py
     python scripts/summarize_episode_cost.py
     python paper/make_overview.py
