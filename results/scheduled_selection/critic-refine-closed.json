@@ -1,0 +1,67 @@
+{
+  "layouts": 200,
+  "arms": {
+    "single": {
+      "success": 98,
+      "queries": 2140,
+      "calls": 0,
+      "candidates": 2140,
+      "mean_core_ms_per_episode": 2260.1077147806063,
+      "parameters": 0
+    },
+    "dense": {
+      "success": 110,
+      "queries": 2061,
+      "calls": 2061,
+      "candidates": 8244,
+      "mean_core_ms_per_episode": 2246.373912245035,
+      "parameters": 43756674
+    },
+    "front": {
+      "success": 110,
+      "queries": 2061,
+      "calls": 1000,
+      "candidates": 5061,
+      "mean_core_ms_per_episode": 2184.419391741976,
+      "parameters": 43756674
+    },
+    "refined": {
+      "success": 91,
+      "queries": 2167,
+      "calls": 1000,
+      "candidates": 5167,
+      "mean_core_ms_per_episode": 2440.755939912051,
+      "parameters": 43756674
+    }
+  },
+  "refined_vs": {
+    "single": {
+      "delta_pp": -3.5000000000000004,
+      "ci95_pp": [
+        -11.0,
+        3.5000000000000004
+      ],
+      "rescues": 25,
+      "harms": 32
+    },
+    "dense": {
+      "delta_pp": -9.5,
+      "ci95_pp": [
+        -17.0,
+        -2.0
+      ],
+      "rescues": 21,
+      "harms": 40
+    },
+    "front": {
+      "delta_pp": -9.5,
+      "ci95_pp": [
+        -17.0,
+        -2.0
+      ],
+      "rescues": 23,
+      "harms": 42
+    }
+  },
+  "decision": "harm"
+}

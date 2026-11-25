@@ -301,6 +301,27 @@ Spatial and fixed Plus lighting variants. Prefix
 reuse and early-window selection address work within a query and across
 queries, respectively. Measuring complete episode wall time would further characterize the deployment impact.
 
+\appendix
+\section{Critic refinement from deployment rollouts}
+We fine-tuned the released Object critic on discounted terminal success
+from archived executed chunks, keeping the SmolVLA actor frozen.
+Training and validation used 270 and 30 disjoint calibration layouts.
+On 337 held-out queries, the original critic and the two fine-tuned
+seeds had success AUCs of 0.495, 0.639 and 0.612. The two fine-tuned
+seeds chose the same winner on 280 of 337 regenerated four-candidate
+pools (83.1\%). Relative to the original critic, the ratio of median
+within-query score deviation to the deviation of query means was
+1.57 for the first refinement seed.
+
+We evaluated the first seed with EWS-5 on 200 matched Object layouts
+disjoint from training and validation. The refined critic succeeded
+in 91 episodes versus 110 with the original EWS-5 critic
+($-9.50$ pp, task-stratified paired 95\% interval $[-17.00,-2.00]$),
+with 23 rescues and 42 harms at 1,000 four-way calls per arm.
+Archived single and full-Bo4 runs succeeded in 98 and 110 episodes.
+The offline AUC uses labels for executed actions. On this cohort,
+higher AUC and reproducible rankings coincided with worse closed-loop selection.
+
 \begingroup\small
 \input{\paperdir references.tex}
 \endgroup

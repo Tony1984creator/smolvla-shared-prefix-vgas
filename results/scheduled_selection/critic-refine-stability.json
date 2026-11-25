@@ -1,0 +1,28 @@
+{
+  "queries": 337,
+  "original": {
+    "within_median_sd": 0.9957841178363668,
+    "across_query_mean_sd": 10.981791849930755,
+    "ratio": 0.09067592351448964
+  },
+  "seed1": {
+    "within_median_sd": 0.036884520562912,
+    "across_query_mean_sd": 0.2591880034067013,
+    "ratio": 0.14230797752253666
+  },
+  "seed2": {
+    "within_median_sd": 0.034984258347449775,
+    "across_query_mean_sd": 0.24994379943986925,
+    "ratio": 0.13996849862189195
+  },
+  "seed1_refined_auc": 0.6387021475256769,
+  "seed2_refined_auc": 0.6124649859943978,
+  "original_auc": 0.4945845004668534,
+  "relative_spread_seed1": 1.5694130482144626,
+  "relative_spread_seed2": 1.5436126062672586,
+  "spread_threshold": 0.030225307838163212,
+  "agreement": 280,
+  "agreement_rate": 0.8308605341246291,
+  "chance_agreement_from_marginals": 0.2522079088483653,
+  "gate_pass": true
+}

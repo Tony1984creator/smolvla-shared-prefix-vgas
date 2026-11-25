@@ -50,3 +50,8 @@ Object prefix arms on matched layouts. Run python scripts/summarize_marginal_val
 after regenerating the scheduled-selection summary. Cumulative capture divides by the
 observed full-Bo4 gain over single. Planned-slot means describe the blocks at their
 tested prefixes. Realized calls reflect termination.
+
+[Critic refinement stability](critic-refine-stability.json) compares two training seeds
+on the same 337 held-out queries. The [closed-loop ledger](critic-refine-paired.csv)
+and [summary](critic-refine-closed.json) add one refined EWS-5 arm on 200 disjoint
+layouts and reuse the archived single, full Bo4 and original EWS-5 controls.
