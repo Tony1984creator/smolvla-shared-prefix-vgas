@@ -1,0 +1,42 @@
+[
+  {
+    "shard": 0,
+    "gpu": 0,
+    "warm_capture_ms": {
+      "1": 1259.0815164148808,
+      "4": 1076.4625063166022
+    },
+    "device": "NVIDIA A100 80GB PCIe",
+    "torch_version": "2.7.1+cu126"
+  },
+  {
+    "shard": 1,
+    "gpu": 1,
+    "warm_capture_ms": {
+      "1": 1049.8373648151755,
+      "4": 1060.7026629149914
+    },
+    "device": "NVIDIA A100 80GB PCIe",
+    "torch_version": "2.7.1+cu126"
+  },
+  {
+    "shard": 2,
+    "gpu": 0,
+    "warm_capture_ms": {
+      "1": 1432.7475493773818,
+      "4": 1088.5217627510428
+    },
+    "device": "NVIDIA A100 80GB PCIe",
+    "torch_version": "2.7.1+cu126"
+  },
+  {
+    "shard": 3,
+    "gpu": 1,
+    "warm_capture_ms": {
+      "1": 1370.3923588618636,
+      "4": 949.809005483985
+    },
+    "device": "NVIDIA A100 80GB PCIe",
+    "torch_version": "2.7.1+cu126"
+  }
+]

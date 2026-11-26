@@ -9,7 +9,7 @@ from make_paper_tables import ROOT, load, table
 
 PAPER = ROOT / "paper"
 FIGURES = PAPER / "figures"
-COLORS = ("#48709a", "#59a2a0", "#d58b44", "#8e77ac")
+COLORS = ("#b7c9d8", "#7896ae", "#234d73", "#8c6647")
 
 
 def main():
@@ -68,17 +68,25 @@ def main():
         return
     import matplotlib.pyplot as plt
 
-    fig, ax = plt.subplots(figsize=(4.5, 2.7), layout="constrained")
-    for index, label, marker in ((2, "Matched eager", "o"), (3, "Warm CUDA Graph", "s")):
-        ax.plot(ns, [t[index] for t in graph_times], marker=marker, label=label)
+    plt.rcParams.update({"font.size": 8, "axes.labelsize": 8, "legend.fontsize": 7.5,
+                         "axes.spines.top": False, "axes.spines.right": False,
+                         "axes.linewidth": .65, "pdf.fonttype": 42})
+    fig, ax = plt.subplots(figsize=(3.42, 2.14), constrained_layout=True)
+    for index, label, marker, color, style in (
+        (2, "Matched eager", "o", "#545b65", "--"),
+        (3, "Warm CUDA Graph", "s", COLORS[2], "-"),
+    ):
+        ax.plot(ns, [t[index] for t in graph_times], marker=marker, color=color,
+                linestyle=style, linewidth=1.2, markersize=4, label=label)
     ax.set(xlabel="Number of candidates", ylabel="Median decision time (ms)", xticks=ns)
-    ax.grid(axis="y", alpha=.2)
-    ax.legend(frameon=False)
-    fig.savefig(FIGURES / "decision-latency.pdf")
+    ax.set_axisbelow(True)
+    ax.grid(axis="y", color="#d8dce0", linewidth=.5)
+    ax.legend(frameon=False, loc="center right")
+    fig.savefig(FIGURES / "decision-latency.pdf", metadata={"CreationDate": None})
     plt.close(fig)
 
     profile = [r for r in load("profile")["rows"] if r["n"] in ns]
-    fig, ax = plt.subplots(figsize=(4.5, 2.7), layout="constrained")
+    fig, ax = plt.subplots(figsize=(3.42, 2.14), constrained_layout=True)
     base = [0.] * len(profile)
     for stage, label, color in zip(("vision", "prefix", "expert", "critic"),
                                    ("Vision", "Prefix", "Action expert", "Critic"), COLORS):
@@ -87,8 +95,10 @@ def main():
         base = [x + y for x, y in zip(base, height)]
     ax.set(xlabel="Number of candidates", ylabel="Sum of stage medians (ms)",
            xticks=range(len(profile)), xticklabels=[r["n"] for r in profile], ylim=(0, 310))
+    ax.set_axisbelow(True)
+    ax.grid(axis="y", color="#d8dce0", linewidth=.5)
     ax.legend(frameon=False, ncol=2, loc="upper center")
-    fig.savefig(FIGURES / "stage-latency.pdf")
+    fig.savefig(FIGURES / "stage-latency.pdf", metadata={"CreationDate": None})
     plt.close(fig)
 
 

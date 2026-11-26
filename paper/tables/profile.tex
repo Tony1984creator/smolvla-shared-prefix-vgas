@@ -3,10 +3,10 @@
 \centering\small
 \caption{Shared decision stages on A100. Times are medians of 20 measurements. Registered operator FLOPs and logical tensor traffic use decimal giga-units ($10^9$). Physical DRAM traffic was unmeasured.}
 \label{tab:profile}
-\begin{tabular}{rlrrrrr}
-\hline
+\begin{tabular}{@{}rlrrrrr@{}}
+\toprule
 $N$ & Stage & ms & GFLOP & Weight read (GB) & Act. read (GB) & Act. write (GB) \\
-\hline
+\midrule
 1 & vision & 9.92 & 430.6 & 0.393 & 1.486 & 0.723 \\
 1 & prefix & 20.31 & 57.6 & 0.409 & 0.682 & 0.597 \\
 1 & expert & 188.68 & 110.2 & 2.062 & 2.302 & 1.973 \\
@@ -23,6 +23,6 @@ $N$ & Stage & ms & GFLOP & Weight read (GB) & Act. read (GB) & Act. write (GB) \
 16 & prefix & 20.33 & 57.6 & 0.409 & 0.682 & 0.597 \\
 16 & expert & 191.86 & 1763.0 & 2.062 & 44.632 & 39.367 \\
 16 & critic & 6.97 & 277.1 & 0.175 & 3.065 & 2.343 \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table*}

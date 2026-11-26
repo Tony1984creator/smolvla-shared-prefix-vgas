@@ -2,8 +2,8 @@
 \centering\small\setlength{\tabcolsep}{3.5pt}
 \caption{Episode-level selection. Calls count four-way scoring batches. Chunks include single proposals. Paired 95\% percentile intervals resample within task; Long resamples physical layouts with both noise repeats together. The combined Object contrast resamples within cohort and task. Times shown for the two new cohorts are mean A100 core ms per episode. See Table~\ref{tab:episode-cost} for the full timing comparison.}
 \label{tab:scheduled}
-\begin{tabular}{llrrrrll}\hline
-Cohort & Schedule & Wins & Calls & Chunks & ms/episode & vs.\ single (pp) & vs.\ full Bo4 (pp) \\ \hline
+\begin{tabular}{@{}llrrrrll@{}}\toprule
+Cohort & Schedule & Wins & Calls & Chunks & ms/episode & vs.\ single (pp) & vs.\ full Bo4 (pp) \\ \midrule
 Object sweep (300) & Single & 144 & 0 & 3,251 & -- & -- & $-8.33$ $[-14.67, -1.67]$ \\
  & First 3 & 159 & 900 & 5,891 & -- & $+5.00$ $[-1.33, 11.33]$ & $-3.33$ $[-6.00, -0.67]$ \\
  & First 5 & 167 & 1,500 & 7,608 & -- & $+7.67$ $[1.00, 14.00]$ & $-0.67$ $[-2.67, 1.33]$ \\
@@ -12,27 +12,28 @@ Object sweep (300) & Single & 144 & 0 & 3,251 & -- & -- & $-8.33$ $[-14.67, -1.6
  & Full Bo4 & 169 & 3,099 & 12,396 & -- & $+8.33$ $[1.67, 14.67]$ & -- \\
  & Random seven & 159 & 1,567 & 7,838 & -- & $+5.00$ $[0.00, 10.33]$ & -- \\
  & Late & 141 & 1,757 & 8,528 & -- & $-1.00$ $[-2.67, 0.67]$ & $-9.33$ $[-15.67, -2.67]$ \\
-\hline
+\addlinespace
 Object fresh (200) & Single & 98 & 0 & 2,140 & -- & -- & $-6.00$ $[-14.00, 2.00]$ \\
  & Full Bo4 & 110 & 2,061 & 8,244 & -- & $+6.00$ $[-2.00, 14.00]$ & -- \\
  & First five & 110 & 1,000 & 5,061 & -- & $+6.00$ $[-2.00, 14.00]$ & $+0.00$ $[-2.00, 2.00]$ \\
  & Late & 98 & 1,136 & 5,544 & -- & $+0.00$ $[-2.00, 2.00]$ & $-6.00$ $[-14.00, 2.00]$ \\
-\hline
+\addlinespace
 Long Task2 (256) & Single & 93 & 0 & 5,390 & -- & -- & $-12.11$ $[-18.75, -5.86]$ \\
  & Full Bo4 & 124 & 4,949 & 19,796 & -- & $+12.11$ $[5.86, 18.75]$ & -- \\
  & First eight & 127 & 2,048 & 11,077 & -- & $+13.28$ $[7.03, 19.53]$ & $+1.17$ $[-5.08, 7.42]$ \\
-\hline
+\addlinespace
 Spatial (300) & Single & 131 & 0 & 3,147 & 2,372.74 & -- & $-3.67$ $[-10.00, 2.67]$ \\
  & Full Bo4 & 142 & 3,046 & 12,184 & 2,180.16 & $+3.67$ $[-2.67, 10.00]$ & -- \\
  & First five & 141 & 1,491 & 7,522 & 2,136.47 & $+3.33$ $[-2.67, 9.33]$ & $-0.33$ $[-5.00, 4.33]$ \\
  & Late & 131 & 1,663 & 8,144 & 2,200.06 & $+0.00$ $[-4.00, 4.00]$ & $-3.67$ $[-10.33, 2.67]$ \\
-\hline
+\addlinespace
 Plus lighting (300) & Single & 100 & 0 & 3,516 & 2,387.96 & -- & $-7.67$ $[-14.33, -1.33]$ \\
  & Full Bo4 & 123 & 3,376 & 13,504 & 2,364.64 & $+7.67$ $[1.33, 14.33]$ & -- \\
  & First five & 123 & 1,500 & 7,871 & 2,377.45 & $+7.67$ $[1.33, 14.33]$ & $+0.00$ $[-2.00, 2.00]$ \\
-\hline
+\midrule
 Object sweep (300) & \multicolumn{5}{l}{First five vs. Late (pp)} & \multicolumn{2}{l}{$+8.67$ $[2.33, 15.00]$} \\
 Object fresh (200) & \multicolumn{5}{l}{First five vs. Late (pp)} & \multicolumn{2}{l}{$+6.00$ $[-2.00, 14.00]$} \\
 Combined Object (500) & \multicolumn{5}{l}{First five vs. Late (pp)} & \multicolumn{2}{l}{$+7.60$ $[2.60, 12.60]$} \\
+\bottomrule
 \end{tabular}
 \end{table*}

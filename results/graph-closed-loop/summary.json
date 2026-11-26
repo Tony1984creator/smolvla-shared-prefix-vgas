@@ -1,0 +1,83 @@
+{
+  "arms": {
+    "single": {
+      "successes": 98,
+      "episodes": 200,
+      "queries": 2140,
+      "four_way_calls": 0,
+      "candidates": 2140,
+      "mean_episode_ms": 825.189752,
+      "decision_p50_ms": 72.5387,
+      "decision_p90_ms": 98.911508
+    },
+    "dense": {
+      "successes": 110,
+      "episodes": 200,
+      "queries": 2061,
+      "four_way_calls": 2061,
+      "candidates": 8244,
+      "mean_episode_ms": 943.958374,
+      "decision_p50_ms": 86.298442,
+      "decision_p90_ms": 113.581424
+    },
+    "front5": {
+      "successes": 110,
+      "episodes": 200,
+      "queries": 2061,
+      "four_way_calls": 1000,
+      "candidates": 5061,
+      "mean_episode_ms": 859.406732,
+      "decision_p50_ms": 82.385017,
+      "decision_p90_ms": 102.185005
+    }
+  },
+  "paired": {
+    "front5_minus_dense": {
+      "success_difference_pp": 0.0,
+      "success_ci95_pp": [
+        -2.0,
+        2.0
+      ],
+      "episode_ms_difference": -84.551641,
+      "episode_ms_ci95": [
+        -103.23854,
+        -66.242241
+      ],
+      "rescues": 2,
+      "harms": 2
+    },
+    "front5_minus_single": {
+      "success_difference_pp": 6.0,
+      "success_ci95_pp": [
+        -2.0,
+        14.0
+      ],
+      "episode_ms_difference": 34.21698,
+      "episode_ms_ci95": [
+        -8.788583,
+        76.828487
+      ],
+      "rescues": 40,
+      "harms": 28
+    },
+    "dense_minus_single": {
+      "success_difference_pp": 6.0,
+      "success_ci95_pp": [
+        -2.0,
+        14.0
+      ],
+      "episode_ms_difference": 118.768622,
+      "episode_ms_ci95": [
+        72.080098,
+        165.623516
+      ],
+      "rescues": 40,
+      "harms": 28
+    }
+  },
+  "bootstrap": {
+    "seed": 20261126,
+    "draws": 20000,
+    "unit": "physical layout within task"
+  }
+}

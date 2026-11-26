@@ -5,7 +5,7 @@
 - VGAS source [ef656cb](https://github.com/Jyugo-15/VGAS/tree/ef656cbed9b740e035e5bd2981578531e4076e85).
 - Author checkpoints [VGAS-5-shot f23261d](https://huggingface.co/SemyonXu616/VGAS-5-shot/tree/f23261d42938662851e438cee6e25b2ceaa05ceb). Use the shared 5-shot actor and separate Object/Long critics from the corresponding suite.
 - Object and Plus used the server's smolvla-plus environment, Long used vgas-author. Object PyTorch was 2.7.1+cu126 on A100 80 GB PCIe. Checkout, compatible LIBERO/PyTorch stack and asset layout are dependencies of the full evaluator.
-- Candidate generation emits 50¡Á7 actions in 10 flow steps. Object critic consumes the first 32, Long critic 50. Both execute at most 20 before observing again. Episode budgets are 280 Object steps and 520 Long steps. Score with the smaller of the two critic outputs and execute the maximum-scoring candidate.
+- Candidate generation emits 50Ã—7 actions in 10 flow steps. Object critic consumes the first 32, Long critic 50. Both execute at most 20 before observing again. Episode budgets are 280 Object steps and 520 Long steps. Score with the smaller of the two critic outputs and execute the maximum-scoring candidate.
 
 ## Standalone check
 
@@ -34,3 +34,5 @@ Each row in [the paired Object ledger](../results/object-query-budget.csv) recor
 Run `python scripts/summarize_query_budget.py` to regenerate the original first-seven table and paired intervals without GPU access. For a fresh example with the installed simulator, run `python scripts/eval_libero.py --suite object --impl shared --candidates 4 --schedule first-seven --episodes 1`. Use `--schedule random-seven` for the timing control. This example uses the standalone evaluator's reset and seed conventions. The published comparison used the original P4 evaluation harness and the ledger's paired scene and policy seeds.
 
 The expanded cutoff sweep, fresh Object cohort and Long Task2 comparison are indexed in the [scheduled-selection data and protocol](../results/scheduled_selection/README.md). Run `python scripts/summarize_scheduled_selection.py` to regenerate the current paper table and dose figure.
+
+The [paired CUDA Graph rollout protocol](../results/graph-closed-loop/README.md) provides its own evaluator, frozen layout manifest, per-decision ledger and paired timing analysis. Run `python scripts/summarize_graph_closed_loop.py --verify` to check its released summary on CPU.

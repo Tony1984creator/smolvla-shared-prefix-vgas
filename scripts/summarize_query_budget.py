@@ -31,12 +31,12 @@ def main():
     def values(arm, field):
         return np.array([int(cases[k][arm][field]) for k in ordered])
 
-    lines = [r"\begin{tabular}{lrrr}\hline",
-             r"Schedule & Wins & Calls & Chunks \\ \hline"]
+    lines = [r"\begin{tabular}{@{}lrrr@{}}\toprule",
+             r"Schedule & Wins & Calls & Chunks \\ \midrule"]
     for arm, label in ARMS.items():
         wins, calls, candidates = (values(arm, key).sum() for key in ("success", "bo4_calls", "candidate_samples"))
         lines.append(rf"{label} & {wins} & {calls:,} & {candidates:,} \\")
-    lines.append(r"\hline\end{tabular}")
+    lines.append(r"\bottomrule\end{tabular}")
     (ROOT / "paper/tables/query-budget.tex").write_text("\n".join(lines)+"\n", encoding="ascii")
     for ref in ("B-BC", "B-Bo4", "random"):
         delta = (values("early","success")-values(ref,"success")).reshape(10,30)

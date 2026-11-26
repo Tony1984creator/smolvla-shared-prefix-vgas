@@ -1,8 +1,8 @@
-# Shared-prefix inference for VGAS on SmolVLA
+# Allocating test-time compute in SmolVLA
 
-SmolVLA encodes the current observation once, reuses it across four independently generated actions, and executes the proposal preferred by the released VGAS critic.
+We share SmolVLA's observation encoding across proposal generation and VGAS scoring, and evaluate when four-way selection is worth its inference cost. The actor, critic and scoring rule are from VGAS.
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Python 3.10](https://img.shields.io/badge/python-3.10-blue)](docs/INSTALL.md) [Project overview](#architecture) · ![arXiv: pending](https://img.shields.io/badge/arXiv-pending-lightgrey) · [Code](method/shared_prefix_selection.py) · [Data and settings](docs/REPRODUCIBILITY.md)
+[Paper PDF](paper/main.pdf) · [Code](method/shared_prefix_selection.py) · [Data and settings](docs/REPRODUCIBILITY.md) · [License](LICENSE)
 
 ![Closed-loop success in Object and Long Task2 alongside the A100 decision latency for one to sixteen candidates](docs/media/decision-cost.png)
 
@@ -66,11 +66,25 @@ The ten action-expert steps took 188.68 ms at one candidate and 191.86 ms at six
 
 ### What changes with CUDA Graph replay?
 
-With four candidates on a fixed real Object observation, capturing the ten action-expert steps reduced their median latency from **189.84 to 47.38 ms** and the complete decision from **225.74 to 80.54 ms**. Once dispatch overhead fell, batch size mattered again: the complete replay decision took **69.22 ms at one candidate** and **119.78 ms at sixteen**. Measurements include refreshing the inputs for each replay and exclude one-time capture. This is a timing and numerical-equivalence experiment on A100; closed-loop success above was measured with eager execution. [Protocol and raw timing samples](docs/PROFILE.md).
+On a fixed LIBERO-Object observation, capturing the ten action-expert steps reduced the four-proposal decision median from **225.74 to 80.54 ms**. The snapshot benchmark includes input refresh and excludes capture. [Protocol and raw samples](docs/PROFILE.md)
+
+On 200 paired Object layouts, all three schedules used the same warm Graph path.
+
+| Schedule | Successes | Four-way calls | Core ms/episode | Decision p50/p90 (ms) |
+|---|---:|---:|---:|---:|
+| Single proposal | 98/200 | 0 | 825.2 | 72.5 / 98.9 |
+| Full Bo4 | 110/200 | 2,061 | 944.0 | 86.3 / 113.6 |
+| EWS-5 | 110/200 | 1,000 | 859.4 | 82.4 / 102.2 |
+
+EWS-5 reduced mean core inference by **9.0%** versus full Bo4 (−84.55 ms, paired 95% interval [−103.24, −66.24]). The paired success difference was 0.0 pp [−2.0, 2.0]. [Data, protocol and recomputation](results/graph-closed-loop/README.md)
+
+![Paired success and inference-time differences under warm CUDA Graph replay](paper/figures/graph-closed-loop.png)
+
+Points compare each schedule with full Bo4. Whiskers show task-stratified paired 95% intervals.
 
 ## Architecture
 
-![One shared observation encoding feeds the four-proposal actor and the twin critic. The winner supplies up to twenty actions before the next observation.](docs/media/shared-prefix-architecture.svg)
+![Shared-prefix decision and the first-five selection schedule on LIBERO-Object](paper/figures/method-overview.png)
 
 **VGAS supplies** the frozen actor, the suite-specific critic and the selection rule. **Our implementation** shares the observation encoding across generation and scoring, preserves separate noise for each proposal, and dispatches the winning chunk. Both critic heads evaluate the first 32 proposed steps on Object or all 50 on Long. The smaller of the two scores ranks each proposal. An episode that succeeds during execution stops immediately. [VGAS source](https://github.com/Jyugo-15/VGAS) · [Pinned weights and evaluation settings](docs/REPRODUCIBILITY.md)
 

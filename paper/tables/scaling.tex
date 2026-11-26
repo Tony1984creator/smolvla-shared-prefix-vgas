@@ -3,10 +3,10 @@
 \centering\small
 \caption{A100 fixed-observation decision latency and peak GPU memory over 60 repetitions per condition. Both implementations score candidates at $N=1$. Memory is in MiB ($2^{20}$ bytes).}
 \label{tab:scaling}
-\begin{tabular}{rlrrrr}
-\hline
+\begin{tabular}{@{}rlrrrr@{}}
+\toprule
 $N$ & Implementation & Median (ms) & P90 (ms) & Allocated (MiB) & Reserved (MiB) \\
-\hline
+\midrule
 1 & original & 252.21 & 254.80 & 1624.52 & 2090.00 \\
 1 & shared & 216.97 & 218.01 & 1623.86 & 2092.00 \\
 2 & original & 257.25 & 259.49 & 1656.71 & 2092.00 \\
@@ -17,6 +17,6 @@ $N$ & Implementation & Median (ms) & P90 (ms) & Allocated (MiB) & Reserved (MiB)
 8 & shared & 218.52 & 219.40 & 1691.07 & 2088.00 \\
 16 & original & 331.13 & 332.10 & 2063.50 & 2494.00 \\
 16 & shared & 219.66 & 220.30 & 1773.80 & 2090.00 \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table*}

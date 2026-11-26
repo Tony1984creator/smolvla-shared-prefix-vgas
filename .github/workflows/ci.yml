@@ -15,5 +15,7 @@ jobs:
           python -m pip install numpy==1.26.4
           python scripts/make_paper_tables.py
           python scripts/summarize_query_budget.py
+          python scripts/summarize_graph_closed_loop.py
+          git diff --exit-code -- results/graph-closed-loop/summary.json
           python paper/make_figures.py --numbers-only
           git diff --exit-code -- paper/metrics.tex paper/tables/

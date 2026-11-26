@@ -203,8 +203,8 @@ def main():
              r"with both noise repeats together. The combined Object contrast resamples within cohort and task. "
              r"Times shown for the two new cohorts are mean A100 core ms per episode. See Table~\ref{tab:episode-cost} for the full timing comparison.}",
              r"\label{tab:scheduled}",
-             r"\begin{tabular}{llrrrrll}\hline",
-             r"Cohort & Schedule & Wins & Calls & Chunks & ms/episode & vs.\ single (pp) & vs.\ full Bo4 (pp) \\ \hline"]
+             r"\begin{tabular}{@{}llrrrrll@{}}\toprule",
+             r"Cohort & Schedule & Wins & Calls & Chunks & ms/episode & vs.\ single (pp) & vs.\ full Bo4 (pp) \\ \midrule"]
     summaries = {}
     timing_deltas = {}
     for name, label, widths, tasks, layouts, repeats, horizon, seed, draws, single, dense, labels in configs:
@@ -221,7 +221,7 @@ def main():
             time = f'{row["mean_inference_ms"]:,.2f}' if "mean_inference_ms" in row else "--"
             lines.append(f'{cohort} & {labels[arm]} & {row["wins"]} & {row["calls"]:,} & {row["chunks"]:,} & '
                          f"{time} & {bc_text} & {dense_text} " + r"\\")
-        lines.append(r"\hline")
+        lines.append(r"\addlinespace")
         summaries[name] = {"totals": totals, "paired": comparisons}
         if name in ("object-sweep", "object-fresh"):
             early = "front5" if name == "object-sweep" else "front"
@@ -247,10 +247,11 @@ def main():
     comparisons = [(label, summaries[name]["first_five_vs_late"]) for label, name in
                    (("Object sweep (300)", "object-sweep"), ("Object fresh (200)", "object-fresh"),
                     ("Combined Object (500)", "object-combined"))]
+    lines[-1] = r"\midrule"
     for label, outcome in comparisons:
         lines.append(label + r" & \multicolumn{5}{l}{First five vs. Late (pp)} & \multicolumn{2}{l}{"
                      + pair_text(outcome) + r"} \\")
-    lines += [r"\end{tabular}", r"\end{table*}"]
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table*}"]
     (PAPER / "tables/scheduled-selection.tex").write_text("\n".join(lines)+"\n", encoding="ascii")
     (DATA / "summary.json").write_text(json.dumps(summaries, indent=2)+"\n", encoding="ascii")
 

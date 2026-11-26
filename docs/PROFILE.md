@@ -59,6 +59,8 @@ Each N used six warm-up pairs followed by 30 measured pairs with alternating ord
 
 We compared every returned action chunk, every critic score and the winning index with the original shared eager implementation. For each N we used three noise banks and perturbed the preprocessed state in the third check to exercise refreshed prefix KV. Maximum absolute action and score errors were zero and all nine winners matched in each precision mode. The separate FP32 check casts actor and critic parameters to float32 and disables matmul and cuDNN TF32.
 
+The [paired closed-loop replay study](../results/graph-closed-loop/README.md) separately compares single proposal, full Bo4 and early-window selection on 200 identical starting layouts. It uses the same replay path for all three schedules and keeps their observed episode costs distinct from the fixed-observation measurements above.
+
 With the same environment variables as the P5 profile above, run:
 
 ```sh
