@@ -1,0 +1,69 @@
+{
+  "layouts": 300,
+  "queries": 900,
+  "branches": 3600,
+  "mixed_queries": 370,
+  "mixed_auc": 0.55,
+  "rates": {
+    "critic": 0.5233333333333333,
+    "uniform": 0.49722222222222223,
+    "oracle": 0.6955555555555556
+  },
+  "by_query": {
+    "1": {
+      "n": 300,
+      "mixed": 129,
+      "rates": {
+        "critic": 0.5133333333333333,
+        "uniform": 0.49166666666666664,
+        "oracle": 0.7033333333333334
+      }
+    },
+    "2": {
+      "n": 300,
+      "mixed": 147,
+      "rates": {
+        "critic": 0.5266666666666666,
+        "uniform": 0.485,
+        "oracle": 0.72
+      }
+    },
+    "3": {
+      "n": 300,
+      "mixed": 94,
+      "rates": {
+        "critic": 0.53,
+        "uniform": 0.515,
+        "oracle": 0.6633333333333333
+      }
+    }
+  },
+  "contrasts": {
+    "oracle_minus_critic": {
+      "difference_pp": 17.22222222222223,
+      "ci95_pp": [
+        14.777777777777779,
+        19.77777777777777
+      ]
+    },
+    "oracle_minus_uniform": {
+      "difference_pp": 19.833333333333336,
+      "ci95_pp": [
+        18.027777777777775,
+        21.66666666666667
+      ]
+    },
+    "critic_minus_uniform": {
+      "difference_pp": 2.6111111111111085,
+      "ci95_pp": [
+        0.8333333333333359,
+        4.3618055555555
+      ]
+    }
+  },
+  "bootstrap": {
+    "draws": 20000,
+    "seed": 20261126,
+    "unit": "layout within task"
+  }
+}

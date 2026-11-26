@@ -36,6 +36,8 @@ with a paired difference from single of 0.00 pp [−4.00, 4.00].
 The fresh Object difference from one proposal was +6.00 pp [−2.00, 14.00].
 Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls.
 Late uses one proposal at queries 1–5 and four thereafter. The counts measure workload and depend on episode termination.
+The [Object branch analysis](results/scheduled_selection/critic-oracle.json) estimates how often the released critic, uniform selection and a four-candidate oracle find a successful branch under fixed single-proposal continuation.
+
 [Data and protocol](results/scheduled_selection/README.md) · [Recompute the
 comparisons](scripts/summarize_scheduled_selection.py) · [Paper PDF](paper/main.pdf)
 

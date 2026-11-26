@@ -55,3 +55,13 @@ tested prefixes. Realized calls reflect termination.
 on the same 337 held-out queries. The [closed-loop ledger](critic-refine-paired.csv)
 and [summary](critic-refine-closed.json) add one refined EWS-5 arm on 200 disjoint
 layouts and reuse the archived single, full Bo4 and original EWS-5 controls.
+
+[Object branch outcomes](critic-oracle-branches.csv) record the 900 early
+anchors and their four terminal labels from the frozen F-line branch runs.
+Each candidate runs for up to 20 steps, followed by a one-proposal policy
+with noise aligned by simulator step across branches. Query anchors follow
+the original critic's path. Run python scripts/summarize_critic_oracle.py
+to regenerate the [selector comparison](critic-oracle.json). The oracle
+uses the best outcome in each saved pool. The [holdout scores](critic-counterfactual-holdout.json)
+and [training summary](critic-counterfactual-training.json) document the
+offline refinement that missed the +0.08 AUC gate.

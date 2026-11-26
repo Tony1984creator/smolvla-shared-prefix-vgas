@@ -271,6 +271,33 @@ In an exploratory post-episode analysis, candidate-zero critic scores
 had lower held-out failure AUC than query count alone (0.876 vs.\ 0.994),
 providing no evidence for an independent outcome readout.
 
+Ranking quality limits how much the fixed candidate pool can deliver.
+We branched four candidates at each of the first three queries along
+the released critic's selected trajectory on 300 Object calibration
+layouts. With one-proposal continuation, 370 of 900 anchors (41.1\%)
+had both successful and unsuccessful candidates. The original critic's
+query-macro ranking AUC on those anchors was 0.55. Across all anchors,
+the critic-selected branch succeeded 52.33\% of the time, compared
+with 49.72\% in expectation under uniform selection. An oracle choosing
+a successful branch when available reached 69.56\%, a paired gap of
+17.22 pp [14.78, 19.78]. This finite-pool ceiling uses a fixed
+continuation policy and fixed reference anchors. A different selector
+could visit different states, so the ceiling does not bound the
+success of a repeatedly applied closed-loop policy. The separate
+Object rollout gain of 8.33 pp from full Bo4 establishes the benefit
+of the existing procedure. The branch comparison shows room to improve
+its ranking under the tested continuation.
+
+Direct refinement on deployment returns reduced Object EWS success
+by 9.50 pp (Appendix~\ref{app:critic-refinement}). Each archived
+state supplied an outcome only for its executed action, which leaves
+the relative outcomes of other candidates unobserved. This is a
+possible explanation for the poor transfer from prediction to selection.
+Pairwise supervision using same-state branch outcomes lifted held-out
+ranking AUC by 0.075, below the prespecified 0.08 threshold. Learning a
+critic from larger collections of same-state counterfactual branches
+is a direction for future work.
+
 \begin{figure}[tb]
 \centering
 \includegraphics[width=\columnwidth]{\paperdir figures/q0-gate.pdf}
@@ -303,6 +330,7 @@ queries, respectively. Measuring complete episode wall time would further charac
 
 \appendix
 \section{Critic refinement from deployment rollouts}
+\label{app:critic-refinement}
 We fine-tuned the released Object critic on discounted terminal success
 from archived executed chunks, keeping the SmolVLA actor frozen.
 Training and validation used 270 and 30 disjoint calibration layouts.
@@ -321,6 +349,19 @@ with 23 rescues and 42 harms at 1,000 four-way calls per arm.
 Archived single and full-Bo4 runs succeeded in 98 and 110 episodes.
 The offline AUC uses labels for executed actions. On this cohort,
 higher AUC and reproducible rankings coincided with worse closed-loop selection.
+
+We also evaluated within-state pairwise ranking supervision. The
+four candidates at each archived anchor were executed independently
+before continuing with the same one-proposal policy. We preserved
+the original twin-head architecture and trained two seeds on 270
+calibration layouts with a discounted terminal-return regularizer.
+The disjoint 30-layout holdout contained 90 queries, including 42
+with mixed outcomes. Same-state ranking AUC was 0.5060 for the
+released critic and 0.5813 and 0.5774 for the two refined seeds.
+Their top choices agreed on 52/90 queries (57.8\%), meeting
+the 50\% stability threshold. The first seed gained 0.0754 AUC,
+below the prespecified gain of 0.08, so the experiment ended
+at offline validation.
 
 \begingroup\small
 \input{\paperdir references.tex}
