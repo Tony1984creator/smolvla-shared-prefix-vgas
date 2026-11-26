@@ -65,3 +65,8 @@ to regenerate the [selector comparison](critic-oracle.json). The oracle
 uses the best outcome in each saved pool. The [holdout scores](critic-counterfactual-holdout.json)
 and [training summary](critic-counterfactual-training.json) document the
 offline refinement that missed the +0.08 AUC gate.
+
+The [query and task decomposition](critic-oracle-decomposition.json) uses the same generator.
+It combines mixed-pool frequency, the oracle gap conditional on mixed pools, and
+critic capture of that gap. Regenerate marginal-value.csv first for the closed-loop
+dose comparison. The sum of fixed-anchor effects provides a scale comparison.
