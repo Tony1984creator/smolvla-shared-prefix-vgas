@@ -1,0 +1,42 @@
+{
+  "type": "critic",
+  "actor_pool": "light",
+  "intended_anchors": 40,
+  "missing": [
+    {
+      "case": "object_t2_init40_policy2",
+      "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 0,
+        "cl": 0,
+        "lc": 3,
+        "ll": 0
+      }
+    }
+  ],
+  "all": {
+    "anchors": 39,
+    "clean": 14.0,
+    "light": 10.0,
+    "rescues": 2,
+    "harms": 6,
+    "light_minus_clean": -0.10256410256410256,
+    "paired_95ci": [
+      -0.22857142857142856,
+      0.0
+    ]
+  },
+  "affected": {
+    "anchors": 25,
+    "clean": 11.0,
+    "light": 7.0,
+    "rescues": 2,
+    "harms": 6,
+    "light_minus_clean": -0.16,
+    "paired_95ci": [
+      -0.32,
+      0.0
+    ]
+  }
+}

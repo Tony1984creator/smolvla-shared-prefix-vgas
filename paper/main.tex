@@ -289,6 +289,19 @@ kernel-level traces. All timing is on A100. Target-chip latency, bandwidth
 and energy remain open. The closed-loop Graph comparison measures core
 inference under the shared A100 runtime. The simulator and action
 postprocessing are outside the timing scope.
+
+In a separate A100 timing ablation, removing 25\% of the action-expert
+feed-forward channels reduced full Bo4 Graph decision medians by
+0.87--1.20\% across two interleaved blocks. Reusing cross-attention key
+and value projections across denoising steps brought the combined
+reduction to 1.77--2.33\%. The small reductions show that a large FFN
+width change can yield little full-decision savings in this execution
+regime. Attention, memory movement and scheduling are plausible sources
+of remaining cost. Their contributions require kernel-level timing.
+In the matched closed-loop Graph comparison, reducing the number of Bo4
+queries saved 9.0\% of core inference per episode relative to full Bo4.
+The pruning results measure latency on archived observations.
+
 Three measurements support a near-flat late region. In the Object
 dose sweep, extending the prefix beyond query 7 added little observed
 success. The separate Late intervention activated scoring after query 5
@@ -345,6 +358,22 @@ possible explanation for the poor transfer from prediction to selection.
 Pairwise supervision using same-state branch outcomes lifted held-out
 ranking AUC by 0.075, below the prespecified 0.08 threshold for proceeding
 to a closed-loop evaluation.
+
+For the fixed LIBERO-Plus lighting variants, we replayed the first three
+queries on each of 50 archived Object layouts and crossed the generation
+and scoring images at each physical state. The median same-noise
+chunk difference was 0.107 in mean absolute units
+over the first 20 normalized actions. With the lighting-generated pool held fixed, changing
+the critic's image changed the winner on 26/150 queries
+(17.3\%, 95\% layout-bootstrap interval [11.3\%, 23.3\%]).
+We selected 40 anchors enriched for flips and branched all four proposals
+under the lighting condition with one-proposal continuation. One
+anchor's winner changed on replay, leaving 39 matched anchors. The clean
+and lighting scoring inputs selected 14 and 10 successful branches,
+respectively ($-10.26$ pp [$-22.86$, $0.00$], two rescues and six harms).
+This contrast isolates scoring on the replayed lighting-generated pools
+in the selected cohort. The effect of changing the generator on success
+remains open.
 
 VGAS supplies the actor, critic and selection rule. All settings use
 LIBERO simulation or its Plus extension \cite{libero}. Long is scoped to Task2 selected in

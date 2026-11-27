@@ -1,0 +1,446 @@
+{
+  "type": "critic",
+  "actor_pool": "light",
+  "anchors": [
+    {
+      "case": "object_t4_init40_policy2",
+      "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 0,
+        "cl": 0,
+        "lc": 3,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t1_init25_policy2",
+      "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 2,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t4_init35_policy2",
+      "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 3,
+        "cl": 2,
+        "lc": 1,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t3_init25_policy2",
+      "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 1,
+        "cl": 2,
+        "lc": 1,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t5_init42_policy2",
+      "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 0,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t7_init20_policy2",
+      "task": "pick_up_the_milk_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 2,
+        "cl": 1,
+        "lc": 0,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t6_init32_policy2",
+      "task": "pick_up_the_butter_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 2,
+        "cl": 0,
+        "lc": 2,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t9_init49_policy2",
+      "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 0,
+        "cl": 0,
+        "lc": 1,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t4_init40_policy2",
+      "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 1,
+        "cl": 0,
+        "lc": 1,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t4_init42_policy2",
+      "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 1,
+        "cl": 3,
+        "lc": 3,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t7_init42_policy2",
+      "task": "pick_up_the_milk_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 2,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t7_init42_policy2",
+      "task": "pick_up_the_milk_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 2,
+        "cl": 2,
+        "lc": 2,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t7_init20_policy2",
+      "task": "pick_up_the_milk_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 1,
+        "cl": 1,
+        "lc": 1,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t9_init34_policy2",
+      "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 3,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t4_init40_policy2",
+      "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 0,
+        "cl": 2,
+        "lc": 0,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t6_init22_policy2",
+      "task": "pick_up_the_butter_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 2,
+        "cl": 1,
+        "lc": 2,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t3_init46_policy2",
+      "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 3,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t0_init29_policy2",
+      "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 1,
+        "cl": 1,
+        "lc": 1,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t8_init45_policy2",
+      "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 3,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t0_init38_policy2",
+      "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 2,
+        "cl": 2,
+        "lc": 2,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t9_init47_policy2",
+      "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 3,
+        "cl": 0,
+        "lc": 0,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t5_init28_policy2",
+      "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 3,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t2_init40_policy2",
+      "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 0,
+        "cl": 0,
+        "lc": 3,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t1_init26_policy2",
+      "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 2,
+        "cl": 2,
+        "lc": 3,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t8_init34_policy2",
+      "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 1,
+        "cl": 1,
+        "lc": 1,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t0_init28_policy2",
+      "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 2,
+        "cl": 1,
+        "lc": 2,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t9_init36_policy2",
+      "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 3,
+        "cl": 0,
+        "lc": 3,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t3_init46_policy2",
+      "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 0,
+        "cl": 0,
+        "lc": 0,
+        "ll": 0
+      }
+    },
+    {
+      "case": "object_t3_init37_policy2",
+      "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 2,
+        "cl": 2,
+        "lc": 2,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t9_init48_policy2",
+      "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 2,
+        "cl": 2,
+        "lc": 2,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t5_init43_policy2",
+      "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 2,
+        "cl": 3,
+        "lc": 3,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t0_init46_policy2",
+      "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 2,
+        "cl": 2,
+        "lc": 1,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t1_init43_policy2",
+      "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 3,
+        "cl": 0,
+        "lc": 2,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t7_init45_policy2",
+      "task": "pick_up_the_milk_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 0,
+        "cl": 0,
+        "lc": 1,
+        "ll": 1
+      }
+    },
+    {
+      "case": "object_t5_init35_policy2",
+      "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 3,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t1_init43_policy2",
+      "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 2,
+        "cl": 2,
+        "lc": 2,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t8_init25_policy2",
+      "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+      "query": 3,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 3,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t3_init25_policy2",
+      "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "query": 1,
+      "winner": {
+        "cc": 2,
+        "cl": 2,
+        "lc": 2,
+        "ll": 2
+      }
+    },
+    {
+      "case": "object_t1_init43_policy2",
+      "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 3,
+        "cl": 3,
+        "lc": 3,
+        "ll": 3
+      }
+    },
+    {
+      "case": "object_t3_init29_policy2",
+      "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+      "query": 2,
+      "winner": {
+        "cc": 1,
+        "cl": 1,
+        "lc": 1,
+        "ll": 1
+      }
+    }
+  ]
+}

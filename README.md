@@ -78,6 +78,8 @@ On 200 paired Object layouts, all three schedules used the same warm Graph path.
 
 EWS-5 reduced mean core inference by **9.0%** versus full Bo4 (−84.55 ms, paired 95% interval [−103.24, −66.24]). The paired success difference was 0.0 pp [−2.0, 2.0]. Against single proposal on the same Graph path, EWS-5 used 34.22 ms more per episode on average [−8.79, 76.83]. [Data, protocol and recomputation](results/graph-closed-loop/README.md)
 
+In a separate Bo4 timing ablation, removing 25% of action-expert FFN channels reduced full decision p50 by 0.87–1.20% across two blocks. With K/V projection reuse the reduction was 1.77–2.33%. [Matched timing data](results/structured-pruning/README.md)
+
 ![Paired success and inference-time differences under warm CUDA Graph replay](paper/figures/graph-closed-loop.png)
 
 Points compare each schedule with full Bo4. Whiskers show task-stratified paired 95% intervals.

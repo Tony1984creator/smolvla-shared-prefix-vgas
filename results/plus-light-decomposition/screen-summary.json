@@ -1,0 +1,56 @@
+{
+  "anchors": 150,
+  "layouts": 50,
+  "matched_action_l1_p10_p50_p90": [
+    0.06035877577960491,
+    0.10747099295258522,
+    0.2048048108816147
+  ],
+  "within_clean_pool_l1_median": 0.2027207762002945,
+  "mean_matched_l1_over_pool_l1_median": 0.5354565366622879,
+  "image_mae_median": {
+    "image": 37.351043701171875,
+    "image2": 26.62524922688802
+  },
+  "physics_max_error": 0.0,
+  "comparisons": {
+    "cc_vs_cl": {
+      "flips": 36,
+      "rate": 0.24,
+      "paired_95ci": [
+        0.18666666666666668,
+        0.29333333333333333
+      ],
+      "winner_margin_abs_change_median": 0.42793846130371094
+    },
+    "lc_vs_ll": {
+      "flips": 26,
+      "rate": 0.17333333333333334,
+      "paired_95ci": [
+        0.11333333333333333,
+        0.23333333333333334
+      ],
+      "winner_margin_abs_change_median": 0.5407085418701172
+    },
+    "cc_vs_lc": {
+      "flips": 52,
+      "rate": 0.3466666666666667,
+      "paired_95ci": [
+        0.2866666666666667,
+        0.41333333333333333
+      ],
+      "winner_margin_abs_change_median": 0.8180332183837891
+    },
+    "cl_vs_ll": {
+      "flips": 42,
+      "rate": 0.28,
+      "paired_95ci": [
+        0.22666666666666666,
+        0.3333333333333333
+      ],
+      "winner_margin_abs_change_median": 0.8060188293457031
+    }
+  },
+  "branch_type": "critic",
+  "branch_actor_pool": "light"
+}
