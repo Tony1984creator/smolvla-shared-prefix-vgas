@@ -206,7 +206,13 @@ point-estimate tolerance. The schedule reduces the number of
 four-way queries, and prefix sharing reduces work within a query.
 
 \input{\paperdir tables/episode-cost.tex}
-Table~\ref{tab:episode-cost} sums core decision times within each episode. Mean core inference was lower with EWS than with one proposal in three of four suite settings: Object (2,201 vs.\ 2,282 ms on calibration and 2,184 vs.\ 2,260 ms on fresh starts), Long Task2 (4,399 vs.\ 5,165 ms), and Spatial (2,136 vs.\ 2,373 ms, $-10.0$\%). The Plus lighting cohort was near parity (2,377 vs.\ 2,388 ms), with timings recorded in separate rollout batches. On Goal, mean inference rose 13.4\% (2,943 vs.\ 2,595 ms). Episode totals reflect the number of queries reached as well as the work per query.
+Table~\ref{tab:episode-cost} reports episode totals for the earlier eager
+rollouts. EWS and single-proposal core inference averaged 2,201 and
+2,282 ms on Object calibration, 2,184 and 2,260 ms on fresh Object, 4,399
+and 5,165 ms on Long Task2, and 2,136 and 2,373 ms on Spatial. The Plus
+lighting means were 2,377 and 2,388 ms in separate rollout batches. On
+Goal, EWS averaged 2,943 ms and single proposal 2,595 ms. Episode totals
+depend on the number of queries reached and the cost of each query.
 
 \subsection{Decision latency and critic storage}
 Across Object rollout decisions, mean latency is \BaselineTime{} ms for one
