@@ -15,14 +15,15 @@ python scripts/make_paper_tables.py
 python scripts/summarize_scheduled_selection.py
 python scripts/summarize_episode_cost.py
 python scripts/summarize_graph_closed_loop.py
+python scripts/summarize_width_time.py
 python paper/make_figures.py --numbers-only
 python paper/make_submission.py
 tectonic --outdir paper paper/main.tex
 ```
 
 The submission generator reads archived paired ledgers and summaries. It
-writes the cross-cohort table, headline macros, README counts, nine
-diagnostic or main plots plus the per-query Graph plot, and matching
+writes the cross-cohort table, headline macros, README counts, eleven
+submission and appendix plots, and matching
 300 dpi PNGs. The figures share `figstyle.py` and use the template's
 5.5-inch text width. Camera frames are the recorded inputs documented in
 [assets](assets/README.md).

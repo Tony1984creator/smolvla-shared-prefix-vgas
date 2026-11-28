@@ -149,16 +149,6 @@ Matched replanning and zero-gradient controls narrowed what we could attribute t
 
 ## Citation and acknowledgments
 
-The software citation below identifies this artifact while the manuscript is in preparation. The repository preserves the upstream weights and evaluation provenance in its [third-party notices](../THIRD_PARTY_NOTICES.md).
-
-```bibtex
-@software{sharedprefix_smolvla_2026,
-  author  = {{Shared-prefix SmolVLA contributors}},
-  title   = {Shared-prefix inference for VGAS on SmolVLA},
-  year    = {2026},
-  version = {0.1.0},
-  url     = {https://github.com/Tony1984creator/smolvla-shared-prefix-vgas}
-}
-```
+Use the [software citation in the README](../README.md#citation). The repository documents the upstream weights and evaluation provenance in its [third-party notices](../THIRD_PARTY_NOTICES.md).
 
 This artifact uses [Xu et al., VGAS](https://ijcai.org/proceedings/2026/569), [LeRobot](https://github.com/huggingface/lerobot) and [Liu et al., LIBERO](https://arxiv.org/abs/2306.03310). The [workshop technical-report draft](../workshop/README.md) documents the earlier [VLA-Corrector](https://github.com/ZJU-OmniAI/vla-corrector) and [Q-Guided Flow](https://github.com/zhouzypaul/qgf) reproductions. Original project code is available under the [MIT license](../LICENSE).

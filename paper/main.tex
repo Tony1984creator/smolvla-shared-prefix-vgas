@@ -6,47 +6,55 @@
 \usepackage[hidelinks]{hyperref}
 \input{\paperdir metrics.tex}
 \input{\paperdir submission-metrics.tex}
+\input{\paperdir width-time-metrics.tex}
 \newcommand{\paperfigure}[4]{%
   \begin{figure}[#1]\centering
   \includegraphics{\paperdir figures/#2.pdf}
   \caption{#3}\label{#4}
   \end{figure}}
-\title{Spend Selection Early: Allocating Test-Time Compute Across the Episode for Vision-Language-Action Policies}
+\title{Spend Selection Early: Allocating Test-Time Compute Across VLA Episodes}
 \author{Anonymous Authors}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Best-of-four (Bo4) action selection can improve robot policies at test time,
-but a fixed per-query budget treats every observation as equally valuable.
-With a frozen SmolVLA actor and VGAS critic, we find that the front window
-outperforms late selection by \JLateGain{} percentage points on paired
-LIBERO-Object layouts. Early-window selection (EWS) uses four proposals
-only for an initial fraction of the query budget and uses one thereafter.
-It retains full-selection success within a prespecified point-estimate
-tolerance across the tested LIBERO cohorts, cuts four-way calls by about
-half, and saves \JGraphSaving\% of A100 core inference per episode in
-matched CUDA Graph rollouts.
+Best-of-four (Bo4) action selection can improve vision-language-action
+policies at test time. We freeze the SmolVLA actor and VGAS critic and
+vary when to sample multiple proposals. Early-window selection (EWS)
+beats Late by \JLateGain{} percentage points on paired LIBERO-Object
+layouts and outperforms three alternative width and timing schedules.
+It matches full selection within a prespecified point-estimate tolerance
+across the tested cohorts, halves four-way calls, and saves
+\JGraphSaving\% of A100 core inference time per episode under warm
+CUDA Graph replay.
 \end{abstract}
 
 \paperfigure{!ht}{teaser}{\textbf{Selection early in an episode.}
-(a) Frames at odd-numbered queries in one EWS rollout. The strip shows every reached
-query. (b) With warm CUDA Graph replay on Object, EWS and full Bo4 both
-succeeded in \JGraphWins{} episodes. EWS used less core inference time.}{fig:teaser}
+(a) Frames at odd-numbered queries in one EWS rollout. Color tiles mark
+the proposal width of every reached query. (b) With warm CUDA Graph
+replay on Object, EWS and full Bo4 both
+succeeded in \JGraphWins{} episodes. EWS used less core inference time.
+Late was measured in eager execution (Table~\ref{tab:late-paired}).}{fig:teaser}
 
 \section{Introduction}
 A test-time critic can improve action selection at the cost of generating
-and scoring more proposals. We ask when to spend that compute.
-Our contributions are:
+and scoring more proposals. A uniform per-query budget assumes that every
+observation is equally valuable for selection. We ask when to spend
+that budget. Our contributions are:
 \begin{itemize}
 \setlength{\itemsep}{1pt}
-\item We estimate marginal gains and compare early with delayed selection
-on paired layouts.
-\item We evaluate a static allocation across LIBERO suites and Plus lighting,
-with prospective criteria on Goal and Spatial.
-\item We decompose fixed-state branch gains and measure shared-prefix
-and CUDA Graph costs on A100.
+\item We estimate marginal gains. Early selection improves success by
+\JLateGain{} pp over Late on paired Object layouts.
+\item We evaluate four LIBERO suites and Plus lighting. The early window
+reduces four-way calls by about half.
+\item We factor fixed-state gains into mixed pools and scoring quality
+(AUC \JRankAUC{}, 10--18\% of the oracle gap captured). EWS saves
+\JGraphSaving\% of core Graph inference time per episode versus full Bo4.
 \end{itemize}
+
+Early choices can change which states a policy visits later and how
+many useful alternatives it generates. We freeze the actor and scoring
+rule to study the placement and width of selection across queries.
 
 \section{Related Work}
 \paragraph{Test-time selection for VLAs.}
@@ -65,11 +73,13 @@ selection allocation with matched inference controls.
 
 \paragraph{Adaptive compute allocation.}
 Adaptive decoding varies the work done within each call
-\cite{early,elastic}. VLA-Corrector adjusts the action execution
-horizon \cite{corrector}. EWS holds the execution horizon fixed and
-assigns the candidate budget across calls.
+\cite{early}. ELASTIC learns state-dependent choices of denoising depth
+and candidate width \cite{elastic}. VLA-Corrector adapts the action
+execution horizon \cite{corrector}. We hold the horizon and denoising
+depth fixed, then compare static width schedules across an episode.
 
 \section{Early-window selection}
+\label{sec:allocation}
 \paperfigure{!ht}{method-overview}{\textbf{One observation, several proposals.}
 (a) Two camera views from a recorded Object query. The shared encoding supplies
 the actor's attention cache and the critic's observation features.
@@ -85,15 +95,23 @@ The shared implementation encodes the observation once, reuses the KV
 cache for denoising, and passes observation features to the critic.
 A one-proposal query skips the critic.
 
-Let \(S_K=\{1,\ldots,K\}\) within a cap \(N_{\max}\), and let
-\(\widehat F(S_K)\) be the paired cohort success rate for that schedule.
+Let \(N_q\) be the number of proposals at query \(q\) within a cap
+\(N_{\max}\). The planned extra budget is
+\(B=\sum_{q=1}^{N_{\max}}(N_q-1)\). EWS is the special case
+\(N_q=4\) for \(q\in S_K=\{1,\ldots,K\}\) and \(N_q=1\) otherwise.
+Let \(\widehat F(S_K)\) be the observed cohort success rate for EWS.
 For adjacent tested cutoffs \(a<b\), the block increment is
 \(\widehat F(S_b)-\widehat F(S_a)\). EWS chooses the smallest tested
 cutoff whose point estimate is within 3 percentage points of full Bo4.
 The selected Object cutoff motivates the one-third rule
 \(K=\operatorname{round}(N_{\max}/3)\), evaluated prospectively on Goal
-and Spatial. Long Task2 uses its development-calibrated window. Early
-termination can change realized call counts.
+and Spatial. Long Task2 uses its development-calibrated window.
+If a surrogate had separable diminishing returns within each query,
+an extra proposal would be allocated to the largest remaining
+per-query marginal gain. Actual rollouts can visit different states and
+terminate early, so we measure \(\sum_{q\ {\rm reached}} (N_q-1)\).
+
+\input{\paperdir algorithm.tex}
 
 \section{Evaluation}
 We pair by physical layout and policy noise; bootstrap intervals resample
@@ -124,7 +142,7 @@ outperformed the tested delayed policy.
 \par\textbf{Takeaway.} The tested early queries accounted for most of the
 observed selection gain.
 
-\subsection{RQ2. How well does the allocation transfer across suites?}
+\subsection{RQ2. How sensitive is the allocation to suite and width?}
 Can EWS preserve the observed full-selection rate while saving calls?
 The new Object layouts and Long Task2 meet the retention criterion.
 Goal and Spatial meet both preregistered point-estimate criteria. The
@@ -139,9 +157,30 @@ intervals. Values beneath the axis are EWS call reductions relative to
 full Bo4. Missing Late bars indicate untested arms. Table~\ref{tab:cohorts}
 reports paired differences.}{fig:cohorts}
 
+On the Object calibration layouts, we compare a wide short window with a
+narrow long window and full-episode Bo2. The noise bank is shared across
+schedules, with each width using its prefix. Executing different batch
+shapes can change numerical outputs for the same noise. All schedules
+use the frozen actor and critic.
+At \KEwsExtra{} realized extra proposals per episode, EWS-5 outperforms
+full Bo2 (\KTwoFullExtra{} extras, \KTwoFullDelta{} pp relative to EWS-5),
+Bo2 for ten queries (\KTwoFrontExtra{}, \KTwoFrontDelta{} pp), and Bo8 for
+three queries (\KEightFrontExtra{}, \KEightFrontDelta{} pp).
+All three paired 95\% intervals exclude zero (Table~\ref{tab:width-time}). Figure~\ref{fig:width-time} shows the trade-off across all tested schedules.
+In an exploratory near-budget comparison, Bo4 for seven queries
+(\KSevenExtra{} extras) exceeds Bo8 for three (\KEightFrontExtra{}) by
+\KNearDelta{} pp [\KNearCI{}].
+
+\input{\paperdir tables/width-time.tex}
+\paperfigure{!ht}{width-time}{\textbf{Success and realized candidate budget.}
+The curve connects the tested Bo4 prefixes. Each whisker places the
+paired 95\% interval versus EWS-5 on the success axis by adding the
+observed EWS-5 success rate. The budget subtracts one candidate per
+reached query.}{fig:width-time}
+
 \textbf{Takeaway.} EWS retains the full schedule's observed success
 within the stated point-estimate criterion while reducing calls in the
-tested cohorts.
+tested cohorts. On Object, Bo8 for three queries costs more than EWS-5 and succeeds less often.
 
 \subsection{RQ3. What changes along the reference trajectory?}
 Why can selection help at some queries and little at others? We execute
@@ -153,8 +192,9 @@ conditional oracle gap and the fraction of that gap captured. Unanimous
 pools contribute zero.
 
 \paperfigure{!ht}{mechanism}{\textbf{Decomposing fixed-pool gains.}
-(a) Fraction of mixed pools and the oracle gap to uniform choice within
-mixed pools. (b) Fraction of the gap captured by the critic.
+(a) Fraction of mixed pools and the conditional failure rate of uniform
+selection. The latter equals the oracle gap in percentage points because
+the oracle succeeds on every mixed pool. (b) Fraction of that gap captured by the critic.
 (c) Reconstructed critic gain, equal to the observed difference from
 uniform choice, with paired 95\% intervals. Each query uses archived
 reference states and a single shared continuation schedule.}{fig:mechanism}
@@ -215,6 +255,9 @@ arithmetic uses unpacked weights.
 \setlength{\itemsep}{1pt}
 \item The actor, critic and results are scoped to the released VGAS
 configuration in LIBERO, including one development-selected Long task.
+\item We vary both proposal width and selection timing only on the
+Object calibration cohort. The widths and windows have unequal
+realized budgets, with two exploratory comparisons at nearby costs.
 \item The retention rule uses point estimates, and the intervals
 describe uncertainty in paired differences.
 \item Dose increments depend on the tested prefix, termination and

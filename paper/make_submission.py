@@ -9,6 +9,7 @@ import numpy as np
 from matplotlib.patches import FancyBboxPatch, Rectangle
 
 from figstyle import COLORS as C, LABELS, MARKERS, WIDTH, grid, panel, plt, save
+from width_time_figure import draw as width_time
 
 PAPER = Path(__file__).resolve().parent
 RESULTS = PAPER.parent / "results"
@@ -103,13 +104,14 @@ def teaser():
         y = 100 * arm["successes"] / arm["episodes"]
         ax.scatter(x, y, color=C[tag], marker=MARKERS[tag], s=19, zorder=3)
         ax.annotate(LABELS[tag], (x, y), xytext=offset, textcoords="offset points", ha="center",
-                    fontsize=7, color=C[tag])
+                    fontsize=8, color=C[tag])
     ax.annotate("", (graph["front5"]["mean_episode_ms"] + 5, 55),
                 (graph["dense"]["mean_episode_ms"] - 5, 55),
                 arrowprops=dict(arrowstyle="->", color=C["front"], lw=.85))
     ax.set(xlim=(805, 971), ylim=(46, 60), xlabel="Core ms / episode",
            ylabel="Success (%)", xticks=(825, 875, 925), yticks=(48, 52, 56))
     grid(ax)
+    ax.tick_params(axis="y", labelsize=8)
     panel(scene, "a", x=.018, y=.946, transform=fig.transFigure, va="top")
     panel(ax, "b", x=.673, y=.946, transform=fig.transFigure, va="top")
     save(fig, "teaser")
@@ -226,8 +228,9 @@ def mechanism():
     fig, axes = plt.subplots(1,3,figsize=(WIDTH,1.74),layout="constrained")
     left, mid, right = axes
     left.plot(x,[100*s["mixed_rate"] for s in q],marker="o",ms=4,color=C["dense"],label="Mixed pools")
-    left.plot(x,[s["conditional_oracle_gap_pp"] for s in q],marker="s",ms=4,color=C["oracle"],ls="--",label="Oracle gap")
-    left.set(ylabel="Percent / pp",ylim=(25,60))
+    left.plot(x,[s["conditional_oracle_gap_pp"] for s in q],marker="s",ms=4,
+              color=C["oracle"],ls="--",label="Uniform failure")
+    left.set(ylabel="Rate (%)",ylim=(25,60))
     left.legend(loc="upper center",fontsize=7)
     mid.bar(x,[100*s["capture"] for s in q],width=.51,color=C["green"])
     mid.set(ylabel="Gap captured (%)",ylim=(0,23))
@@ -384,7 +387,9 @@ def write_tables(data):
         effect=pp(contrast["pp"])+" "+markers(contrast["ci"])
         lines.append(" & ".join([f"{name} ({sample})",*rates,f"${effect}$",f"{saved:.1f}"+r"\%"])+r" \\")
         readme.append(f"| {name} | "+" | ".join(f"{selected[k][0]}/{selected[k][1]}" if k in selected else "—" for k in ARMS)+f" | {saved:.1f}% |")
-    lines.extend([r"\bottomrule\end{tabular}",r"\end{table}"])
+    lines.extend([r"\bottomrule\end{tabular}",
+                  r"\par\smallskip\footnotesize\textit{Note.} Late was unmeasured on Long Task2 and Plus lighting.",
+                  r"\end{table}"])
     (PAPER/"tables/cohorts.tex").write_text("\n".join(lines)+"\n",encoding="ascii")
     path=PAPER.parent/"README.md"
     readme_text=path.read_text(encoding="utf-8")
@@ -450,6 +455,7 @@ def main():
     method()
     marginal()
     cohorts(data)
+    width_time()
     mechanism()
     system_fig()
     q0_gate()

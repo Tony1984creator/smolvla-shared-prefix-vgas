@@ -1,31 +1,8 @@
-% Algorithm and evaluation section for the hardware manuscript.
-% Include from a parent document after resolving table paths.
-\subsection{Action selection on a shared observation}
-We load the released five-shot SmolVLA policy fine-tuned on demonstrations
-and its separately trained VGAS critic. Both remain frozen at inference.
-At a four-proposal query, the actor samples four candidate action
-chunks using independent noise. The released VGAS critic ranks these chunks.
-For each candidate it uses the lower of its two value estimates; the executor
-dispatches the highest-ranked chunk. Our implementation encodes the observation
-once per query, shares its attention cache across the four denoising branches,
-and passes its features to the critic. Cross-candidate prefix reuse has
-precedents in language-model inference and VLA systems, including Zora and
-PACT-VLA \cite{zora,pact}. We integrate this reuse with a flow actor and a learned critic. The episode
-schedule in Section~\ref{sec:scheduled} determines when to use four proposals.
-
-\subsection{Closed-loop and hardware evaluation}
-The actor generates 50 steps, the Object critic scores the first 32 and the
-Long critic scores all 50. The executor commits up to 20 actions before a new
-observation. The single-candidate control measures the closed-loop effect of sampling
-and ranking four proposals. The original four-candidate implementation
-provides the same-width comparison for observation reuse. Object covers ten tasks; Long covers
-Task2, selected during development, with two noise repeats per physical layout.
-Both suites use the same LIBERO simulator. Fixed lighting variants provide a
-separate perturbation check. GPU measurements use an A100; deployment latency,
-energy and bandwidth on the intended chip remain open.
-
-On Object, the critic matrices are also stored as signed eight-bit integers
-with per-channel scales and unpacked to the original arithmetic precision on
-access. Reported bytes count persistent critic tensors including scales.
-The paired success interval describes uncertainty in the observed difference;
-formal equivalence requires a prespecified margin and an equivalence test.
+\begin{quote}\small
+\textbf{Early-window selection with cutoff \(K\).}\\
+For each reached query \(q\), encode the current observation once.\\
+Set \(N_q=4\) when \(q\le K\), and set \(N_q=1\) otherwise.\\
+Denoise \(N_q\) independent proposals with the shared prefix.\\
+If \(N_q>1\), score the proposals and choose the highest twin-min score.\\
+Otherwise select the single proposal. Execute up to the action horizon.
+\end{quote}

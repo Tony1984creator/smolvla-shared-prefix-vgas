@@ -12,6 +12,10 @@ Early-window selection (EWS) uses four SmolVLA proposals near the start of an ep
 
 [Paper PDF](paper/main.pdf) · [中文一页总结](docs/SUMMARY_CN.md) · [Evidence audit](paper/CLAIMS_AUDIT.md) · [Extended experiment guide](docs/RESULTS_GUIDE.md)
 
+![Archived paired LIBERO-Object rollout. Single reaches its step cap; EWS-5 completes the task.](docs/media/object-paired-single-ews.gif)
+
+The two rollouts start from the same Object layout and policy seed. The GIF shows snapshots at control-query boundaries and holds the terminal frame of each arm. [Recording details](docs/DEMOS.md)
+
 ## Closed-loop results
 
 <!-- cohort-table:start -->
@@ -27,13 +31,30 @@ Early-window selection (EWS) uses four SmolVLA proposals near the start of an ep
 
 Each cell reports successful episodes over the cohort. The manuscript gives paired EWS-minus-full intervals. Goal and Spatial were evaluated under preregistered point-estimate criteria. Long is the development-selected Task2. [Paired data and protocols](results/scheduled_selection/README.md)
 
+On the 300 Object calibration layouts, EWS-5 won 167 episodes. Full Bo2, Bo2 for ten queries, and Bo8 for three won 142, 141, and 148. Each schedule used a different realized extra-proposal budget. [Paired width and timing results](results/width-time/README.md)
+
 ## Reproduce
 
 ```sh
 python scripts/verify_results.py
 python -m pip install numpy matplotlib pillow
+python scripts/summarize_width_time.py
 python paper/make_submission.py
 tectonic --outdir paper paper/main.tex
 ```
 
 [Install and run the policy](docs/INSTALL.md) · [Pinned checkpoints and settings](docs/REPRODUCIBILITY.md) · [Paper build](paper/README.md) · [License and upstream notices](THIRD_PARTY_NOTICES.md)
+
+## Citation
+
+~~~bibtex
+@software{sharedprefix_smolvla_2026,
+  author  = {{Shared-prefix SmolVLA contributors}},
+  title   = {Shared-prefix inference for VGAS on SmolVLA},
+  year    = {2026},
+  version = {0.2.0},
+  url     = {https://github.com/Tony1984creator/smolvla-shared-prefix-vgas}
+}
+~~~
+
+The [workshop draft](workshop/README.md) records the earlier VLA-Corrector and Q-Guided Flow reproductions.

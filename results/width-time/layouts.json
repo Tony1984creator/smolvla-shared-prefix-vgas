@@ -1,0 +1,2702 @@
+[
+  {
+    "case": "object_t0_init20_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261132,
+    "policy_seed": 2051020002,
+    "physical_sha": "21dd6b9dd75148c89c88ae38bd8654ed1b53bc1347551f3213b23cbdcacb1e8d",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t0_init21_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261133,
+    "policy_seed": 2051021002,
+    "physical_sha": "a09298bddb909fa0621f99c40f1214e2b7db0b01209caf371f4760e316c996d4",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t0_init22_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261134,
+    "policy_seed": 2051022002,
+    "physical_sha": "9d2cc0225816693670594db586873bd46999387114de5d690c8e322438d72ca0",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t0_init23_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261135,
+    "policy_seed": 2051023002,
+    "physical_sha": "f48558f0a94a043c93cc316cbd5aa1200cd4e64046bdda2ef6800aa87c9df509",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t0_init24_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261136,
+    "policy_seed": 2051024002,
+    "physical_sha": "8e411b12be1f2ff6f7a274db29c921c10eb778570a021d6b463f1e805031c0bf",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t0_init25_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261137,
+    "policy_seed": 2051025002,
+    "physical_sha": "525c0b026d0f239c2c1c4d09624af31a1dd17a4f776bd90131ab260b4c4418b4",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t0_init26_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261138,
+    "policy_seed": 2051026002,
+    "physical_sha": "22b61b36c9171d18e848b46246d1b9f8f138229bcc2814eb43ff02308540a85c",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t0_init27_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261139,
+    "policy_seed": 2051027002,
+    "physical_sha": "9d93211642c455ecd545e3aa2b04772971f6d441ceb2e3a168a796b748db0b12",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t0_init28_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261140,
+    "policy_seed": 2051028002,
+    "physical_sha": "2d0f65d7ebc16bf0e19b6d23ef9562812de15f538e9fd19987397c7a0668f95e",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t0_init29_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261141,
+    "policy_seed": 2051029002,
+    "physical_sha": "2c93c2b30a67792d3e44fbe1f4909a40423d4fa2477c2680388edf2c143c57eb",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t0_init30_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261142,
+    "policy_seed": 2051030002,
+    "physical_sha": "aeda20dda3b9ef591eb65940790fb0e83a00e03d80a3f495511cd04f733ed1ce",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t0_init31_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261143,
+    "policy_seed": 2051031002,
+    "physical_sha": "43a67de8787a743c7507b5504cab5e57094a86bbdb65b30531c78ae6aa1c14d5",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t0_init32_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261144,
+    "policy_seed": 2051032002,
+    "physical_sha": "1c414db16f1ce0e251a77e01f961610b6c4f701c486ed3bc3cbd463394d1bcde",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t0_init33_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261145,
+    "policy_seed": 2051033002,
+    "physical_sha": "edf2995a9c5e3217cd95cce15ef22ee8a51b23bef30860eb38dc48bfbe432749",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t0_init34_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261146,
+    "policy_seed": 2051034002,
+    "physical_sha": "1d44d2307d7ffb7155cdbd9fc41ba861ae48585f9384826d580cfa067abeb376",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t0_init35_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261147,
+    "policy_seed": 2051035002,
+    "physical_sha": "a44122375fc38b88677f838aba37500a565989404c114574e3e4829c078aa9df",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t0_init36_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261148,
+    "policy_seed": 2051036002,
+    "physical_sha": "bfe19aa441fad03e0f7e76382092621d08685c530611a8301828fa82fea4e1b6",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t0_init37_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261149,
+    "policy_seed": 2051037002,
+    "physical_sha": "882f85151970eec98a9a90d821a83fea0e02beca51e894400e75b57ae5e91c6a",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t0_init38_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261150,
+    "policy_seed": 2051038002,
+    "physical_sha": "3803da5fdbf795e7df7243f93d53587573d4a71fbbf6bf14444f073760f90514",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t0_init39_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261151,
+    "policy_seed": 2051039002,
+    "physical_sha": "515ffa5c95b11ab0727bb54977e2359ec1200ac53c78025bef5ca09de5e78e6b",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t0_init40_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261152,
+    "policy_seed": 2051040002,
+    "physical_sha": "4f806e903de539c7cd5fc583bf83c89c6b21010b017ee1dcd172a631be6d16bd",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t0_init41_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261153,
+    "policy_seed": 2051041002,
+    "physical_sha": "f8139bf06d1d83dfe484d2563a401467e9d26faf94ca4a40f6a7e4aa54220ea0",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t0_init42_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261154,
+    "policy_seed": 2051042002,
+    "physical_sha": "2ed959bace226ca37c1ceebb00ccf9b70ec9421b02f55b323707dd57e9829c7d",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t0_init43_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261155,
+    "policy_seed": 2051043002,
+    "physical_sha": "3107a03620755e9c7db570b02b76c0029f020027c103b7e5535d70227f05eeb4",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t0_init44_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261156,
+    "policy_seed": 2051044002,
+    "physical_sha": "5192be66baab912595228031371262a1ccc0fc8cfb707f16a9b62cd56af3f822",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t0_init45_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261157,
+    "policy_seed": 2051045002,
+    "physical_sha": "ebea32badf70521a197c41917c8b8029026f2b256082d83333d9500f103729b9",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t0_init46_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261158,
+    "policy_seed": 2051046002,
+    "physical_sha": "b5b059e0f766a8eb5a466cc0d2699ab3714cce6d1c7f82282747916137b00861",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t0_init47_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261159,
+    "policy_seed": 2051047002,
+    "physical_sha": "17ee90bc8a0dcaefcae6744d7a95ee2bc64c606e9eebe3c8b5cd6f8a30e5ae80",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t0_init48_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261160,
+    "policy_seed": 2051048002,
+    "physical_sha": "0eac67ff9c2b3db3944d6617718ab8a0edd826f0c57bad0be6e29e6f458aea9f",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t0_init49_policy2",
+    "task": "pick_up_the_alphabet_soup_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261161,
+    "policy_seed": 2051049002,
+    "physical_sha": "56b7909db9f6fe720d70de18b78b6f23a9a0020d6ac9ecfc466afc91dd2d0db9",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t1_init20_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261232,
+    "policy_seed": 2051030002,
+    "physical_sha": "b4eaf14ff0c1c1fa56c300e47b956656c792a32568ad361e6b5bd6f88ebec75e",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t1_init21_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261233,
+    "policy_seed": 2051031002,
+    "physical_sha": "cc2250aeeaceb8d659fee74315b8da8523dddb987e8ed42ad71c16741e872c9e",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t1_init22_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261234,
+    "policy_seed": 2051032002,
+    "physical_sha": "ae03ea5e75a0e7d05d387b0af5d5a1d77c83b44b796b598a974f203d96a2d814",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t1_init23_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261235,
+    "policy_seed": 2051033002,
+    "physical_sha": "ae42d1bb3df5f2de0f573d5699ade1cc9d2dc16be858d7ff95f22c8478a24751",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t1_init24_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261236,
+    "policy_seed": 2051034002,
+    "physical_sha": "436307e86c2ddb7faa47dcbf4f5e0563c12d2d63ec2cbe6847459244e8aff4e3",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t1_init25_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261237,
+    "policy_seed": 2051035002,
+    "physical_sha": "febb16486a73b75fccc8395b8df75f137f6e9db025c6649e96133ad92c57d2a8",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t1_init26_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261238,
+    "policy_seed": 2051036002,
+    "physical_sha": "274bec761b563e9c520a125cd7f6c10f49e1e3764244a11e8f74c82d7bc89282",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t1_init27_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261239,
+    "policy_seed": 2051037002,
+    "physical_sha": "6dd7ac75964600d83dbd70afaeae3a6191c1f197786cc9af4ac46aefd5aae55e",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t1_init28_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261240,
+    "policy_seed": 2051038002,
+    "physical_sha": "0a4bc8c7e701640ded9511cb7dfe81fbc38bba970f4a1fabfa335625e7394d6a",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t1_init29_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261241,
+    "policy_seed": 2051039002,
+    "physical_sha": "2a6959fcf13a1aa5a3df230bfcfc9c651f1a20c5a4b1bc6ce48105490cc9ad45",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t1_init30_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261242,
+    "policy_seed": 2051040002,
+    "physical_sha": "ac824baf995e8897933b84691b1af095480fcb1f767880efb8b93ea7631bb3fa",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t1_init31_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261243,
+    "policy_seed": 2051041002,
+    "physical_sha": "3894bee8f04da1424c5425832a8decfc85f76e05840d3faf5f80c233999cf59b",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t1_init32_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261244,
+    "policy_seed": 2051042002,
+    "physical_sha": "a7c5e5c7251b8fa3d2476b81523dd85b928e850446a375bf77b5c180264d5bbd",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t1_init33_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261245,
+    "policy_seed": 2051043002,
+    "physical_sha": "bc151fd1025d8dfbc0ed147b1f4bcf0742d563d37b6b5f45ff2f5dc42749c897",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t1_init34_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261246,
+    "policy_seed": 2051044002,
+    "physical_sha": "6d5089f659eef15d3db940f2b447506a6c6badf0c4c6f5b8b8d77ccd492c8e6a",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t1_init35_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261247,
+    "policy_seed": 2051045002,
+    "physical_sha": "33c593cb6254ba025c1424c7cdc80fd924089eb75fd6bb224ad925434fa81ec7",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t1_init36_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261248,
+    "policy_seed": 2051046002,
+    "physical_sha": "09c06751d4c224162391a512e6ed24f10ad96c18ec9bbdeb2dea3d5c65f3d499",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t1_init37_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261249,
+    "policy_seed": 2051047002,
+    "physical_sha": "3138ddd71b5737db9b6035e62f20dcfd69564082e57a6e99f59a49819d53f7d5",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t1_init38_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261250,
+    "policy_seed": 2051048002,
+    "physical_sha": "93ccdb37a41687fecffa995d54008ea94eab93a7ee63b7e92d4c9a68ea471cd2",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t1_init39_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261251,
+    "policy_seed": 2051049002,
+    "physical_sha": "78e01b864c824aa1455c37030b92c4dea2f7ea8f0677a5d8e5230e90bd73ff5c",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t1_init40_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261252,
+    "policy_seed": 2051050002,
+    "physical_sha": "364d1faaca9be335ee2a204531e20d9a99ae6f4cb083f2dfdd01b3a10e45ba2f",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t1_init41_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261253,
+    "policy_seed": 2051051002,
+    "physical_sha": "95ebfc57e4464d25e319c3264d763700d6a603b1e1ae10f2798303d09e96ffc3",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t1_init42_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261254,
+    "policy_seed": 2051052002,
+    "physical_sha": "7d41a3bfe329a0d728037fcdc01081077a21b85dab80776287d0cd095cb718bc",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t1_init43_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261255,
+    "policy_seed": 2051053002,
+    "physical_sha": "c49d890f77428a3f0b1eec6f0bd89430784c07d64fb38ea6bf8c0aaa6b60efbb",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t1_init44_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261256,
+    "policy_seed": 2051054002,
+    "physical_sha": "9a99147185488141e37460557a1023c27f236403d2fc28764aada6ce191b4840",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t1_init45_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261257,
+    "policy_seed": 2051055002,
+    "physical_sha": "7f3e55ae29234437b061db2691e1c4bd074e0a0f7ef88f361d8aa038a5813e7a",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t1_init46_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261258,
+    "policy_seed": 2051056002,
+    "physical_sha": "f0efcf841f7fd9cae3c4b8570543a1a288ad19c99f51586f0335452d9bb4f352",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t1_init47_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261259,
+    "policy_seed": 2051057002,
+    "physical_sha": "79ec5ff12ecc2f34d0e816f9301cbd2a6c65e85ac80ba0ec4cf6154caf717cff",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t1_init48_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261260,
+    "policy_seed": 2051058002,
+    "physical_sha": "c7ccc80fc7836864204fe725a12410a5a17a8c4012b0c4a12ac84361b62a27a8",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t1_init49_policy2",
+    "task": "pick_up_the_cream_cheese_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261261,
+    "policy_seed": 2051059002,
+    "physical_sha": "e4c7ff6365cbd5bd2ce65ccb1f52705ab7915e0ac2651c66a6389977c337b7a7",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t2_init20_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261332,
+    "policy_seed": 2051040002,
+    "physical_sha": "c33c784cf965b2d9afd05de33d4d191040ee0a1c9558bbf8c0c27f4aaf8bb129",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t2_init21_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261333,
+    "policy_seed": 2051041002,
+    "physical_sha": "b4f9ab50e6fd8a78ab910aeacb974c3e409363f6b0b04896477555f7e75f4bf3",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t2_init22_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261334,
+    "policy_seed": 2051042002,
+    "physical_sha": "dd057d04683f6514b84e9e57faa2a71d853fde76ccd3d670222e3e1737be9463",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t2_init23_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261335,
+    "policy_seed": 2051043002,
+    "physical_sha": "b64540ca1d9af6b1308d2463bbca3e5f1e96b154bb31f913738c40edd3de115d",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t2_init24_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261336,
+    "policy_seed": 2051044002,
+    "physical_sha": "1dc7a7d3321f47530bd242c2adecbbc2d0f71c687da0589649033e2846b3acbb",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t2_init25_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261337,
+    "policy_seed": 2051045002,
+    "physical_sha": "e870729d247587a10bdc0f7e82e1d739166993dcee69cce0d20a92ce7b225ec4",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t2_init26_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261338,
+    "policy_seed": 2051046002,
+    "physical_sha": "4b79c089848baae046a0a7c75d72f192113d579f67a2710a3423e39afd3cf90a",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t2_init27_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261339,
+    "policy_seed": 2051047002,
+    "physical_sha": "4370315da3e05475bef1b30f1ce66c67f129d7c1f8b0be8f7915c0b18eef5b0f",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t2_init28_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261340,
+    "policy_seed": 2051048002,
+    "physical_sha": "28271985f875c529e744f8cc7a97e5c49c1facc3a46f3325de85df744915241e",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t2_init29_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261341,
+    "policy_seed": 2051049002,
+    "physical_sha": "4ec72e3c5729e7a12e5e00504167209dbdbd7f2d37403e16991a1f6483912b62",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t2_init30_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261342,
+    "policy_seed": 2051050002,
+    "physical_sha": "ee7063d86908503109f8e11d4aa9f0f93c30e206ca36914ba4d0d93c7a258016",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t2_init31_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261343,
+    "policy_seed": 2051051002,
+    "physical_sha": "6f286a21c000c6d153d28e9e3046c9afa08f1d2ad638b4506e13135fe7f06234",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t2_init32_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261344,
+    "policy_seed": 2051052002,
+    "physical_sha": "d9914357e425c6f57864d5e262fc63a229141773cd16ea9bca379c00cc9eeb01",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t2_init33_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261345,
+    "policy_seed": 2051053002,
+    "physical_sha": "36cc294c2e22d1f8c346747debd0be4631d87b04aac5a0d61146f8c4692330d6",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t2_init34_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261346,
+    "policy_seed": 2051054002,
+    "physical_sha": "7d2a417d17dec15520009c2876948e7540d84f4e039ff0042218b32ed9d4fd43",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t2_init35_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261347,
+    "policy_seed": 2051055002,
+    "physical_sha": "06b155bc137ad54781aeacc29a532cfe2ad4b4e012a894fa6baf19ab358802d8",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t2_init36_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261348,
+    "policy_seed": 2051056002,
+    "physical_sha": "c74c2c126c3ef2048adaec08e233520100087d95ab898fdcdd110804a16544b7",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t2_init37_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261349,
+    "policy_seed": 2051057002,
+    "physical_sha": "bb28531e3c5f85a22f0a26cd49c5e771376b1945ba5c054a1c84db1253cfd06b",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t2_init38_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261350,
+    "policy_seed": 2051058002,
+    "physical_sha": "6bb5c1d755ef1b93f6227208ecdcd15bb3f6ca453d82a0a529433490a9514726",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t2_init39_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261351,
+    "policy_seed": 2051059002,
+    "physical_sha": "aeae8780c4ec2b85c588e4d4dc0d986c7fa919a2ffd5077ff7f7b65f8424df3b",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t2_init40_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261352,
+    "policy_seed": 2051060002,
+    "physical_sha": "9d650c0085038973e8e53e4cf6fa1a99b052129fe6feec9206437ccddb4451e0",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t2_init41_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261353,
+    "policy_seed": 2051061002,
+    "physical_sha": "e5d624d1df45285c417ca39913a02b7c0dad00a90dbfdd47f5b1631ba8ea0d28",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t2_init42_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261354,
+    "policy_seed": 2051062002,
+    "physical_sha": "6b490e6925a1ecbe0f9b712e87bf3f75d6015e0b7f3be0511a318850e067639b",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t2_init43_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261355,
+    "policy_seed": 2051063002,
+    "physical_sha": "ec8b457b32b9df1f76ff7942ad10cdf6635d0101e5fa80c9604c824eb933dc4d",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t2_init44_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261356,
+    "policy_seed": 2051064002,
+    "physical_sha": "af61afaff89fb43e1c5bac232165d079a1e469940f74ddc1ad90dfd0cf09851d",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t2_init45_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261357,
+    "policy_seed": 2051065002,
+    "physical_sha": "32669dc2bb9990f4a12aa38c71439e966eb97fe121e44328eaa8c9d3c1136c96",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t2_init46_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261358,
+    "policy_seed": 2051066002,
+    "physical_sha": "4ef767d8c9aea0d92fc35ff1e663cc9574ff2b11ed1e0ad24989dc555b543a12",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t2_init47_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261359,
+    "policy_seed": 2051067002,
+    "physical_sha": "c3ad13a4b4486b5ad5e7386fb78f566f4fea23b65c5139fc4aa96324da90cca0",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t2_init48_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261360,
+    "policy_seed": 2051068002,
+    "physical_sha": "b78a9b5ee9d38719d4ce4b62a04dca727d0113265b7b8847fda944665baffac3",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t2_init49_policy2",
+    "task": "pick_up_the_salad_dressing_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261361,
+    "policy_seed": 2051069002,
+    "physical_sha": "8aa982d2ce55f9f6f44b7630fa263177f177e99a07a7781da3609f90983b7988",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t3_init20_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261432,
+    "policy_seed": 2051050002,
+    "physical_sha": "8ccbac907f27e84c2c6d40a700a593fb9d1ed6b448bf5ea349b6cf7e72d266e4",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t3_init21_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261433,
+    "policy_seed": 2051051002,
+    "physical_sha": "c1728f7896899b14c10177eb2ac2725122fa66fa592ee90f7390064683939e89",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t3_init22_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261434,
+    "policy_seed": 2051052002,
+    "physical_sha": "186373ecb8a2b1688a01f4a75486fbc739bbe2262a273c53540de54c28f62e53",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t3_init23_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261435,
+    "policy_seed": 2051053002,
+    "physical_sha": "9f1d23e986dd376d78b5ea44fa214a56963e00683e079f0cc4d0639bb41da403",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t3_init24_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261436,
+    "policy_seed": 2051054002,
+    "physical_sha": "fab8ef722f3fec9d9116cc70642f3850f94d4c287fa9614e2055441a42878ec1",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t3_init25_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261437,
+    "policy_seed": 2051055002,
+    "physical_sha": "8402f88778e6d30de6f30564faa792ce66691b878b1fcda8f3da446b5631567f",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t3_init26_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261438,
+    "policy_seed": 2051056002,
+    "physical_sha": "77d0901ba0957ea608cad220cd0b1edc528a3145e0b5fc4aa3fa3f903475198c",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t3_init27_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261439,
+    "policy_seed": 2051057002,
+    "physical_sha": "45dbe8fdbc3419578286e694c3bcb64dd5ef7b39e06136697b571177295e8dfc",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t3_init28_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261440,
+    "policy_seed": 2051058002,
+    "physical_sha": "c489a0d9a9f59bd2b90cffc84d043168cdfbbf5d413617a191bcad9761e8b894",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t3_init29_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261441,
+    "policy_seed": 2051059002,
+    "physical_sha": "87bfc8bd408454e7efa69cc6ff2335c416573d9f44ddb5ae87c0b67e73a7857d",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t3_init30_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261442,
+    "policy_seed": 2051060002,
+    "physical_sha": "3af96b8fa974ead9408e59eb12705cc7f34dfd352289b37ac069b50086cbe90e",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t3_init31_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261443,
+    "policy_seed": 2051061002,
+    "physical_sha": "cca8975471aa3c13ce657a7bd6d5f110e92d39b98c2c25934ed7118d5f7c4c12",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t3_init32_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261444,
+    "policy_seed": 2051062002,
+    "physical_sha": "caf85b47b525dab43c37a398a0e566c76e0366a580f8daa6be98910676ac1277",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t3_init33_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261445,
+    "policy_seed": 2051063002,
+    "physical_sha": "dda046ea6c3a0ba193cdffd70e441d70cc630a3ba41e27efa466ac2cf0927826",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t3_init34_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261446,
+    "policy_seed": 2051064002,
+    "physical_sha": "fc112acccbd7047ddba194d07e924aa7e2b62b4dc3c302c94308912667cc4f48",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t3_init35_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261447,
+    "policy_seed": 2051065002,
+    "physical_sha": "2e82a2665abd2117c1a253a867e0e5422b16d2e1ef0de3528005d10cec3c1b21",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t3_init36_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261448,
+    "policy_seed": 2051066002,
+    "physical_sha": "85bce19f5e97466eaa543ebde2cf8b65d1a11a72da24160e3fc14b5a1134c204",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t3_init37_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261449,
+    "policy_seed": 2051067002,
+    "physical_sha": "5f07fa5fdffa913072ad9b72c1ded15dfc6e8494eb26d540d0b4bef23e0709e5",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t3_init38_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261450,
+    "policy_seed": 2051068002,
+    "physical_sha": "5fe63a60aacbd6d994e4c5fbe51ae43ba5c426923c312745cd79a6e8cd9c969f",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t3_init39_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261451,
+    "policy_seed": 2051069002,
+    "physical_sha": "4a35367f0ed307dab55c0d1376695ad6d1644a00cc7e1f82b55680c8874fa6aa",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t3_init40_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261452,
+    "policy_seed": 2051070002,
+    "physical_sha": "142c2c03b2c164dd97982afd01c30985c5d3c299d2187ec508117a52921a9b2a",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t3_init41_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261453,
+    "policy_seed": 2051071002,
+    "physical_sha": "53bfcb316f1700ea060c50269d5a1baa2abc74cd7585ea76914ec11dcf126d3b",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t3_init42_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261454,
+    "policy_seed": 2051072002,
+    "physical_sha": "b50d5fcd3df4315c5d0198fcb9e4ffe9453c10e3b4a500ecbc66d3b06e73594d",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t3_init43_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261455,
+    "policy_seed": 2051073002,
+    "physical_sha": "32a1071a78a430c49a529092159f439b27dbabb698ff628a98e5d86ee28fc7f8",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t3_init44_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261456,
+    "policy_seed": 2051074002,
+    "physical_sha": "bc1a7aaf6a9ef85a5bf2a82115752209ee399f444ea0d24bde850e822e5c0fe8",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t3_init45_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261457,
+    "policy_seed": 2051075002,
+    "physical_sha": "41d41be8264f25a40cb405fb4b2524e342fc7553bc26eab83f1fa071769ae668",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t3_init46_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261458,
+    "policy_seed": 2051076002,
+    "physical_sha": "db9c0a93711acc4167b3e56e2c57f0e7a4b88f4cd64acd1c82bf3d6851c81d0a",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t3_init47_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261459,
+    "policy_seed": 2051077002,
+    "physical_sha": "3ba068f1d0403b5b909b80635d4adced773ba98e7b7b2e42886bdf2a505fab63",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t3_init48_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261460,
+    "policy_seed": 2051078002,
+    "physical_sha": "3ff09a786f14cc84602d4c65fcbfa6b24a851332ed547b798b8d5b125b7a5582",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t3_init49_policy2",
+    "task": "pick_up_the_bbq_sauce_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261461,
+    "policy_seed": 2051079002,
+    "physical_sha": "b874ed3e42e8e5aa3d842015b73ddfde25ebb16a373f3cbe66e5d57f7b7098ed",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t4_init20_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261532,
+    "policy_seed": 2051060002,
+    "physical_sha": "fe5df451de683af58fe6d0a0ee1c7b8bbe50a4bbe21425229441a7837e90577d",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t4_init21_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261533,
+    "policy_seed": 2051061002,
+    "physical_sha": "3fce032fc7b0194d971d9c86ac1e83a02cf92ac0c352e3ee3544810e21b0abd1",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t4_init22_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261534,
+    "policy_seed": 2051062002,
+    "physical_sha": "98be03a2ae7b10682328e8c3eecb1a77c9508d493aeac3b61e05605159f9c23d",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t4_init23_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261535,
+    "policy_seed": 2051063002,
+    "physical_sha": "3bdb0d5cc732a5ee1d0bb40258f10569a61279d0feafb1e78a440f4f1049a853",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t4_init24_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261536,
+    "policy_seed": 2051064002,
+    "physical_sha": "0ae22ab23094e93394469465bf49fa48cb2b4b6a41fd745c28e5bba3890f5718",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t4_init25_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261537,
+    "policy_seed": 2051065002,
+    "physical_sha": "74b874b9d430ec75ebd2a96aefd84a0e3b3fc3b2dae542e67c1e89ec75f63b05",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t4_init26_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261538,
+    "policy_seed": 2051066002,
+    "physical_sha": "598a79a597c01ffa09e560e3697b7fe9f6867cab0180e6293a92df18993a8717",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t4_init27_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261539,
+    "policy_seed": 2051067002,
+    "physical_sha": "419bb8657dbcec7212ce53e39f16149e5921ff4afa62bf9efe533c0495c09c3d",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t4_init28_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261540,
+    "policy_seed": 2051068002,
+    "physical_sha": "99b8a992bc43cbabc69b4304417bc226d4a70b6c083a44db6d01caafcb864899",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t4_init29_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261541,
+    "policy_seed": 2051069002,
+    "physical_sha": "a00e742dcaed238d357b21fd2afeec767166020a4a8656063aae1b2ea0845f8e",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t4_init30_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261542,
+    "policy_seed": 2051070002,
+    "physical_sha": "d02a9abd46f7a3ea62e7a3ce5f6b4ee4ffa1f33a6bb6af7f413670bdc9ded499",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t4_init31_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261543,
+    "policy_seed": 2051071002,
+    "physical_sha": "b24d212fd51ec7772971ff800c3fa018b4acd2baa2c4a3dc031eb1920a598f41",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t4_init32_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261544,
+    "policy_seed": 2051072002,
+    "physical_sha": "8f0a529841a299ac008d9718cfa9e41766bac6d6ebe46ed847f5c29dd36986b1",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t4_init33_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261545,
+    "policy_seed": 2051073002,
+    "physical_sha": "3958b8bf76c5e23a666497fd8769f42124b902c238e312655a45bff6f47174a4",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t4_init34_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261546,
+    "policy_seed": 2051074002,
+    "physical_sha": "4050f280eb02737be02e6d1ef34f774f453b754994be7a242d4001ec8af92771",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t4_init35_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261547,
+    "policy_seed": 2051075002,
+    "physical_sha": "5223168e39632e6f0ecf44abbeba3150ba3e3e7ed17e9744989630f681d934d5",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t4_init36_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261548,
+    "policy_seed": 2051076002,
+    "physical_sha": "181b82d0f46f4c403450b59d8fc789a7ba94478c22a2a203de4bb7d64e38b834",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t4_init37_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261549,
+    "policy_seed": 2051077002,
+    "physical_sha": "cb6db7da8fc4ecb286a68ab9bf3f8efcb83cb6c4bc5f1aa829b6309f22590866",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t4_init38_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261550,
+    "policy_seed": 2051078002,
+    "physical_sha": "a4ad88bf5b835e290f04022d06a02d481199943abc4a884e5943755cd7ff8f84",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t4_init39_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261551,
+    "policy_seed": 2051079002,
+    "physical_sha": "395406c3a527c45c17961fc9c5dc8f7821327a80343d61b6349e509c22b0fcea",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t4_init40_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261552,
+    "policy_seed": 2051080002,
+    "physical_sha": "21806546f88a2a1ed289e2886cbb9de13972025c20aab3e547042fc825647ea2",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t4_init41_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261553,
+    "policy_seed": 2051081002,
+    "physical_sha": "1969c5dae303a180deb5db0c467b21c571e1b29dab407a084ed86192f89847e3",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t4_init42_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261554,
+    "policy_seed": 2051082002,
+    "physical_sha": "c62d45dae5937e2c54f809d6d87bd1d8209913874e80b281ab1f4c76fc1fde56",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t4_init43_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261555,
+    "policy_seed": 2051083002,
+    "physical_sha": "c8c262726e40b16f29b00cbd6b6293bc4829f51b049d08716430c889408202cf",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t4_init44_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261556,
+    "policy_seed": 2051084002,
+    "physical_sha": "3c8026f282c5e6c92eaf2ba637d9722716584ececeacb3591b920cc4564b34b0",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t4_init45_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261557,
+    "policy_seed": 2051085002,
+    "physical_sha": "51cedf5a371288f18ffaf57ab761643056969d9977c8334323d7b59f2650fe95",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t4_init46_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261558,
+    "policy_seed": 2051086002,
+    "physical_sha": "3b5f5b477911803c3511ef20607cff2e385238ade25d68e4ad68042e1ae2fef7",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t4_init47_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261559,
+    "policy_seed": 2051087002,
+    "physical_sha": "ad74e5532911a7ea84127a8c6361d1c83aec38c6e50fc38c890348b003a33020",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t4_init48_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261560,
+    "policy_seed": 2051088002,
+    "physical_sha": "551b0d4f2501af1afd3702b3a422af533ea0650db6d64d7a59016dd7d8ca802a",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t4_init49_policy2",
+    "task": "pick_up_the_ketchup_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261561,
+    "policy_seed": 2051089002,
+    "physical_sha": "d3145c5e2e37c676250272a3def57626b460793995301df7251ab61e93c57326",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t5_init20_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261632,
+    "policy_seed": 2051070002,
+    "physical_sha": "89bada8fac97cb45133cb015fcc7d1e317b8f2ea9f4a943fdd33be85af14482a",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t5_init21_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261633,
+    "policy_seed": 2051071002,
+    "physical_sha": "f94fff7dee17bddcb734e980a82bde3c7b8c8b6a48f39f5e118d6175626cfa88",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t5_init22_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261634,
+    "policy_seed": 2051072002,
+    "physical_sha": "73a8f5c119e5945b5e8bcf8ebaeefcd0aa9ce66d46373cdff1883684867586b8",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t5_init23_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261635,
+    "policy_seed": 2051073002,
+    "physical_sha": "7c6cb4c0d8b0a2d0f553afe46aff0d841ff5ba0a45cb270316e2c4b4542573f9",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t5_init24_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261636,
+    "policy_seed": 2051074002,
+    "physical_sha": "d244e51b5d91e18598af301c230c43290b2b1cd26a4921a9d3ec54ea684d138d",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t5_init25_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261637,
+    "policy_seed": 2051075002,
+    "physical_sha": "0c807fdae6e96f7a2f7d541fdeb1de8be1593c2e4acaf99e0a837fb5e5712e90",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t5_init26_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261638,
+    "policy_seed": 2051076002,
+    "physical_sha": "f41d9bf9076a5e917c402366997fcda115e5f6d3bc85be998e3f1eb44d34134f",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t5_init27_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261639,
+    "policy_seed": 2051077002,
+    "physical_sha": "926865742ff79b93db4a6e5d71b8f20982a9f2163e2785c3324b64e1ab15a21a",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t5_init28_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261640,
+    "policy_seed": 2051078002,
+    "physical_sha": "8080a9f914ea31b8b62559fb5c1ea5bde2c62d08f62d46d59a21d88cf799d36d",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t5_init29_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261641,
+    "policy_seed": 2051079002,
+    "physical_sha": "358199aeb1c719c71b8643ffe4ba9f9219ccb6ac1ab3aced5bf063b8dbbf5980",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t5_init30_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261642,
+    "policy_seed": 2051080002,
+    "physical_sha": "c4b40421f6d90413c4a0d70483b64ffa6546b68597470ff292d81c5716b6307f",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t5_init31_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261643,
+    "policy_seed": 2051081002,
+    "physical_sha": "a228e2830a62a7022037e3efa4136ad9661b1fb14a7c98df811bc515721e097b",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t5_init32_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261644,
+    "policy_seed": 2051082002,
+    "physical_sha": "cfcde2bb14b2a17b8185e6992740c011d390c38e2b939b2140101df70cc2b7b0",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t5_init33_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261645,
+    "policy_seed": 2051083002,
+    "physical_sha": "59a8d6ab2745738747155c06c32c5e690fda56f023dd6af1270a63167389f5a9",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t5_init34_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261646,
+    "policy_seed": 2051084002,
+    "physical_sha": "eb0c27e68638d554a7607eaa383e6d57a29b75a1f43a117a028d96c93d10f86c",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t5_init35_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261647,
+    "policy_seed": 2051085002,
+    "physical_sha": "cf6bd37a06d897f54beda9fe7ece8f9044bae4024092ebc1f5a8f07aa0c15dad",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t5_init36_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261648,
+    "policy_seed": 2051086002,
+    "physical_sha": "504a0085ed32d2b84626ed3939e22503c04186fc174f857e83ac17d5cb00a14d",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t5_init37_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261649,
+    "policy_seed": 2051087002,
+    "physical_sha": "50005536ab0f34de5227b2304d12904ba6c039e4b8774f4bb84fb113406cbdc9",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t5_init38_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261650,
+    "policy_seed": 2051088002,
+    "physical_sha": "75073fb4ebd4746783e515abce8292c7fc6c042ef2010b048438c669cc469f0b",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t5_init39_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261651,
+    "policy_seed": 2051089002,
+    "physical_sha": "5796d265462ace3adc2fac0ac9d020e53e96e2b7abea25c93f222896bb1ada95",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t5_init40_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261652,
+    "policy_seed": 2051090002,
+    "physical_sha": "c9c7996f395f3b3944accbc168249dab7fd3d5406f240c5b6980dae6cee7bc82",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t5_init41_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261653,
+    "policy_seed": 2051091002,
+    "physical_sha": "44be46bdd648e7e9fe469f0f2510e76d1bebb3887385e7b7a51686d4ca7cbb44",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t5_init42_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261654,
+    "policy_seed": 2051092002,
+    "physical_sha": "fd883fc6c2dd62a3aee9b441a4c9a812da4776b378246b2dc6c92fdab556e6bc",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t5_init43_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261655,
+    "policy_seed": 2051093002,
+    "physical_sha": "13d698af4d11275de4f4b97fb8e61a4d4b079457107cea05353fad81048080ac",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t5_init44_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261656,
+    "policy_seed": 2051094002,
+    "physical_sha": "c59843231ee0e7ada2b736fd3740c38c22c88c25ca70576f2c8a58e8df1de5f3",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t5_init45_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261657,
+    "policy_seed": 2051095002,
+    "physical_sha": "203da826c6d5556d50d651dc69bb4c59ab62135ca67c7878b8a77e20030e63f0",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t5_init46_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261658,
+    "policy_seed": 2051096002,
+    "physical_sha": "aec91d5f7599eec36da63417c03eb1c6af6eec7c8a2733a79aae734d0af68f4f",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t5_init47_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261659,
+    "policy_seed": 2051097002,
+    "physical_sha": "f6936eb43a2a7503a57914de00c0ac5db747549b0ad900de6aba57403a4d7dc2",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t5_init48_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261660,
+    "policy_seed": 2051098002,
+    "physical_sha": "976334f7cb35941c6e3de4d0dcf10d3d4224571e41a573babe005be7de3de65a",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t5_init49_policy2",
+    "task": "pick_up_the_tomato_sauce_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261661,
+    "policy_seed": 2051099002,
+    "physical_sha": "2c0cc2e6e4182446357ad1d540bb002338668b529c00cb4624489b18845b1ff1",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t6_init20_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261732,
+    "policy_seed": 2051080002,
+    "physical_sha": "f41c95089d6828773b2fd8e3b904b346e541f30ce878cf1ae6138e4f224ae75c",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t6_init21_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261733,
+    "policy_seed": 2051081002,
+    "physical_sha": "bafd233a68ce6a87fc0232cbc98e30646b5b300cbfe013809719e88c07022d4d",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t6_init22_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261734,
+    "policy_seed": 2051082002,
+    "physical_sha": "7f10b99a73f8e1aecc049037f9c35d92aa8d3ba690715dac82416d44d165002d",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t6_init23_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261735,
+    "policy_seed": 2051083002,
+    "physical_sha": "84dece901154c0853e45dca3f8202ae149f08177ebdcbabe39e0986f59c20cde",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t6_init24_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261736,
+    "policy_seed": 2051084002,
+    "physical_sha": "a0bac047fc1491c528ee404970116940ac7d048c0057c48b642c735caecae1ac",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t6_init25_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261737,
+    "policy_seed": 2051085002,
+    "physical_sha": "85cb13aff9f9ce887a5417619f0ef71942d63268d991deec5ec6d61b79a92ef9",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t6_init26_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261738,
+    "policy_seed": 2051086002,
+    "physical_sha": "cf51f58be07b3aca9739d71f52d1cbd5bd61122ba1da227d64f092b8b54849fa",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t6_init27_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261739,
+    "policy_seed": 2051087002,
+    "physical_sha": "5527fc59aedecc15cd24f9743e3f0697127c18367c5d1f557aaf3b0ce92aab71",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t6_init28_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261740,
+    "policy_seed": 2051088002,
+    "physical_sha": "6a39020931f01c4c19312246ddce93ced1af6747dfa0e1e2f36b3ac06699df0c",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t6_init29_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261741,
+    "policy_seed": 2051089002,
+    "physical_sha": "36901c5c88b8c5bc68fe5e5b1f4f1461568e79aeb07d6ca7f7f7307d20978cd7",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t6_init30_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261742,
+    "policy_seed": 2051090002,
+    "physical_sha": "c167c06fada2121d1e1d144e29252da058100d16e88a1ee5955d371103d1fb0a",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t6_init31_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261743,
+    "policy_seed": 2051091002,
+    "physical_sha": "a1c152107b6b7875b218c05d359a10c897f8dffb7c9ae7fa170af0415dace4e0",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t6_init32_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261744,
+    "policy_seed": 2051092002,
+    "physical_sha": "9dc5be36e5d1ec68989aefb5df8f27a050859f82e68f9cfc534ffaddce843a7f",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t6_init33_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261745,
+    "policy_seed": 2051093002,
+    "physical_sha": "145c5e74185f57c072769f657f48ccc196ba4319ba67d4ac551f0a2bd77de2e3",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t6_init34_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261746,
+    "policy_seed": 2051094002,
+    "physical_sha": "0f5e48917e27fb3f0d62661cb8f88c41ff8ce90c03780fba498639c38ccfd240",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t6_init35_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261747,
+    "policy_seed": 2051095002,
+    "physical_sha": "fed12653ea1f227d1344506d3010ade040b10a4e6bd826d6221926bbb5fedc3f",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t6_init36_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261748,
+    "policy_seed": 2051096002,
+    "physical_sha": "2fb84f1fc93e2f8408e505e774c910bf78749dd0bc07ea23c2eaa3a01feb3a55",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t6_init37_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261749,
+    "policy_seed": 2051097002,
+    "physical_sha": "d8bf4c7568d625b15d92b6371966240a8320ed8808b040e3bb1ea78b13185546",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t6_init38_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261750,
+    "policy_seed": 2051098002,
+    "physical_sha": "4e9b480e3829741f1ee5d57c27d204c65820d9718d434cadd1cc36748c53f804",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t6_init39_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261751,
+    "policy_seed": 2051099002,
+    "physical_sha": "a647140e1c40b3ff2239127fbb01117a8695b950325da6ebfad3803da54b3a0a",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t6_init40_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261752,
+    "policy_seed": 2051100002,
+    "physical_sha": "83492648648ec1de196b4f7e4e83aad7752d391e2acd9ed5b0bcc78aa98718e6",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t6_init41_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261753,
+    "policy_seed": 2051101002,
+    "physical_sha": "0fc9af347009bab7caf6d3574244d49a47c760202d83a4e0ad842a574990b81b",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t6_init42_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261754,
+    "policy_seed": 2051102002,
+    "physical_sha": "551ab7c1ceb7f37b30e06b83747b5c62c55ee02b70d3f970f69f6e54be24d466",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t6_init43_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261755,
+    "policy_seed": 2051103002,
+    "physical_sha": "4e40e4ebe22ce0f90927636bbe7b94a2e595a04a2ae9d1ec8f772b8565d45ea6",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t6_init44_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261756,
+    "policy_seed": 2051104002,
+    "physical_sha": "34f89d6ab0e0dfccc734374e4b6bca57f28d95f9c86f21ccbbcc12eb5d749f15",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t6_init45_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261757,
+    "policy_seed": 2051105002,
+    "physical_sha": "cbe962fca911a44810b32133fc44adc6c429e38b57e19a21b83e2884e4a0f166",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t6_init46_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261758,
+    "policy_seed": 2051106002,
+    "physical_sha": "572334a119c2e8bb0c07d8035329444520b0939f723f20459d6316c0df830736",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t6_init47_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261759,
+    "policy_seed": 2051107002,
+    "physical_sha": "7ebf4b1e70e107194d6190214d8c224f6db257193d54c3aa1a1084a9f2489497",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t6_init48_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261760,
+    "policy_seed": 2051108002,
+    "physical_sha": "6face7cc9c7399fe24b1a841fdd20d83ceb10be195c7fadefc8187267759eb79",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t6_init49_policy2",
+    "task": "pick_up_the_butter_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261761,
+    "policy_seed": 2051109002,
+    "physical_sha": "87ea7c12dda043ab0387b510cfffe01748a673c3f854846560eae5d7d0b427b8",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t7_init20_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261832,
+    "policy_seed": 2051090002,
+    "physical_sha": "10ec0ccfa873926b2be8f9704ea7e40dc8a5be2fc6fc11b8329320ada4275ec5",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t7_init21_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261833,
+    "policy_seed": 2051091002,
+    "physical_sha": "229c036f3cdb171a3a93fb7a4b49933bf86b65d2934db367d4392cd26f494797",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t7_init22_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261834,
+    "policy_seed": 2051092002,
+    "physical_sha": "d55f4c7e60dd9309f20fd9c97ac4fea8c1b0ecd3a0509306fbf015fd633f5c4e",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t7_init23_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261835,
+    "policy_seed": 2051093002,
+    "physical_sha": "d4350bd3ae5bf4e1575f99ac6924e2a706eaabd0211984132b66e9016f3f5304",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t7_init24_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261836,
+    "policy_seed": 2051094002,
+    "physical_sha": "a1fceefba2cc0ae1e606124b71d1648fb6df372b209505ebf13523c2eb3e35c9",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t7_init25_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261837,
+    "policy_seed": 2051095002,
+    "physical_sha": "352783114fa8a284d11bc90474b5dd770acd3c7c69d7c3b916e4802e7e64cd96",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t7_init26_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261838,
+    "policy_seed": 2051096002,
+    "physical_sha": "054185aa4739250746ce40b2c6245d11fef27b74bc69bc9c38016d99bbdff365",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t7_init27_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261839,
+    "policy_seed": 2051097002,
+    "physical_sha": "ac9b9216042254f853a3eb4d804d477cb0c5150f4fae1fc8b8b951e6e370eda9",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t7_init28_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261840,
+    "policy_seed": 2051098002,
+    "physical_sha": "6d5fa272b05e97b7fb09b7f008500223107ad3eb0742259c173a1d26a6fcbf86",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t7_init29_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261841,
+    "policy_seed": 2051099002,
+    "physical_sha": "bbcec47e52a729dce3b194bfd46100ed7ed52cd648e8fc10c322d09a1a2b338c",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t7_init30_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261842,
+    "policy_seed": 2051100002,
+    "physical_sha": "fae8748ddccf3c9fcb3108ae8c93f54dc0f7db932e923fcdbdf6eea21c40fe33",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t7_init31_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261843,
+    "policy_seed": 2051101002,
+    "physical_sha": "d114f6eacafc699d1dbfd3dc9d345ae4c2a4003f3e028b50fce113981495172b",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t7_init32_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261844,
+    "policy_seed": 2051102002,
+    "physical_sha": "3e0a4a432c07db1baf61a2778819fa5fa4f570cbc4124b3dc89e181f4ac64084",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t7_init33_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261845,
+    "policy_seed": 2051103002,
+    "physical_sha": "305b61b0a96d6d6ba563e2a03897b215939fa4d7dd5e5f2152cb215db38469bb",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t7_init34_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261846,
+    "policy_seed": 2051104002,
+    "physical_sha": "4b394d8c390d047aa1f7426fcd47061278b4bf431990ee22c4960a63bc10052d",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t7_init35_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261847,
+    "policy_seed": 2051105002,
+    "physical_sha": "562ba66393701d069771adcb0c860851e9ba201a2d2fd4a7e1afd08182cf25cf",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t7_init36_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261848,
+    "policy_seed": 2051106002,
+    "physical_sha": "81922ba0e4fa104d33430e4512d8e47ffb2959591841d29eac1c148ec3b7f5bc",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t7_init37_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261849,
+    "policy_seed": 2051107002,
+    "physical_sha": "38134c282c42ae0cdab803d7f500da6f41a86bee5ed31d70ed582d5ed92d0b5b",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t7_init38_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261850,
+    "policy_seed": 2051108002,
+    "physical_sha": "eb1fa2aa1e8d5b99713c30034e2155a3690c3bb7245d45a5724a21c4fc85e0d2",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t7_init39_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261851,
+    "policy_seed": 2051109002,
+    "physical_sha": "a0d08af8e56fe84e7944eb574f4e84f55a306e99ce2209930ae662db86cf1710",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t7_init40_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261852,
+    "policy_seed": 2051110002,
+    "physical_sha": "a331db36db8094a5afae788e74dcaae1e1f3db773538282dc89e6a8fc26443d5",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t7_init41_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261853,
+    "policy_seed": 2051111002,
+    "physical_sha": "bb83031d766358b5dff9610d9f6639e5d3b10dce075a49563cd10460df93897b",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t7_init42_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261854,
+    "policy_seed": 2051112002,
+    "physical_sha": "ea129398a61c0f6b2c10860f531a383a0c87ebc2b55989130e631e3ee6b24a62",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t7_init43_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261855,
+    "policy_seed": 2051113002,
+    "physical_sha": "d557227d691ba67bf4b2607aba0d4d4e62267bf3348d30e3d054a0946cd55445",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t7_init44_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261856,
+    "policy_seed": 2051114002,
+    "physical_sha": "5e4d7a90a3664a13e79ca44dc3a84b3027195a1aa5ba3e6fb47cc5369ddea088",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t7_init45_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261857,
+    "policy_seed": 2051115002,
+    "physical_sha": "08f3dedb5bea4d06d9830826652f6a983cd920469725015b53b9aa14d7b491fe",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t7_init46_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261858,
+    "policy_seed": 2051116002,
+    "physical_sha": "59191df15f083fd96c3906e0cfaf89ac84cfcbfde0143df141a164d971215ebf",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t7_init47_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261859,
+    "policy_seed": 2051117002,
+    "physical_sha": "56a22822922df2268ecac8029edf3316f9939c66eb356e3c7ca89a574cb172ec",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t7_init48_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261860,
+    "policy_seed": 2051118002,
+    "physical_sha": "8336a154fe1c0141edc36c807388457ba9540cce7f0769b152c4fc8172bf5dba",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t7_init49_policy2",
+    "task": "pick_up_the_milk_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261861,
+    "policy_seed": 2051119002,
+    "physical_sha": "87de188d0c7b61084dfc5722da60dd337e1a85dd14c938d3154cc1f705a841b3",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t8_init20_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20261932,
+    "policy_seed": 2051100002,
+    "physical_sha": "5275a74ec0e8fdf0250bb6bb474daf33f25f847f98798d54b51ce4c15fb94ef3",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t8_init21_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20261933,
+    "policy_seed": 2051101002,
+    "physical_sha": "21ffbcef795b63d8548d8e2f7ca0d1c70ff176d0e4de637eb216411faf0c4b26",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t8_init22_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20261934,
+    "policy_seed": 2051102002,
+    "physical_sha": "38552cf301ebe479921fd7f2f6c3b7e3654a9e3fa88fbea2e1020d239cfd8878",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t8_init23_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20261935,
+    "policy_seed": 2051103002,
+    "physical_sha": "0941be2d63ad3944e7326cca4655ec5940b7a7a674cf5f399c4b112e879e20aa",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t8_init24_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20261936,
+    "policy_seed": 2051104002,
+    "physical_sha": "d680d5abd67081e87c12d83c7df2ed05f9ba55ec0c3c6dc41a3a994d5b317e61",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t8_init25_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20261937,
+    "policy_seed": 2051105002,
+    "physical_sha": "cfdee08462e6ae7a663f69392155f0b54e6412ea8658622638747acba0724904",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t8_init26_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20261938,
+    "policy_seed": 2051106002,
+    "physical_sha": "4e7979a671be2e34590e8d29910c35c80f22eb4ec337215b5a4b58bc0a805286",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t8_init27_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20261939,
+    "policy_seed": 2051107002,
+    "physical_sha": "d504bc9ac027a33329bab545e98ed4153eb0ad637c981b898091c74db63ebbcf",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t8_init28_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20261940,
+    "policy_seed": 2051108002,
+    "physical_sha": "495dbab1e144e8c22a3d4bd4e1a8019dedd6fa751f6fb50acb6c97aaed61c0c4",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t8_init29_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20261941,
+    "policy_seed": 2051109002,
+    "physical_sha": "e21cd8cee7b91d4f944a7d172c380ce797f38718583f7298efd693fb145295f5",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t8_init30_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20261942,
+    "policy_seed": 2051110002,
+    "physical_sha": "719fdd33c8ad8c3916c5ff3a4c9e492a702026cee7f30bff4521730a106a3722",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t8_init31_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20261943,
+    "policy_seed": 2051111002,
+    "physical_sha": "d8c3ea759b6ce906c39cf383eff1206a275b9147d4f201707e31b6c6ae5ffc28",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t8_init32_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20261944,
+    "policy_seed": 2051112002,
+    "physical_sha": "7e4b11fc9df05c7084fab986ef1a1962c6783b11ebd85930a4e0fab35d030678",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t8_init33_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20261945,
+    "policy_seed": 2051113002,
+    "physical_sha": "70b39e0bc38fba16ad083332d16c4a1cc770d1a06e2e6b1461277a942e76d6de",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t8_init34_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20261946,
+    "policy_seed": 2051114002,
+    "physical_sha": "4e142de7ee09b3e0e1e94a6ca2a56d5e59a10fd709d0f1f19c48801e3bccd8fa",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t8_init35_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20261947,
+    "policy_seed": 2051115002,
+    "physical_sha": "49151118eba06dff085c82a7568819670f3a3aef295869b42916b9dc5c966042",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t8_init36_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20261948,
+    "policy_seed": 2051116002,
+    "physical_sha": "43907779fded2e40070d3309094382afa0c17454baccfba6dfe0231f8de46cb2",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t8_init37_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20261949,
+    "policy_seed": 2051117002,
+    "physical_sha": "92794f6ceff6d866270b660277777632b9aef21b1de1d12979ddea214bfcff0d",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t8_init38_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20261950,
+    "policy_seed": 2051118002,
+    "physical_sha": "d9e7e4e9755d9f1eeb6ddefa04f09046952142aea65bf0575395de6579397c66",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t8_init39_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20261951,
+    "policy_seed": 2051119002,
+    "physical_sha": "57b5d2557fabc01e50d82a7d38801a8d4b0d81ee0630e0a319a72bf62acb5c51",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t8_init40_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20261952,
+    "policy_seed": 2051120002,
+    "physical_sha": "6773a4aa36faede28520bf0d8cce24c5148395fbd6c838bb1ecfde223e189574",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t8_init41_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20261953,
+    "policy_seed": 2051121002,
+    "physical_sha": "6db8840ff2a467aaa09962e8551edc1037ff05886e183528d3b81a748cd62a39",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t8_init42_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20261954,
+    "policy_seed": 2051122002,
+    "physical_sha": "19a5daf5298457e40bdf1417eee1581a4ff42eb608a15389af5290b1a158f161",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t8_init43_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20261955,
+    "policy_seed": 2051123002,
+    "physical_sha": "e914361d798df4fb1d397319232653d561aa74fad445134a38027f6dc0ef85df",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t8_init44_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20261956,
+    "policy_seed": 2051124002,
+    "physical_sha": "9a6265ef9d1522c8d2b7aef856cce2ef909aa1c2edf1451d51013e64db34d063",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t8_init45_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20261957,
+    "policy_seed": 2051125002,
+    "physical_sha": "6c2de66fd64005cc5a49ddcdce69101fdcd7fe91c11115e0b3eb4659655738cd",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t8_init46_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20261958,
+    "policy_seed": 2051126002,
+    "physical_sha": "df109198c041aeb63dbd7a38fb71f825318738360799f8b6cab32467436ddf39",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t8_init47_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20261959,
+    "policy_seed": 2051127002,
+    "physical_sha": "4453ce2afaed3275a855b922b62ba3e4ff457e7ee07862c220dc795aa364c4b9",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t8_init48_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20261960,
+    "policy_seed": 2051128002,
+    "physical_sha": "8c4cfe1c9515a7957a6a44048eae2d92452c4587b95dabb9800f071f6d793c2d",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t8_init49_policy2",
+    "task": "pick_up_the_chocolate_pudding_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20261961,
+    "policy_seed": 2051129002,
+    "physical_sha": "8a045ee7a41a7b9ee978a7c0358e8aee36c6ddaf2ee90c28a00d81430c07662f",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t9_init20_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 20,
+    "scene_seed": 20262032,
+    "policy_seed": 2051110002,
+    "physical_sha": "9d6511e4303775d902c95fb7e2e441ec5ba27cb066dc1ceced943e7b6069e5be",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t9_init21_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 21,
+    "scene_seed": 20262033,
+    "policy_seed": 2051111002,
+    "physical_sha": "b444d056764c1c10aa5cb9f47bd35d6ffeb43fb6c19adf2094070ba8e2ceb48b",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t9_init22_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 22,
+    "scene_seed": 20262034,
+    "policy_seed": 2051112002,
+    "physical_sha": "138b4d58dcf4fd24295a05ce39c2981b4eefdb49fbd26f5d4d4e30947f9a2962",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t9_init23_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 23,
+    "scene_seed": 20262035,
+    "policy_seed": 2051113002,
+    "physical_sha": "a00d907de0acbfff5f8f70b3d0d3cb6c38c5d2bfab83a9c124232ab13b71088b",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t9_init24_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 24,
+    "scene_seed": 20262036,
+    "policy_seed": 2051114002,
+    "physical_sha": "50135d169ac1653dd5cef102ea2153f2766347872ad1778d166eddb54ebbb14d",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t9_init25_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 25,
+    "scene_seed": 20262037,
+    "policy_seed": 2051115002,
+    "physical_sha": "8c5ee0822d8acd322dc54c57bbf00bee511c2620e3e1a45078a229b298f37806",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t9_init26_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 26,
+    "scene_seed": 20262038,
+    "policy_seed": 2051116002,
+    "physical_sha": "47c223b97977b30f3be9b6e00599b979c66ebe0f514e7b26c87fc12a3506dbf2",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t9_init27_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 27,
+    "scene_seed": 20262039,
+    "policy_seed": 2051117002,
+    "physical_sha": "b1dbc1d7ca6deeb89bb582cd6c5a8cb3a83956cd8bd906acd602c0c9d23d7144",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t9_init28_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 28,
+    "scene_seed": 20262040,
+    "policy_seed": 2051118002,
+    "physical_sha": "3df33dce1a02f250968bfeed758ec5a836e83f812bf83daa6720faef0de0bd7c",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t9_init29_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 29,
+    "scene_seed": 20262041,
+    "policy_seed": 2051119002,
+    "physical_sha": "e8a3a239cb114bbbeccfb5a2cd68ad1c14d08353e04b202c80faf721b42c6f5d",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t9_init30_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 30,
+    "scene_seed": 20262042,
+    "policy_seed": 2051120002,
+    "physical_sha": "e08a252c9fe7cfbdbbf12274200c1a7e1ddab62c8a6346579be2c3083c51085c",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t9_init31_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 31,
+    "scene_seed": 20262043,
+    "policy_seed": 2051121002,
+    "physical_sha": "a1b7a1b938aedf5b7b36fc74a988da771451a7055f8447ef7e24e7a6811a34fa",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t9_init32_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 32,
+    "scene_seed": 20262044,
+    "policy_seed": 2051122002,
+    "physical_sha": "ff4e96b76bcc696f7e1df1c35230180c4b81c9e31c8b2fa2a26b6519efb1cf65",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t9_init33_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 33,
+    "scene_seed": 20262045,
+    "policy_seed": 2051123002,
+    "physical_sha": "2d5656cdec4fe29350c633fcc6a056715f48f2ed32cddbd949f1482f27116f7b",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t9_init34_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 34,
+    "scene_seed": 20262046,
+    "policy_seed": 2051124002,
+    "physical_sha": "4b23fb91ece8e5867d2d996ccf63b56a8fa071ef55219a1c1aa9e68295ee5d39",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t9_init35_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 35,
+    "scene_seed": 20262047,
+    "policy_seed": 2051125002,
+    "physical_sha": "1094e25cc2cdf135d8894798651e9e1a23dc69479a7c67758cd1e532c8c5a5b7",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t9_init36_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 36,
+    "scene_seed": 20262048,
+    "policy_seed": 2051126002,
+    "physical_sha": "67473bba065d5d0b9f5180c90738b465a54b07aba8af0a7830f4ae667a88165f",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t9_init37_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 37,
+    "scene_seed": 20262049,
+    "policy_seed": 2051127002,
+    "physical_sha": "9d20c10f9ccbe258c32000af3527b478ef9198f30ffd623fde0aaf0983f24d8d",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t9_init38_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 38,
+    "scene_seed": 20262050,
+    "policy_seed": 2051128002,
+    "physical_sha": "020f9ff5f66dc7da0df60b09dd40104a3709a33a0fdf30f499cfbb6d498af505",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t9_init39_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 39,
+    "scene_seed": 20262051,
+    "policy_seed": 2051129002,
+    "physical_sha": "16d3093f3c02193a6e2fb97df63cdaf205f7d1c2a376db0ab922b794d8c2b57b",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t9_init40_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 40,
+    "scene_seed": 20262052,
+    "policy_seed": 2051130002,
+    "physical_sha": "f998e73cacb4e883bda3d5aa4ef2ed1c18476d207c540460ad46fd0450eaa4f6",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t9_init41_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 41,
+    "scene_seed": 20262053,
+    "policy_seed": 2051131002,
+    "physical_sha": "a9b1889d38de836affa94dfd59c1aabac5431f2bf79d221877a55268476f7546",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t9_init42_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 42,
+    "scene_seed": 20262054,
+    "policy_seed": 2051132002,
+    "physical_sha": "295ac255e04f6f8a69098f95f4943214a78a88e51009dfdbfbe91cbd0abca139",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t9_init43_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 43,
+    "scene_seed": 20262055,
+    "policy_seed": 2051133002,
+    "physical_sha": "eaea97b8af52c13416f5058a656a2ab8464c7f88a19248e70eb4a0b92ce5d650",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t9_init44_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 44,
+    "scene_seed": 20262056,
+    "policy_seed": 2051134002,
+    "physical_sha": "1e52b8858088bff8517bfa56f0d68ba129fe57ce73efd274376b10e44e66e930",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t9_init45_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 45,
+    "scene_seed": 20262057,
+    "policy_seed": 2051135002,
+    "physical_sha": "e9d5f02fb49a23dd0192987cd1d2e9b9bed91039e2f47d7d7eca17cf0314fa36",
+    "historical_shard": 3
+  },
+  {
+    "case": "object_t9_init46_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 46,
+    "scene_seed": 20262058,
+    "policy_seed": 2051136002,
+    "physical_sha": "87c27789c80844e2b6baaa7aa43add67dde37e1801905b25283642aa0d4955ca",
+    "historical_shard": 0
+  },
+  {
+    "case": "object_t9_init47_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 47,
+    "scene_seed": 20262059,
+    "policy_seed": 2051137002,
+    "physical_sha": "1a276e3073d2a54603e006466b798e57f7d8b87e141fe9ec67f5a2386b02b230",
+    "historical_shard": 1
+  },
+  {
+    "case": "object_t9_init48_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 48,
+    "scene_seed": 20262060,
+    "policy_seed": 2051138002,
+    "physical_sha": "1dba3a2f0080dcfd7653f4906004388e6b0ea4ba810f610a769def91e48efb53",
+    "historical_shard": 2
+  },
+  {
+    "case": "object_t9_init49_policy2",
+    "task": "pick_up_the_orange_juice_and_place_it_in_the_basket",
+    "init_id": 49,
+    "scene_seed": 20262061,
+    "policy_seed": 2051139002,
+    "physical_sha": "21d57d2ebd1e527d0c992beeb386823bbf1068707a7eb2b835cb0e7a53d8d821",
+    "historical_shard": 3
+  }
+]

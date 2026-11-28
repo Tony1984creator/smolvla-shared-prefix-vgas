@@ -1,0 +1,154 @@
+[
+  {
+    "parity": "object_t0_init20_policy2",
+    "comparisons": {
+      "2/4": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.0055484771728515625,
+        "score_max_abs": 0.012969970703125,
+        "small_winner": 1,
+        "large_restricted_winner": 1
+      },
+      "4/8": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.006904542446136475,
+        "score_max_abs": 0.009922027587890625,
+        "small_winner": 2,
+        "large_restricted_winner": 2
+      }
+    }
+  },
+  {
+    "parity": "object_t0_init24_policy2",
+    "comparisons": {
+      "2/4": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.005981862545013428,
+        "score_max_abs": 0.016582489013671875,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      },
+      "4/8": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.00575333833694458,
+        "score_max_abs": 0.007457733154296875,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      }
+    }
+  },
+  {
+    "parity": "object_t0_init21_policy2",
+    "comparisons": {
+      "2/4": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.004166841506958008,
+        "score_max_abs": 0.00055694580078125,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      },
+      "4/8": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.005057692527770996,
+        "score_max_abs": 0.006282806396484375,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      }
+    }
+  },
+  {
+    "parity": "object_t0_init25_policy2",
+    "comparisons": {
+      "2/4": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.005684971809387207,
+        "score_max_abs": 0.013248443603515625,
+        "small_winner": 1,
+        "large_restricted_winner": 1
+      },
+      "4/8": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.004229068756103516,
+        "score_max_abs": 0.007373809814453125,
+        "small_winner": 2,
+        "large_restricted_winner": 2
+      }
+    }
+  },
+  {
+    "parity": "object_t0_init22_policy2",
+    "comparisons": {
+      "2/4": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.00609201192855835,
+        "score_max_abs": 0.025150299072265625,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      },
+      "4/8": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.004820287227630615,
+        "score_max_abs": 0.024730682373046875,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      }
+    }
+  },
+  {
+    "parity": "object_t0_init26_policy2",
+    "comparisons": {
+      "2/4": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.006133675575256348,
+        "score_max_abs": 0.003551483154296875,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      },
+      "4/8": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.005826711654663086,
+        "score_max_abs": 0.01343536376953125,
+        "small_winner": 2,
+        "large_restricted_winner": 3
+      }
+    }
+  },
+  {
+    "parity": "object_t0_init23_policy2",
+    "comparisons": {
+      "2/4": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.007367491722106934,
+        "score_max_abs": 0.0155029296875,
+        "small_winner": 1,
+        "large_restricted_winner": 1
+      },
+      "4/8": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.00435638427734375,
+        "score_max_abs": 0.008068084716796875,
+        "small_winner": 3,
+        "large_restricted_winner": 3
+      }
+    }
+  },
+  {
+    "parity": "object_t0_init27_policy2",
+    "comparisons": {
+      "2/4": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.0043059587478637695,
+        "score_max_abs": 0.010284423828125,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      },
+      "4/8": {
+        "noise_prefix_exact": true,
+        "action_max_abs": 0.005851626396179199,
+        "score_max_abs": 0.01129913330078125,
+        "small_winner": 0,
+        "large_restricted_winner": 0
+      }
+    }
+  }
+]

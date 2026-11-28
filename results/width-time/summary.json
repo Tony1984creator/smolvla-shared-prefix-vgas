@@ -1,0 +1,347 @@
+{
+  "layouts": 300,
+  "bootstrap_draws": 20000,
+  "bootstrap_seed": 20261129,
+  "reference_arm": "front5",
+  "schedules": {
+    "B-BC": {
+      "label": "Single",
+      "wins": 144,
+      "episodes": 300,
+      "plan": {
+        "width": 1,
+        "scoring_slots": 0,
+        "maximum_scored_candidates": 0,
+        "maximum_extra_candidates": 0
+      },
+      "mean_queries": 10.836666666666666,
+      "mean_scoring_calls": 0,
+      "mean_candidates": 10.836666666666666,
+      "mean_extra_candidates": 0.0,
+      "mean_extra_candidates_ci95": [
+        0.0,
+        0.0
+      ],
+      "mean_episode_ms": 2281.9187856527633,
+      "paired_vs_ews": {
+        "difference_pp": -7.666666666666666,
+        "ci95_pp": [
+          -14.000000000000002,
+          -1.3333333333
+        ],
+        "rescues": 40,
+        "harms": 63
+      }
+    },
+    "front3": {
+      "label": "Bo4, q1--3",
+      "wins": 159,
+      "episodes": 300,
+      "plan": {
+        "width": 4,
+        "scoring_slots": 3,
+        "maximum_scored_candidates": 12,
+        "maximum_extra_candidates": 9
+      },
+      "mean_queries": 10.636666666666667,
+      "mean_scoring_calls": 3,
+      "mean_candidates": 19.636666666666667,
+      "mean_extra_candidates": 9.0,
+      "mean_extra_candidates_ci95": [
+        9.0,
+        9.0
+      ],
+      "mean_episode_ms": null,
+      "paired_vs_ews": {
+        "difference_pp": -2.666666666666667,
+        "ci95_pp": [
+          -5.6666666667,
+          0.3333333333
+        ],
+        "rescues": 7,
+        "harms": 15
+      }
+    },
+    "front5": {
+      "label": "EWS-5",
+      "wins": 167,
+      "episodes": 300,
+      "plan": {
+        "width": 4,
+        "scoring_slots": 5,
+        "maximum_scored_candidates": 20,
+        "maximum_extra_candidates": 15
+      },
+      "mean_queries": 10.36,
+      "mean_scoring_calls": 5,
+      "mean_candidates": 25.36,
+      "mean_extra_candidates": 15.0,
+      "mean_extra_candidates_ci95": [
+        15.0,
+        15.0
+      ],
+      "mean_episode_ms": 2201.136309445487,
+      "paired_vs_ews": {
+        "difference_pp": 0.0,
+        "ci95_pp": [
+          0.0,
+          0.0
+        ],
+        "rescues": 0,
+        "harms": 0
+      }
+    },
+    "early": {
+      "label": "Bo4, q1--7",
+      "wins": 170,
+      "episodes": 300,
+      "plan": {
+        "width": 4,
+        "scoring_slots": 7,
+        "maximum_scored_candidates": 28,
+        "maximum_extra_candidates": 21
+      },
+      "mean_queries": 10.31,
+      "mean_scoring_calls": 6.9366666666666665,
+      "mean_candidates": 31.12,
+      "mean_extra_candidates": 20.81,
+      "mean_extra_candidates_ci95": [
+        20.73,
+        20.89
+      ],
+      "mean_episode_ms": null,
+      "paired_vs_ews": {
+        "difference_pp": 1.0,
+        "ci95_pp": [
+          -1.0,
+          3.0
+        ],
+        "rescues": 6,
+        "harms": 3
+      }
+    },
+    "front10": {
+      "label": "Bo4, q1--10",
+      "wins": 169,
+      "episodes": 300,
+      "plan": {
+        "width": 4,
+        "scoring_slots": 10,
+        "maximum_scored_candidates": 40,
+        "maximum_extra_candidates": 30
+      },
+      "mean_queries": 10.33,
+      "mean_scoring_calls": 8.576666666666666,
+      "mean_candidates": 36.06,
+      "mean_extra_candidates": 25.73,
+      "mean_extra_candidates_ci95": [
+        25.29,
+        26.16
+      ],
+      "mean_episode_ms": null,
+      "paired_vs_ews": {
+        "difference_pp": 0.6666666666666667,
+        "ci95_pp": [
+          -1.3333333333,
+          2.6666666667
+        ],
+        "rescues": 6,
+        "harms": 4
+      }
+    },
+    "B-Bo4": {
+      "label": "Full Bo4",
+      "wins": 169,
+      "episodes": 300,
+      "plan": {
+        "width": 4,
+        "scoring_slots": 14,
+        "maximum_scored_candidates": 56,
+        "maximum_extra_candidates": 42
+      },
+      "mean_queries": 10.33,
+      "mean_scoring_calls": 10.33,
+      "mean_candidates": 41.32,
+      "mean_extra_candidates": 30.99,
+      "mean_extra_candidates_ci95": [
+        29.99,
+        31.99
+      ],
+      "mean_episode_ms": 2239.31934253312,
+      "paired_vs_ews": {
+        "difference_pp": 0.6666666666666667,
+        "ci95_pp": [
+          -1.3333333333,
+          2.6666666667
+        ],
+        "rescues": 6,
+        "harms": 4
+      }
+    },
+    "random": {
+      "label": "Random-seven",
+      "wins": 159,
+      "episodes": 300,
+      "plan": {
+        "width": 4,
+        "scoring_slots": 7,
+        "maximum_scored_candidates": 28,
+        "maximum_extra_candidates": 21
+      },
+      "mean_queries": 10.456666666666667,
+      "mean_scoring_calls": 5.223333333333334,
+      "mean_candidates": 26.126666666666665,
+      "mean_extra_candidates": 15.67,
+      "mean_extra_candidates_ci95": [
+        15.12,
+        16.21
+      ],
+      "mean_episode_ms": null,
+      "paired_vs_ews": {
+        "difference_pp": -2.666666666666667,
+        "ci95_pp": [
+          -8.3333333333,
+          3.0
+        ],
+        "rescues": 34,
+        "harms": 42
+      }
+    },
+    "late": {
+      "label": "Late",
+      "wins": 141,
+      "episodes": 300,
+      "plan": {
+        "width": 4,
+        "scoring_slots": 9,
+        "maximum_scored_candidates": 36,
+        "maximum_extra_candidates": 27
+      },
+      "mean_queries": 10.856666666666667,
+      "mean_scoring_calls": 5.8566666666666665,
+      "mean_candidates": 28.426666666666666,
+      "mean_extra_candidates": 17.57,
+      "mean_extra_candidates_ci95": [
+        16.57,
+        18.54
+      ],
+      "mean_episode_ms": null,
+      "paired_vs_ews": {
+        "difference_pp": -8.666666666666668,
+        "ci95_pp": [
+          -15.0,
+          -2.3333333333
+        ],
+        "rescues": 38,
+        "harms": 64
+      }
+    },
+    "bo2-full": {
+      "label": "Full Bo2",
+      "wins": 142,
+      "episodes": 300,
+      "plan": {
+        "width": 2,
+        "scoring_slots": 14,
+        "maximum_scored_candidates": 28,
+        "maximum_extra_candidates": 14
+      },
+      "mean_queries": 10.856666666666667,
+      "mean_scoring_calls": 10.856666666666667,
+      "mean_candidates": 21.713333333333335,
+      "mean_extra_candidates": 10.856666666666667,
+      "mean_extra_candidates_ci95": [
+        10.51325,
+        11.196666666667
+      ],
+      "mean_episode_ms": 2618.686104218165,
+      "paired_vs_ews": {
+        "difference_pp": -8.333333333333332,
+        "ci95_pp": [
+          -14.666666666700001,
+          -1.6666666667
+        ],
+        "rescues": 38,
+        "harms": 63
+      }
+    },
+    "bo8-front3": {
+      "label": "Bo8, q1--3",
+      "wins": 148,
+      "episodes": 300,
+      "plan": {
+        "width": 8,
+        "scoring_slots": 3,
+        "maximum_scored_candidates": 24,
+        "maximum_extra_candidates": 21
+      },
+      "mean_queries": 10.776666666666667,
+      "mean_scoring_calls": 3,
+      "mean_candidates": 31.776666666666667,
+      "mean_extra_candidates": 21.0,
+      "mean_extra_candidates_ci95": [
+        21.0,
+        21.0
+      ],
+      "mean_episode_ms": 2561.9641770701855,
+      "paired_vs_ews": {
+        "difference_pp": -6.333333333333334,
+        "ci95_pp": [
+          -12.0,
+          -0.6666666667000001
+        ],
+        "rescues": 31,
+        "harms": 50
+      }
+    },
+    "bo2-front10": {
+      "label": "Bo2, q1--10",
+      "wins": 141,
+      "episodes": 300,
+      "plan": {
+        "width": 2,
+        "scoring_slots": 10,
+        "maximum_scored_candidates": 20,
+        "maximum_extra_candidates": 10
+      },
+      "mean_queries": 10.86,
+      "mean_scoring_calls": 8.733333333333333,
+      "mean_candidates": 19.593333333333334,
+      "mean_extra_candidates": 8.733333333333333,
+      "mean_extra_candidates_ci95": [
+        8.583333333333,
+        8.883333333333
+      ],
+      "mean_episode_ms": 2613.2607816470168,
+      "paired_vs_ews": {
+        "difference_pp": -8.666666666666668,
+        "ci95_pp": [
+          -15.0,
+          -2.0
+        ],
+        "rescues": 38,
+        "harms": 64
+      }
+    }
+  },
+  "exploratory_near_budget": {
+    "front3_vs_bo2-front10": {
+      "difference_pp": 6.0,
+      "ci95_pp": [
+        -0.3333333333,
+        12.3333333333
+      ],
+      "rescues": 57,
+      "harms": 39
+    },
+    "early_vs_bo8-front3": {
+      "difference_pp": 7.333333333333333,
+      "ci95_pp": [
+        1.6666666667,
+        13.333333333299999
+      ],
+      "rescues": 52,
+      "harms": 30
+    }
+  }
+}
