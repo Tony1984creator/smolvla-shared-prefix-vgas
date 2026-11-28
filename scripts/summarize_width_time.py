@@ -158,6 +158,10 @@ def formats(data):
         values[f"K{tag}Extra"] = f'{row["mean_extra_candidates"]:.2f}'
         if arm != "front5":
             values[f"K{tag}Delta"] = f'{row["paired_vs_ews"]["difference_pp"]:+.2f}'
+    win_tags = {"B-BC": "Single", "B-Bo4": "BoFour",
+                "bo2-full": "TwoFull", "bo2-front10": "TwoFront"}
+    for arm, tag in win_tags.items():
+        values[f"K{tag}Wins"] = str(schedules[arm]["wins"])
     near = data["exploratory_near_budget"]["early_vs_bo8-front3"]
     values["KSevenExtra"] = f'{schedules["early"]["mean_extra_candidates"]:.2f}'
     values["KNearDelta"] = f'{near["difference_pp"]:+.2f}'

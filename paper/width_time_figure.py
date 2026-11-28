@@ -28,8 +28,8 @@ def draw():
     def anchor(row):
         return (row["mean_extra_candidates"], 100 * row["wins"] / row["episodes"])
 
-    fig, ax = plt.subplots(figsize=(WIDTH, 2.43))
-    fig.subplots_adjust(left=.115, right=.973, top=.80, bottom=.20)
+    fig, ax = plt.subplots(figsize=(WIDTH, 2.23))
+    fig.subplots_adjust(left=.115, right=.973, top=.87, bottom=.218)
     ax.plot(*zip(*(anchor(rows[arm]) for arm in CURVE)), color=COLORS["dense"], alpha=.55,
             linewidth=.9, label="Bo4 prefix sweep", zorder=1)
     for arm, row in rows.items():

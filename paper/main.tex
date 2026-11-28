@@ -22,7 +22,7 @@ Best-of-four (Bo4) action selection can improve vision-language-action
 policies at test time. We freeze the SmolVLA actor and VGAS critic and
 vary when to sample multiple proposals. Early-window selection (EWS)
 beats Late by \JLateGain{} percentage points on paired LIBERO-Object
-layouts and outperforms three alternative width and timing schedules.
+layouts and outperforms three alternative schedules on the Object calibration layouts.
 It matches full selection within a prespecified point-estimate tolerance
 across the tested cohorts, halves four-way calls, and saves
 \JGraphSaving\% of A100 core inference time per episode under warm
@@ -166,7 +166,12 @@ At \KEwsExtra{} realized extra proposals per episode, EWS-5 outperforms
 full Bo2 (\KTwoFullExtra{} extras, \KTwoFullDelta{} pp relative to EWS-5),
 Bo2 for ten queries (\KTwoFrontExtra{}, \KTwoFrontDelta{} pp), and Bo8 for
 three queries (\KEightFrontExtra{}, \KEightFrontDelta{} pp).
-All three paired 95\% intervals exclude zero (Table~\ref{tab:width-time}). Figure~\ref{fig:width-time} shows the trade-off across all tested schedules.
+All three paired 95\% intervals exclude zero (Table~\ref{tab:width-time}).
+We selected \(K\) on this cohort, so comparisons with EWS-5 may favor it.
+Full Bo2 and ten-query Bo2 won \KTwoFullWins{} and \KTwoFrontWins{} episodes.
+Both show no detectable gain over Single (\KSingleWins{} wins) and trail
+full Bo4 (\KBoFourWins{} wins). Figure~\ref{fig:width-time} shows the
+trade-off across schedules.
 In an exploratory near-budget comparison, Bo4 for seven queries
 (\KSevenExtra{} extras) exceeds Bo8 for three (\KEightFrontExtra{}) by
 \KNearDelta{} pp [\KNearCI{}].
@@ -180,9 +185,16 @@ reached query.}{fig:width-time}
 
 \textbf{Takeaway.} EWS retains the full schedule's observed success
 within the stated point-estimate criterion while reducing calls in the
-tested cohorts. On Object, Bo8 for three queries costs more than EWS-5 and succeeds less often.
+tested cohorts. On Object, the weak Bo2 results and the lower success of
+Bo8 for three queries versus Bo4 for seven are consistent with the
+mechanism in Section~\ref{sec:mechanism}: selection needs mixed outcomes
+and the critic only weakly ranks proposals within those pools
+(AUC \JRankAUC{}). Full Bo8 also had fewer
+wins than full Bo4 in the archived P4 Object batch on the same layouts
+and seeds (161 versus 169, November 18, 2026).
 
 \subsection{RQ3. What changes along the reference trajectory?}
+\label{sec:mechanism}
 Why can selection help at some queries and little at others? We execute
 each archived proposal independently at the first three queries of the
 reference policy, then follow the same single-proposal continuation.
@@ -256,7 +268,7 @@ arithmetic uses unpacked weights.
 \item The actor, critic and results are scoped to the released VGAS
 configuration in LIBERO, including one development-selected Long task.
 \item We vary both proposal width and selection timing only on the
-Object calibration cohort. The widths and windows have unequal
+Object calibration cohort used to select \(K\). The schedules have unequal
 realized budgets, with two exploratory comparisons at nearby costs.
 \item The retention rule uses point estimates, and the intervals
 describe uncertainty in paired differences.
