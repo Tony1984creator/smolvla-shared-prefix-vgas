@@ -1,457 +1,332 @@
-\documentclass[10pt,twocolumn]{article}
-\usepackage[letterpaper,margin=.72in,columnsep=.23in]{geometry}
-\usepackage{amsmath,booktabs,graphicx}
-\usepackage[hidelinks]{hyperref}
+\documentclass{article}
+\usepackage[T1]{fontenc}
 \IfFileExists{paper/metrics.tex}{\newcommand{\paperdir}{paper/}}{\newcommand{\paperdir}{}}
+\usepackage[preprint,nonatbib]{\paperdir neurips_2025}
+\usepackage{amsmath,booktabs,graphicx,tabularx}
+\usepackage[hidelinks]{hyperref}
 \input{\paperdir metrics.tex}
-\newcommand{\placeholder}[1]{\texttt{[#1]}}
-\title{Allocating Test-Time Compute in SmolVLA: A100 System Characterization and Early-Window Selection}
-\author{\placeholder{Author list}\\\placeholder{Affiliations}}
-\date{\placeholder{Target venue and submission format}}
-\renewcommand{\dbltopfraction}{.85}
-\setcounter{dbltopnumber}{3}
-\renewcommand{\dblfloatpagefraction}{.65}
-\raggedbottom
+\input{\paperdir submission-metrics.tex}
+\newcommand{\paperfigure}[4]{%
+  \begin{figure}[#1]\centering
+  \includegraphics{\paperdir figures/#2.pdf}
+  \caption{#3}\label{#4}
+  \end{figure}}
+\title{Spend Selection Early: Allocating Test-Time Compute Across the Episode for Vision-Language-Action Policies}
+\author{Anonymous Authors}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Frozen VGAS four-proposal selection on SmolVLA improved observed paired success over a single proposal on LIBERO-Object and LIBERO-Long Task2. We estimate block-level marginal gains along the episode and use them to calibrate a static early-window allocation. Using four proposals only at early queries retained observed full-selection success within a 3 percentage point tolerance on new Object starts and Long Task2, cutting four-way calls by 51.5\% and 58.6\%, respectively. Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls.
-The preregistered one-third rule met both point-estimate criteria on LIBERO-Goal and LIBERO-Spatial, and the five-query window matched full Bo4 success on a fixed LIBERO-Plus lighting cohort.
-On A100, prefix sharing reduced eager four-proposal decision time from 272
-to 217 ms. In paired closed-loop CUDA Graph rollouts on 200 Object layouts,
-early-window selection and full selection each succeeded in 110 episodes
-(paired difference 0.0 pp, 95\% interval [$-2.0$, $2.0$]). The early window
-reduced mean core inference from 944 to 859 ms per episode (9.0\%).
+Best-of-four (Bo4) action selection can improve robot policies at test time,
+but a fixed per-query budget treats every observation as equally valuable.
+With a frozen SmolVLA actor and VGAS critic, we find that the front window
+outperforms late selection by \JLateGain{} percentage points on paired
+LIBERO-Object layouts. Early-window selection (EWS) uses four proposals
+only for an initial fraction of the query budget and uses one thereafter.
+It retains full-selection success within a prespecified point-estimate
+tolerance across the tested LIBERO cohorts, cuts four-way calls by about
+half, and saves \JGraphSaving\% of A100 core inference per episode in
+matched CUDA Graph rollouts.
 \end{abstract}
 
-\section{Introduction}
-A vision-language-action policy turns camera images, an instruction and robot
-state into a sequence of actions. Under limited adaptation data, different
-proposals from the same actor can lead to different outcomes. A critic can
-choose among them. An efficient implementation must account for both proposal
-generation and scoring. The observation stays fixed within a query, while each
-proposal starts from independent noise.
+\paperfigure{!ht}{teaser}{\textbf{Selection early in an episode.}
+(a) Recorded frames from one EWS rollout. The strip shows every reached
+query. (b) With warm CUDA Graph replay on Object, EWS and full Bo4 both
+succeeded in \JGraphWins{} episodes. EWS used less core inference time.}{fig:teaser}
 
-Using the released SmolVLA actor and VGAS critic \cite{smolvla,vgas}, we observe paired success gains from four-way selection on Object and Long Task2 in the same LIBERO simulator. We characterize the marginal gains of expanding a selection prefix and use the resulting curve to allocate scoring calls. Fixed early windows retain the full schedule's observed success within the prespecified point-estimate tolerance while cutting scoring calls by about half, and the Late control measures the effect of delaying selection on Object. Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls.
-We measure the cost of shared-prefix inference on A100 and test whether the
-early window still saves inference time when all schedules use CUDA Graph
-replay. A separate INT8 evaluation measures persistent critic storage.
+\section{Introduction}
+A test-time critic can improve action selection at the cost of generating
+and scoring more proposals. We ask when to spend that compute.
+Our contributions are:
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item We estimate marginal gains and compare early with delayed selection
+on paired layouts.
+\item We evaluate a static allocation across LIBERO suites and Plus lighting,
+with prospective criteria on Goal and Spatial.
+\item We decompose fixed-state branch gains and measure shared-prefix
+and CUDA Graph costs on A100.
+\end{itemize}
 
 \section{Related Work}
-Value-Guided Policy Steering reranks actions using an offline-trained value
-function \cite{vgps}. RoboMonkey studies test-time sampling and verification
-for robot policies \cite{robomonkey}. VGAS provides the action-chunk critic
-and scoring rule that we use \cite{vgas}. Q-Guided Flow and Guided Action
-Flow use critic gradients during action generation \cite{qgf,gaf}.
-Our evaluation compares completed chunks under a frozen selection rule.
+\paragraph{Test-time selection for VLAs.}
+Value guidance reranks actions from pretrained robot policies
+\cite{vgps,robomonkey}. VGAS provides the action-chunk critic and scoring
+rule used here \cite{vgas}. QGF and Guided Action Flow use critic
+gradients during action generation \cite{qgf,gaf}. We hold the
+generator and scoring rule fixed and intervene on when selection runs.
 
-Zora shares attention keys and values for autoregressive proposal verification.
-PACT-VLA shares context while scoring proposals under a newer observation
-\cite{zora,pact}. Adaptive decoding in diffusion driving VLAs targets the
-denoising budget itself \cite{early}. CUDA Graphs can reduce repeated host
-dispatch by replaying captured diffusion workloads \cite{graphs}. These
-precedents motivate our measurement of how execution scheduling and proposal
-batch size interact when a flow actor feeds a learned critic.
+\paragraph{Efficient VLA inference.}
+Zora reuses attention keys and values for autoregressive proposal
+verification, and PACT-VLA shares context when scoring candidates
+\cite{zora,pact}. CUDA Graph replay reduces repeated dispatch in diffusion
+workloads \cite{graphs}. We measure observation reuse, replay and
+selection allocation with matched inference controls.
 
-ELASTIC learns how to vary denoising steps and candidate count with
-robot state \cite{elastic}. EWS allocates a fixed-size candidate pool
-across queries in an episode and can be combined with within-query
-compute allocation.
+\paragraph{Adaptive compute allocation.}
+Adaptive decoding varies the work done within each call
+\cite{early,elastic}. VLA-Corrector adjusts the action execution
+horizon \cite{corrector}. EWS holds the execution horizon fixed and
+assigns the candidate budget across calls.
 
-\section{Method}
-Figure~\ref{fig:overview} follows one control query from observation to execution.
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{\paperdir figures/method-overview.pdf}
-\caption{Shared-prefix inference and early-window selection. (a) Two views
-from a recorded LIBERO-Object observation. One encoder pass supplies the
-actor's attention cache and the critic's observation features.
-The critic scores the first 32 proposed actions on Object and 50 on Long.
-The executor commits up to 20 actions, then observes again. (b) On Object,
-EWS-5 uses four proposals at queries 1--5. Subsequent queries use one
-proposal and skip the critic. Episodes can terminate before query 14.}
-\label{fig:overview}
-\end{figure*}
-\input{\paperdir algorithm.tex}
+\section{Early-window selection}
+\paperfigure{!ht}{method-overview}{\textbf{One observation, several proposals.}
+(a) Two camera views from a recorded Object query. The shared encoding supplies
+the actor's attention cache and the critic's observation features.
+(b) On Object, EWS uses Bo4 at the highlighted queries and a single proposal
+at each subsequent reached query.}{fig:overview}
 
-\subsection{Allocating selection calls}
-\label{sec:allocation}
-Let $S\subseteq\{1,\ldots,N_{\max}\}$ be the planned four-way
-queries, with a budget $|S|\le B$. Queries outside $S$ use one proposal
-and skip the critic. Each reached query executes up to 20 environment
-steps. Early termination can leave some planned slots unused.
+We use the released five-shot SmolVLA actor and VGAS critic
+\cite{smolvla,vgas}. Bo4 draws independent noise for four
+chunks and selects the chunk with the highest minimum of the two critic
+scores. Each query predicts 50 actions and executes at most 20; the Object
+critic scores the first 32, while the Long critic scores all 50.
+The shared implementation encodes the observation once, reuses the KV
+cache for denoising, and passes observation features to the critic.
+A one-proposal query skips the critic.
 
-Write $F(S)$ for the success rate under schedule $S$ and let
-$S_K=\{1,\ldots,K\}$. We calibrate the curve on paired development
-rollouts. For adjacent tested cutoffs $a<b$, the block estimate is
-$\widehat F(S_b)-\widehat F(S_a)$, with an interval from paired episode
-differences. Dividing by $b-a$ gives a descriptive mean per planned slot
-in that block. The early-window selection (EWS) rule chooses the smallest
-tested $K$ that captures the full-schedule gain minus a 3 pp tolerance,
-using the prespecified absolute 3 pp point-estimate check in evaluation.
-
-Under an additive surrogate with nonincreasing per-query gains, the
-earliest $B$ queries maximize the surrogate among equal-cost schedules of
-size $B$. The measured gains are conditional on the tested prefixes.
-EWS uses their observed differences to calibrate a static schedule.
-
-\input{\paperdir tables/closed-loop.tex}
-
-\section{System Design and Measurement}
-The shared encoding produces attention keys and values for the actor and
-observation features for the twin critic. Each candidate retains its own
-denoising trajectory through the Euler updates. The critic evaluates the pool
-as a batch and the executor slices out and postprocesses the selected candidate.
-A new observation refreshes the prefix.
-
-For the fixed-shape experiment we capture the denoising loop and refresh its KV
-cache, mask, noise and time scalars before each replay. The surrounding decision
-remains eager. Full-decision timing includes encoding, generation, scoring and
-selection. The fixed-observation replay scope excludes preprocessing,
-postprocessing, simulation and one-time capture. The experiment alternates
-matched eager and replay runs after warm-up. Strict FP32 checks disable TF32
-and compare returned actions, critic scores and winner indices.
-For closed-loop replay, we use the same 200 physical Object layouts as the
-eager fresh-start study. Single, full Bo4 and EWS-5 share the actor, seeds,
-and shape-specific graphs at width one or four. Each width captures the
-ten expert iterations. Each worker cycles through all six arm orders across
-layouts. Two workers share each A100 80 GB PCIe. Measurements exclude the
-first graph call and simulator stepping, and include refreshing the graph
-inputs on every decision.
+Let \(S_K=\{1,\ldots,K\}\) within a cap \(N_{\max}\), and let
+\(\widehat F(S_K)\) be the paired cohort success rate for that schedule.
+For adjacent tested cutoffs \(a<b\), the block increment is
+\(\widehat F(S_b)-\widehat F(S_a)\). EWS chooses the smallest tested
+cutoff whose point estimate is within 3 percentage points of full Bo4.
+The selected Object cutoff motivates the one-third rule
+\(K=\operatorname{round}(N_{\max}/3)\), evaluated prospectively on Goal
+and Spatial. Long Task2 uses its development-calibrated window. Early
+termination can change realized call counts.
 
 \section{Evaluation}
-\subsection{Closed-loop outcomes}
-We pair by physical layout and policy noise. Layout-level resampling keeps
-repeated noises together within a physical layout. Table~\ref{tab:closed-loop}
-compares shared Bo4 with the single-proposal and same-width original comparators.
-The lighting condition is a secondary perturbation check. Its familywise
-interval spans zero. The confirmed Object cohort comes from the corrected
-executor. An earlier wrapper always dispatched candidate zero, so that batch
-is excluded from the evidence.
+We pair by physical layout and policy noise; bootstrap intervals resample
+whole layouts within task, with repeated noises kept together. Single uses
+one frozen SmolVLA proposal. Full Bo4 applies the released critic at every
+query. The late comparator starts scoring after the early window; its
+realized dose can differ. The cohorts use the LIBERO simulator
+\cite{libero} and its fixed lighting variants.
 
-\input{\paperdir tables/scaling.tex}
+\subsection{RQ1. Where does selection improve success?}
+How do gains change as we extend the early window? The calibrated window
+captures \JCapture\% of the observed full-selection gain on Object with
+\JCallShare\% of its realized four-way calls. Later blocks add little
+observed success; their small increments do not form a strictly
+monotone curve.
 
-\subsection{Early-window scheduled selection}
-\label{sec:scheduled}
-We keep the actor, critic and execution horizon fixed. Episodes allow
-up to 14 queries on Object and 26 on Long Task2.
+\paperfigure{!ht}{marginal-value}{\textbf{Marginal and cumulative value on Object.}
+(a) Adjacent-prefix success increments with paired 95\% intervals.
+(b) Cumulative gain and realized calls relative to full Bo4. The Late
+point uses planned slots and shows its gain relative to single. The
+cumulative gain can exceed the full-schedule point estimate.}{fig:marginal-value}
 
-\input{\paperdir tables/scheduled-selection.tex}
-\begin{figure}[tb]
-\centering
-\includegraphics[width=\columnwidth]{\paperdir figures/scheduled-dose.pdf}
-\caption{LIBERO-Object dose sweep on 300 paired layouts. Error bars are
-descriptive paired 95\% intervals. The dashed line scales the full
-schedule's gain by $K/14$. The random-seven policy samples seven
-positions before acting. Late schedules nine positions starting at query 6. Both stop on termination.}
-\label{fig:scheduled-dose}
-\end{figure}
-\begin{figure*}[t]
-\centering
-\includegraphics[width=.87\textwidth]{\paperdir figures/marginal-value.pdf}
-\caption{Object selection increments for adjacent tested prefixes
-on 300 paired layouts. Left: block success differences with descriptive
-95\% intervals resampling layouts within task. Right: cumulative gain
-over one proposal as a share of the full Bo4 gain. The share exceeds
-100\% at seven queries because that arm had one more success than full Bo4.}
-\label{fig:marginal-value}
-\end{figure*}
+Across the two paired Object cohorts, early selection outperforms Late
+by \JLateGain{} pp (Table~\ref{tab:late-paired}). The intervention changes the
+schedule and its realized number of four-way calls. Late used more calls
+in this comparison, so the contrast answers whether the early policy
+outperformed the tested delayed policy.
+\par\textbf{Takeaway.} The tested early queries accounted for most of the
+observed selection gain.
 
-Table~\ref{tab:scheduled} summarizes the paired outcomes. On the
-300-layout calibration cohort, we chose the smallest tested
-$K$ whose success-rate point estimate fell within 3 percentage points
-of full selection. This is EWS's cutoff calibration procedure. This cohort overlaps with a 50-layout pilot that
-motivated the sweep. The block increments for queries 1--3, 4--5,
-6--7, 8--10 and 11--14 were $+5.00$, $+2.67$, $+1.00$, $-0.33$ and
-$0.00$ pp, respectively (Fig.~\ref{fig:marginal-value}). The late
-change from $-0.33$ to $0.00$ pp breaks strict monotonicity in the
-point estimates, and the last two intervals touch or collapse to zero.
-The first five captured 92\% of the observed full-Bo4 gain while using
-48.4\% of its realized four-way calls. The first five reached 167/300
-successes versus 169/300 with full Bo4 and 144/300 with one proposal.
-Four-way calls fell from 3,099 to 1,500 (51.6\%) and generated chunks
-from 12,396 to 7,608 (38.6\%). First-ten agreed with full Bo4 on all
-300 terminal outcomes. First-seven versus random-seven was
-$+3.67$ pp $[-2.00,9.33]$. Random-seven gained $+5.00$ pp over
-single, or 0.71 pp per planned slot when averaged across its
-seven-slot quota. Those policies realized 2,081 and 1,567
-calls, respectively, leaving timing effects at equal realized cost
-unresolved.
+\subsection{RQ2. How well does the allocation transfer across suites?}
+Can EWS preserve the observed full-selection rate while saving calls?
+The new Object layouts and Long Task2 meet the retention criterion.
+Goal and Spatial meet both preregistered point-estimate criteria. The
+fixed Plus lighting cohort retains the full-Bo4 count using the Object
+window. Table~\ref{tab:cohorts} shows paired differences and the
+realized budget across cohorts.
 
-On 200 new Object layouts disjoint from both the pilot and calibration
-cohorts, first-five and full Bo4 each succeeded 110 times
-($0.00$ pp $[-2.00,2.00]$), with two outcome changes in each direction.
-Calls fell from 2,061 to 1,000. Relative to the single-proposal control
-(98/200), the difference was $+6.00$ pp $[-2.00,14.00]$.
+\input{\paperdir tables/cohorts.tex}
+\paperfigure{!ht}{cross-suite}{\textbf{Scheduled selection across cohorts.}
+Bars show observed success with marginal, task-stratified 95\% layout
+intervals. Values beneath the axis are EWS call reductions relative to
+full Bo4. Missing Late bars indicate untested arms. Table~\ref{tab:cohorts}
+reports paired differences.}{fig:cohorts}
 
-The delayed control used one proposal at queries 1--5 and Bo4 thereafter. On calibration, Late succeeded 141/300 times and used 1,757 four-way calls, versus 167/300 and 1,500 calls for first-five. Its change from single-proposal control was -1.00 pp [-2.67, 0.67]. First-five versus Late was +8.67 pp [2.33, 15.00]. On fresh starts, Late succeeded 98/200 times and used 1,136 calls, versus 110/200 and 1,000 for first-five. First-five versus Late was +6.00 pp [-2.00, 14.00]. Late showed no positive point-estimate gain over one proposal on either cohort.
+\textbf{Takeaway.} EWS retains the full schedule's observed success
+within the stated point-estimate criterion while reducing calls in the
+tested cohorts.
 
-Across 500 paired Object layouts, first-five outperformed Late (+7.60 pp [2.60, 12.60]), with 2,500 versus 2,893 realized four-way calls. The combined percentile interval resamples physical layouts within task and cohort. Calibration helped choose the cutoff, and the fresh comparison is reported separately. Realized calls depend on episode termination. We did not match realized call counts exactly.
+\subsection{RQ3. What changes along the reference trajectory?}
+Why can selection help at some queries and little at others? We execute
+each archived proposal independently at the first three queries of the
+reference policy, then follow the same single-proposal continuation.
+An anchor is mixed when some branches succeed and others fail. We
+factor critic gain over uniform choice into the mixed-pool fraction, the
+conditional oracle gap and the fraction of that gap captured. Unanimous
+pools contribute zero.
 
-We evaluated the proportional rule prospectively on ten LIBERO-Goal tasks, using 300 official starts paired across all four arms. With a 300-step cap and at most 20 actions per query, the preregistered cutoff was $K=\operatorname{round}(15/3)=5$. We used the released Goal critic and the shared actor. The four arms (single, full Bo4, EWS-5 and Late-5) succeeded 145, 165, 159, 138/300 times, respectively. EWS-5 minus full was -2.00 pp [-6.00, 2.00], with 1,484 versus 2,996 four-way calls. Late minus single was -2.33 pp [-6.33, 1.67], with 1,751 four-way calls. The one-third rule met both prespecified point-estimate criteria on Goal. Initial physics and seeds were identical across arms, while the first wrist image could differ by up to two pixel levels. EWS and full Bo4 chose the same first winner on 293/300 starts. Goal provides a paired schedule comparison, with rendering variability in the common prefixes.
+\paperfigure{!ht}{mechanism}{\textbf{Decomposing fixed-pool gains.}
+(a) Fraction of mixed pools and the oracle gap to uniform choice within
+mixed pools. (b) Fraction of the gap captured by the critic.
+(c) Reconstructed critic gain, equal to the observed difference from
+uniform choice, with paired 95\% intervals. Each query uses archived
+reference states and a single shared continuation schedule.}{fig:mechanism}
 
-On ten LIBERO-Spatial tasks we preregistered $K=\operatorname{round}(14/3)=5$ and paired 300 official starts using the released Spatial critic and shared actor. Single, full Bo4, EWS-5 and Late-5 succeeded in 131, 142, 141 and 131 episodes, respectively. Full Bo4 gained $+3.67$ pp $[-2.67,10.00]$ over one proposal. Even with this smaller observed gain, EWS-5 met the retention criterion ($-0.33$ pp $[-5.00,4.33]$ versus full) and halved four-way calls (1,491 versus 3,046). Late-5 met the practical tolerance versus one proposal ($0.00$ pp $[-4.00,4.00]$).
+Mixed pools become less frequent from the second to the third query.
+The critic's within-state AUC is \JRankAUC{}, and the hindsight oracle
+exceeds the critic by \JOracleGap{} pp. The oracle knows the recorded
+continuation outcome. The branch sum and the closed-loop dose increment
+are similar in scale, with different interventions and visited states
+\cite{wamheadroom,wambeyond}.
+\par\textbf{Takeaway.} Both candidate outcome variation and scoring
+quality constrain the observed value of choosing among proposals.
 
-With fixed LIBERO-Plus lighting variants, EWS-5 reused 300 Object starts with archived single and full Bo4 controls. First-five and full Bo4 each succeeded in 123 episodes (single: 100/300). The paired EWS-minus-full difference was $0.00$ pp $[-2.00,2.00]$ and four-way calls fell from 3,376 to 1,500 (55.6\%). The observed retention pattern spans four suite settings and a perturbation cohort, with cutoffs set for the tested horizons.
+\subsection{RQ4. What does selection cost on A100?}
+How much latency can sharing within a query and allocating across queries
+save? In paired eager Object rollouts, sharing reduces Bo4's mean decision
+time from \OriginalTime{} to \SharedTime{} ms. The fixed-observation study
+then captures the ten-step denoising loop and refreshes its KV cache,
+mask, noise and time scalars at replay.
 
-For Long Task2 we set a separate eight-query window from development
-observations of the longer task horizon. The two cutoffs use roughly a third of their query caps (5/14 and 8/26). First-eight and full Bo4
-succeeded in 127/256 and 124/256 episodes, respectively
-($+1.17$ pp $[-5.08,7.42]$). Relative to the single-proposal control
-(93/256), the difference was $+13.28$ pp $[7.03,19.53]$. Calls fell
-from 4,949 to 2,048 (58.6\%) and chunks from 19,796 to 11,077
-(44.0\%). The fresh Object and Long Task2 comparisons are within the 3 pp
-point-estimate tolerance. The schedule reduces the number of
-four-way queries, and prefix sharing reduces work within a query.
+\paperfigure{!ht}{system-cost}{\textbf{Independent A100 measurements.}
+(a) Eager Object rollout means for the same candidate width.
+(b) Fixed-observation full-decision medians under matched eager and Graph
+execution. The remainder is the full median minus the expert median.
+(c) Persistent critic storage including quantization scales.}{fig:system}
 
-\input{\paperdir tables/episode-cost.tex}
-Table~\ref{tab:episode-cost} reports episode totals for the earlier eager
-rollouts. EWS and single-proposal core inference averaged 2,201 and
-2,282 ms on Object calibration, 2,184 and 2,260 ms on fresh Object, 4,399
-and 5,165 ms on Long Task2, and 2,136 and 2,373 ms on Spatial. The Plus
-lighting means were 2,377 and 2,388 ms in separate rollout batches. On
-Goal, EWS averaged 2,943 ms and single proposal 2,595 ms. Episode totals
-depend on the number of queries reached and the cost of each query.
-
-\subsection{Decision latency and critic storage}
-Across Object rollout decisions, mean latency is \BaselineTime{} ms for one
-proposal, \OriginalTime{} ms for original Bo4 and \SharedTime{} ms for shared
-Bo4. Table~\ref{tab:scaling} uses a separate fixed-observation protocol with
-the critic active at every candidate count. Table~\ref{tab:precision} reports
-winner agreement and paired Object outcomes with packed critic matrices.
-The storage counts include scales. Computation uses unpacked weights.
-
-\input{\paperdir tables/graph.tex}
-
-\input{\paperdir tables/profile.tex}
-
-\input{\paperdir tables/precision.tex}
-
-\subsection{Denoising schedule}
-Figure~\ref{fig:stages} and Table~\ref{tab:profile} show that action generation
-dominates eager stage time, while vision and prefix account for a substantial
-fraction of registered FLOPs. Logical activation and parameter bytes provide
-modeling inputs. Physical DRAM traffic remains unmeasured.
-
-Graph replay reduces expert time by \ExpertReduction\% at four candidates.
-Figure~\ref{fig:decision} and Table~\ref{tab:graph} show that the latency
-increase with candidate count is more visible after replay. The reduction
-captures graph-removable elapsed time on this software stack, including host
-dispatch and device scheduling effects. In the \FpChecks{} strict FP32
-comparisons, actions, scores and selected indices agreed.
-
-\begin{figure}[tb]
-\centering
-\includegraphics[width=\columnwidth]{\paperdir figures/decision-latency.pdf}
-\caption{Matched eager and CUDA Graph decisions on a fixed Object observation.
-Input refresh is included. One-time capture is excluded.}
-\label{fig:decision}
-\end{figure}
-\begin{figure}[tb]
-\centering
-\includegraphics[width=\columnwidth]{\paperdir figures/stage-latency.pdf}
-\caption{Eager stage profile on A100. Stacks sum separately measured stage medians.}
-\label{fig:stages}
-\end{figure}
-
-\subsection{Closed-loop CUDA Graph replay}
+Matched warm Graph rollouts on the new Object layouts give both EWS and
+full Bo4 \JGraphWins{} successes. EWS reduces mean core inference per
+episode by \JGraphSaving\% versus full Bo4. Table~\ref{tab:graph-rollout}
+gives all three arms and Appendix~\ref{app:systems} reports paired
+intervals. Core timing includes prefix encoding, graph input refresh,
+generation and scoring where applicable. One-time capture, simulator
+stepping and pre/postprocessing are outside this measurement.
 
 \input{\paperdir tables/graph-rollout.tex}
+\textbf{Takeaway.} Sharing saves work within Bo4, and the early window
+saves episode inference time against full Bo4 on the same Graph path.
 
-Table~\ref{tab:graph-rollout} gives the paired results with warm replay at
-both candidate widths. EWS-5 and full Bo4 succeeded in 110/200 episodes
-each ($0.00$ pp [$-2.00$, $2.00$]) and reached the same total number of
-queries. EWS-5 reduced four-way calls from 2,061 to 1,000 (51.5\%) and
-core inference from 943.96 to 859.41 ms per episode (9.0\%,
-$-84.55$ ms [$-103.24$, $-66.24$]). Relative to single, EWS-5 gained
-$6.00$ pp [$-2.00$, $14.00$] and spent $34.22$ ms more per episode on
-average [$-8.79$, $76.83$] (Fig.~\ref{fig:graph-rollout}).
-The intervals resample whole layouts within task. All 600 terminal
-outcomes and query counts matched their archived eager counterparts.
-The Graph and eager measurements ran in separate batches.
+\section{Discussion and limitations}
+\paragraph{Selection and perturbations.}
+In the matched Plus lighting diagnostic, the actor changes its
+same-noise chunks and the scorer changes the winner on \JLightFlip{}
+fixed lighting-generated pools. On replayable anchors enriched for
+flips, lighting scoring selects fewer successful branches
+(\JLightDiff{} pp, descriptive 95\% interval \JLightCI). These are local
+branch effects under the tested continuation.
 
-\begin{figure*}[tb]
-\centering
-\includegraphics[width=.90\textwidth]{\paperdir figures/graph-closed-loop.pdf}
-\caption{Closed-loop replay on the same 200 Object layouts.
-Points indicate mean paired differences relative to full Bo4. Whiskers
-are task-stratified paired 95\% bootstrap intervals. Lower inference
-time is favorable.}
-\label{fig:graph-rollout}
-\end{figure*}
+\paragraph{Where compression helps.}
+Narrowing the action-expert feed-forward layers reduces full-decision
+Graph medians by \JPruneOnly\%, or \JPruneCache\% with cross-step K/V
+projection reuse. The test measures timing on archived observations.
+Attribution to attention, memory movement or scheduling requires
+operator-level evidence. Critic packing reduces persistent storage;
+arithmetic uses unpacked weights.
 
-\section{Discussion and Limitations}
-The flat eager curve describes the measured execution regime. Replay removes
-substantial scheduling cost and reveals increased incremental cost for wider
-batches. Determining how much comes from individual launches would require
-kernel-level traces. All timing is on A100. Target-chip latency, bandwidth
-and energy remain open. The closed-loop Graph comparison measures core
-inference under the shared A100 runtime. The simulator and action
-postprocessing are outside the timing scope.
-
-In a separate A100 timing ablation, removing 25\% of the action-expert
-feed-forward channels reduced full Bo4 Graph decision medians by
-0.87--1.20\% across two interleaved blocks. Reusing cross-attention key
-and value projections across denoising steps brought the combined
-reduction to 1.77--2.33\%. The small reductions show that a large FFN
-width change can yield little full-decision savings in this execution
-regime. Attention, memory movement and scheduling are plausible sources
-of remaining cost. Their contributions require kernel-level timing.
-In the matched closed-loop Graph comparison, reducing the number of Bo4
-queries saved 9.0\% of core inference per episode relative to full Bo4.
-The pruning results measure latency on archived observations.
-
-Three measurements support a near-flat late region. In the Object
-dose sweep, extending the prefix beyond query 7 added little observed
-success. The separate Late intervention activated scoring after query 5
-and used more calls than EWS-5, with no positive point-estimate gain
-over single on either Object cohort. Goal and Spatial replicated this
-coarse early-versus-late comparison, with only two temporal blocks.
-In a prior Long Task2 timing study, only one episode that reached query
-16 ultimately succeeded. That observation conditions on surviving to
-query 16. A shorter remaining horizon and earlier accumulated errors
-could both make late recovery harder.
-
-Exploratory score-gated windows and disagreement-penalized selection
-yielded lower success point estimates than the fixed window in their
-respective matched simulations. Appendix~\ref{app:score-drift} reports
-the score diagnostics that motivated those tests. The full marginal
-shape and cutoff outside the tested settings remain open.
-
-The released critic captures part of the observed fixed-pool advantage.
-We branched four candidates at each of the first three queries along
-the released critic's selected trajectory on 300 Object calibration
-layouts. With one-proposal continuation, 370 of 900 anchors (41.1\%)
-had both successful and unsuccessful candidates. The original critic's
-query-macro ranking AUC on those anchors was 0.55. Across all anchors,
-the critic-selected branch succeeded 52.33\% of the time, compared
-with 49.72\% in expectation under uniform selection. An oracle choosing
-a successful branch when available reached 69.56\%, a paired gap of
-17.22 pp [14.78, 19.78]. This is a hindsight gap for a single shared
-continuation noise schedule at each reference anchor. Any reusable ranking
-advantage depends on whether candidate quality persists across independent
-continuations \cite{wamheadroom,wambeyond}. In closed loop, repeatedly
-selecting different actions can change which states the policy visits.
-
-The branch gain over uniform factors into the fraction of mixed pools,
-the mean oracle gap within those pools, and the share of that gap
-captured by the critic. Unanimous pools contribute zero. At queries
-1--3, mixed pools account for 43.0\%, 49.0\% and 31.3\% of anchors,
-and the critic captures 10.2\%, 17.7\% and 10.1\% of the available
-gap, respectively. The resulting gains are 2.17, 4.17 and 1.50 pp,
-summing to 7.83 pp across the three anchors. The closed-loop
-first-three versus single contrast is 5.00 pp. The two numbers
-have the same order of magnitude and measure different interventions.
-The mixture rate falls from query 2 to 3 in eight of ten tasks.
-Fewer mixed pools leave fewer opportunities to improve by reranking,
-and the drop in capture also contributes to the smaller gain at
-query 3. The data cover only the first three reference anchors
-with one-proposal continuation. A similar decline at queries 4--5
-or later remains a hypothesis.
-
-Direct refinement on deployment returns reduced Object EWS success
-by 9.50 pp (Appendix~\ref{app:critic-refinement}). Each archived
-state supplied an outcome only for its executed action, which leaves
-the relative outcomes of other candidates unobserved. This is a
-possible explanation for the poor transfer from prediction to selection.
-Pairwise supervision using same-state branch outcomes lifted held-out
-ranking AUC by 0.075, below the prespecified 0.08 threshold for proceeding
-to a closed-loop evaluation.
-
-For the fixed LIBERO-Plus lighting variants, we replayed the first three
-queries on each of 50 archived Object layouts and crossed the generation
-and scoring images at each physical state. The median same-noise
-chunk difference was 0.107 in mean absolute units
-over the first 20 normalized actions. With the lighting-generated pool held fixed, changing
-the critic's image changed the winner on 26/150 queries
-(17.3\%, 95\% layout-bootstrap interval [11.3\%, 23.3\%]).
-We selected 40 anchors enriched for flips and branched all four proposals
-under the lighting condition with one-proposal continuation. One
-anchor's winner changed on replay, leaving 39 matched anchors. The clean
-and lighting scoring inputs selected 14 and 10 successful branches,
-respectively ($-10.26$ pp [$-22.86$, $0.00$], two rescues and six harms).
-This contrast isolates scoring on the replayed lighting-generated pools
-in the selected cohort. The effect of changing the generator on success
-remains open.
-
-VGAS supplies the actor, critic and selection rule. All settings use
-LIBERO simulation or its Plus extension \cite{libero}. Long is scoped to Task2 selected in
-development. Object and Long use separately calibrated windows. Paired
-intervals are descriptive. On Long Task2, the single-proposal control
-succeeded in 38/128 and 55/128 episodes under the two noise banks. The 3 pp point-estimate rule guides schedule
-selection, while formal equivalence requires a prespecified margin and test.
-The measured inference totals omit environment execution and action postprocessing. Complete episode wall time and energy are unmeasured. In an offline Object probe of 150 four-proposal
-queries, step-four estimates matched the winner from the complete ten-step
-denoising run in 52\% of cases, below the 80\% screening threshold. The
-reported workload therefore retains all ten denoising steps per proposal.
+\paragraph{Limitations.}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+\item The actor, critic and results are scoped to the released VGAS
+configuration in LIBERO, including one development-selected Long task.
+\item The retention rule uses point estimates, and the intervals
+describe uncertainty in paired differences.
+\item Dose increments depend on the tested prefix, termination and
+state visitation. The observed late increments are not strictly monotone.
+\item Branch estimates condition on early states and a single continuation
+scheme; they do not identify cumulative closed-loop effects or the effect
+of changing generation on success under lighting.
+\item Hardware timing covers the inference core on A100. Target-device
+energy, bandwidth and whole-episode wall time remain open.
+\end{itemize}
 
 \section{Conclusion}
-Shared observation encoding reduces A100 decision time for frozen VGAS
-selection. We observed that using four proposals only at early queries
-retained the full schedule's observed success within the specified
-point-estimate tolerance on new Object layouts, Long Task2, Goal,
-Spatial and fixed Plus lighting variants. Prefix
-reuse and early-window selection address work within and across queries.
-The Object comparison with CUDA Graph replay ties reduced four-way
-scoring to a 9.0\% reduction in measured core inference per episode.
+On frozen SmolVLA and VGAS, early-window selection captures most of the
+observed selection benefit while reducing four-way calls. Matching the
+inference implementation across schedules shows that lower call counts
+can also reduce measured episode inference time. Fixed-state branching
+helps explain when candidates offer a meaningful choice and how much of
+that opportunity the released scoring rule captures.
 
-\appendix
-\section{Critic scores across the episode}
-\label{app:score-drift}
-Candidate zero's median twin-min score rose from $-56.41$ at query 1 to
-$-32.37$ at query 6 on 3,099 archived full-Bo4 queries
-(Fig.~\ref{fig:q0-gate}). A pooled lower-quartile gate at $-53.78$ would
-mark 747 of its 775 queries in the first five. Late-query summaries
-condition on reaching that query. In a post-episode holdout, the best
-candidate-zero score feature had failure AUC 0.876, while total query
-count reached 0.994. Both measurements use completed trajectories.
-
-\begin{figure}[tb]
-\centering
-\includegraphics[width=\columnwidth]{\paperdir figures/q0-gate.pdf}
-\caption{Candidate-zero score drift and retrospective low-score gate
-rates on shared full-Bo4 Object trajectories. Percentile thresholds
-are pooled over all 3,099 recorded queries. Gate rates condition on
-reaching each query index.}
-\label{fig:q0-gate}
-\end{figure}
-
-\section{Critic refinement from deployment rollouts}
-\label{app:critic-refinement}
-We fine-tuned the released Object critic on discounted terminal success
-from archived executed chunks, keeping the SmolVLA actor frozen.
-Training and validation used 270 and 30 disjoint calibration layouts.
-On 337 held-out queries, the original critic and the two fine-tuned
-seeds had success AUCs of 0.495, 0.639 and 0.612. The two fine-tuned
-seeds chose the same winner on 280 of 337 regenerated four-candidate
-pools (83.1\%). Relative to the original critic, the ratio of median
-within-query score deviation to the deviation of query means was
-1.57 for the first refinement seed.
-
-We evaluated the first seed with EWS-5 on 200 matched Object layouts
-disjoint from training and validation. The refined critic succeeded
-in 91 episodes versus 110 with the original EWS-5 critic
-($-9.50$ pp, task-stratified paired 95\% interval $[-17.00,-2.00]$),
-with 23 rescues and 42 harms at 1,000 four-way calls per arm.
-Archived single and full-Bo4 runs succeeded in 98 and 110 episodes.
-The offline AUC uses labels for executed actions. On this cohort,
-higher AUC and reproducible rankings coincided with worse closed-loop selection.
-
-We also evaluated within-state pairwise ranking supervision. The
-four candidates at each archived anchor were executed independently
-before continuing with the same one-proposal policy. We preserved
-the original twin-head architecture and trained two seeds on 270
-calibration layouts with a discounted terminal-return regularizer.
-The disjoint 30-layout holdout contained 90 queries, including 42
-with mixed outcomes. Same-state ranking AUC was 0.5060 for the
-released critic and 0.5813 and 0.5774 for the two refined seeds.
-Their top choices agreed on 52/90 queries (57.8\%), meeting
-the 50\% stability threshold. The first seed gained 0.0754 AUC,
-below the prespecified gain of 0.08, so the experiment ended
-at offline validation.
-
-\begingroup\small
 \input{\paperdir references.tex}
-\endgroup
+
+\clearpage
+\appendix
+\section{Paired controls and execution details}
+The initial Object comparison evaluates released single-proposal SmolVLA,
+the original Bo4 implementation and the shared version with the corrected
+executor. The earlier wrapper dispatched candidate zero and was excluded.
+The Plus lighting row has a familywise interval that spans zero.
+\input{\paperdir tables/closed-loop.tex}
+
+The calibration sweep uses up to fourteen queries and includes random
+seven and late selection. The random and early quotas can realize
+different counts. In the combined Object early-versus-Late comparison
+there were \JEarlyCalls{} and \JLateCalls{} realized calls, respectively. Long Task2 uses
+up to 26 queries and includes both policy noise repeats for each layout.
+See the release ledgers for all counts, contrasts and the cutoff sweep.
+\input{\paperdir tables/query-budget.tex}
+\begin{table}[!ht]\centering\small
+\caption{First five versus Late on the combined Object cohort, with a paired 95\% interval.}
+\label{tab:late-paired}
+\begin{tabular}{@{}lrrl@{}}\toprule
+Contrast & Early calls & Late calls & Success difference (pp)\\
+\midrule
+First five minus Late & \JEarlyCalls & \JLateCalls & \(+\JLateGain\) \JLateCI \\
+\bottomrule\end{tabular}
+\end{table}
+
+\clearpage
+\section{System measurements}
+\label{app:systems}
+The fixed-observation timing alternates eager and replay decisions after
+warm-up. Strict FP32 comparisons agree on candidate actions, scores and
+winners. Closed-loop replay uses the same 200 physical layouts as the
+eager fresh-start study. Arm order alternates across layouts and the
+runtime uses two workers per A100 80 GB PCIe. The simulator outcomes
+and query counts match the archived eager runs. Relative to full Bo4,
+EWS reduces four-way calls from \JGraphFullCalls{} to \JGraphEarlyCalls{}
+and saves \JGraphSavedMs{} core ms per episode (paired 95\% interval
+\JGraphSavedMsCI{} ms). The paired success difference is 0.00 pp
+(\JGraphCI). Relative to single, EWS takes
+\JGraphSingleCost{} ms longer on average (95\% interval \JGraphSingleCI).
+\paperfigure{!ht}{graph-closed-loop}{\textbf{Paired Graph rollout contrasts.}
+Points show mean contrasts relative to full Bo4. Whiskers show paired
+95\% intervals resampling layouts within task.}{fig:graph-rollout}
+
+\paperfigure{!ht}{graph-query-cost}{\textbf{Cost at each reached query.}
+(a) Median core time conditional on reaching the query. (b) Number of
+episodes reaching each query. Query medians summarize distinct survivor
+sets at each index.}{fig:graph-query}
+
+\input{\paperdir tables/graph.tex}
+\input{\paperdir tables/profile.tex}
+\input{\paperdir tables/precision.tex}
+\input{\paperdir tables/episode-cost.tex}
+
+\clearpage
+\section{Scoring diagnostics and tested alternatives}
+\paperfigure{!ht}{q0-gate}{\textbf{Candidate-zero score drift.}
+(a) Median and interquartile range by query. (b) Fraction of queries
+triggering fixed gates from pooled score percentiles.}{fig:q0-gate}
+
+\paperfigure{!ht}{lighting-diagnostic}{\textbf{Crossed lighting intervention.}
+(a) Winner changes when swapping the actor or critic image. The first
+letter refers to the actor image; c and l indicate clean and lighting.
+(b) Branch-success differences when swapping the scoring image on a fixed
+lighting-generated pool, with descriptive paired 95\% intervals.}{fig:lighting}
+
+Of forty selected lighting anchors, one changed winner on replay. The
+remaining \JLightBranchN{} provided \JLightBranchRuns{} branches with
+single-proposal continuation. Clean scoring selected \JLightCleanWins{} successful
+branches and lighting scoring selected \JLightWins{}, with \JLightRescues{} rescues and \JLightHarms{}
+harms. The release contains the crossed scores and branch outcomes.
+
+\begin{table}[!ht]\centering\small
+\caption{Exploratory results and their implications for this configuration.
+Outcome differences are descriptive unless otherwise specified.}
+\label{tab:negative}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.23\linewidth}*{2}{>{\raggedright\arraybackslash}X}@{}}\toprule
+Direction / hypothesis & Observed result & Implication \\
+\midrule
+Adaptive pool gate / scores allocate calls & $-0.92$ pp versus random at matching quota & Offline ranking did not favor the tested gate.\\
+Antithetic noise / proposals improve & Both first-query contrasts $-2$ pp & The tested noise change offered no gain.\\
+Continuation-aware ranking / revisit the first query & $-2.5$ pp versus uniform reference & The tested reranking reduced first-query success.\\
+Half-episode rule / schedules interact & Zero interaction on the 50-layout pilot & The pilot supports little interaction.\\
+Twin-head bound / fewer forward calls & 606 versus 800 head evaluations, $+1.7$ ms & Eliminating head calls did not save decision time.\\
+Denoising pruning / rank early & 78/150 step-four winner matches & Below the 80\% screen.\\
+Failure gate / stop unsuccessful queries & At most 21.4\% of held-out failures exited; some successes stopped & On-policy score drift limits the tested early exit.\\
+Adaptive window / retain quality across suites & Object $-1.33$ pp, Goal $-4.33$ pp & The Goal contrast misses the retention rule.\\
+Head disagreement / penalize uncertainty & $-2.67$ pp [$-7.00$, 1.67] versus EWS & Penalty gave no observed benefit.\\
+Early acceptance / evaluate just two & Half-pool win agreement 47.5--50.9\% & Half the candidates rarely preserve the winner.\\
+Deployment-return critic / improve ranking & Offline AUC rose, closed-loop $-9.50$ pp & Offline outcome prediction did not transfer to selection.\\
+Same-state critic / pairwise supervision & Held-out AUC gain $0.0754$ & Under the prespecified $0.08$ threshold.\\
+\bottomrule\end{tabularx}
+\end{table}
 \end{document}

@@ -10,6 +10,7 @@ The MIT license in the repository root covers original code contributed to this 
 | LeRobot | [Apache License 2.0](https://github.com/huggingface/lerobot/blob/main/LICENSE). |
 | LIBERO | [MIT license](https://github.com/Lifelong-Robot-Learning/LIBERO/blob/master/LICENSE), copyright (c) 2023 Lifelong Robot Learning. Individual simulator assets retain their upstream terms. |
 | LIBERO-Plus | [Upstream benchmark and asset instructions](https://github.com/sylvestf/LIBERO-plus). Consult its distribution and the licenses of the underlying simulator assets. |
+| NeurIPS 2025 manuscript style | The unmodified class package in the [official author kit](https://media.neurips.cc/Conferences/NeurIPS2025/Styles.zip) supplies the preprint layout. |
 
 ## VGAS license text
 

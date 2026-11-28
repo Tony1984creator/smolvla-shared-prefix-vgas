@@ -1,0 +1,16 @@
+{
+  "case_id": "object_t0_fresh14",
+  "task_instruction": "pick up the alphabet soup and place it in the basket",
+  "success": true,
+  "query_widths": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    1,
+    1,
+    1,
+    1
+  ]
+}

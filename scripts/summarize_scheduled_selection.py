@@ -1,12 +1,10 @@
-"""Rebuild the scheduled-selection table, paired statistics and dose figure."""
+"""Rebuild the scheduled-selection table, paired statistics and dose ledger."""
 import csv
 import json
 from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
-from reportlab.lib.colors import HexColor
-from reportlab.pdfgen.canvas import Canvas
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "results/scheduled_selection"
@@ -78,7 +76,7 @@ def pair_text(pair):
     return "$" + f'{pair["pp"]:+.2f}' + f"$ $[{lo:.2f}, {hi:.2f}]$"
 
 
-def draw_curve(comparisons):
+def write_curve(comparisons):
     curve = [(arm, k, comparisons[arm]["single"]) for k, arm in SWEEP.items()]
     random = comparisons["random"]["single"]
     late = comparisons["late"]["single"]
@@ -89,94 +87,6 @@ def draw_curve(comparisons):
         for arm, k, effect in curve + [("random", 7, random), ("late", 9, late)]:
             writer.writerow([arm, k, f'{effect["pp"]:.2f}', *(f"{v:.2f}" for v in effect["ci"]),
                              "" if arm in ("random", "late") else f"{k * dense / 14:.2f}"])
-    # Draw directly to vector PDF so text and error bars stay sharp in print.
-    pdf = Canvas(str(PAPER / "figures/scheduled-dose.pdf"), pagesize=(256, 172), invariant=True)
-    left, bottom, width, height = 39, 30, 208, 132
-
-    def x(value):
-        return left + width * (value + 0.5) / 15
-
-    lower = min(-2, int(np.floor(late["ci"][0])))
-    upper = max(16, int(np.ceil(late["ci"][1])))
-
-    def y(value):
-        return bottom + height * (value - lower) / (upper - lower)
-
-    def segment(x1, y1, x2, y2):
-        pdf.line(x(x1), y(y1), x(x2), y(y2))
-
-    def stroke(color, weight=0.8):
-        pdf.setStrokeColor(HexColor(color))
-        pdf.setLineWidth(weight)
-
-    def marker(slot, value, square=False):
-        if square:
-            pdf.rect(x(slot) - 2, y(value) - 2, 4, 4, fill=1)
-        else:
-            pdf.circle(x(slot), y(value), 2, fill=1)
-
-    def interval(slot, low, high):
-        segment(slot, low, slot, high)
-        for end in (low, high):
-            pdf.line(x(slot) - 2.2, y(end), x(slot) + 2.2, y(end))
-
-    pdf.setFont("Helvetica", 7)
-    for tick in (lower, 0, 4, 8, 12, 16):
-        stroke("#bfc4c9" if tick else "#858d94", 0.4)
-        segment(-0.5, tick, 14.5, tick)
-        pdf.drawRightString(left - 4, y(tick) - 2.3, str(tick))
-    stroke("#172531")
-    segment(-0.5, lower, 14.5, lower)
-    segment(-0.5, lower, -0.5, upper)
-    for slot in sorted(set(SWEEP) | {9}):
-        pdf.line(x(slot), bottom, x(slot), bottom - 2.5)
-        pdf.drawCentredString(x(slot), bottom - 10, str(slot))
-    pdf.drawCentredString(left + width / 2, 6, "Planned four-way queries per episode")
-    pdf.saveState()
-    pdf.translate(9, bottom + height / 2)
-    pdf.rotate(90)
-    pdf.drawCentredString(0, 0, "Gain vs. single proposal (pp)")
-    pdf.restoreState()
-
-    stroke("#69737a")
-    pdf.setDash(3, 2)
-    segment(0, 0, 14, dense)
-    pdf.setDash()
-    stroke("#22577a")
-    pdf.setFillColor(HexColor("#22577a"))
-    for (_, a, start), (_, b, end) in zip(curve, curve[1:]):
-        segment(a, start["pp"], b, end["pp"])
-    for _, slot, effect in curve:
-        interval(slot, *effect["ci"])
-        marker(slot, effect["pp"])
-    stroke("#b24c30")
-    pdf.setFillColor(HexColor("#ffffff"))
-    interval(7, *random["ci"])
-    marker(7, random["pp"], square=True)
-
-    stroke("#56713b")
-    pdf.setFillColor(HexColor("#56713b"))
-    interval(9, *late["ci"])
-    marker(9, late["pp"], square=True)
-
-    legend = (("First K", "#22577a"), ("Random seven", "#b24c30"),
-              ("Late (from query 6)", "#56713b"), ("Linear reference", "#69737a"))
-    for i, (label, color) in enumerate(legend):
-        row_y = 157 - i * 9
-        stroke(color)
-        pdf.setFillColor(HexColor("#ffffff" if i == 1 else color))
-        if i in (1, 2):
-            pdf.rect(left + 7, row_y - 1, 4, 4, fill=1)
-        else:
-            if i == 3:
-                pdf.setDash(3, 2)
-            pdf.line(left + 3, row_y + 1, left + 15, row_y + 1)
-            pdf.setDash()
-            if i == 0:
-                pdf.circle(left + 9, row_y + 1, 1.8, fill=1)
-        pdf.setFillColor(HexColor("#172531"))
-        pdf.drawString(left + 18, row_y - 1.5, label)
-    pdf.save()
 
 
 def main():
@@ -234,7 +144,7 @@ def main():
             summaries[name]["first_ten_dense_agreement"] = int(np.sum(outcomes["front10"] == outcomes[dense]))
             summaries[name]["minimum_cutoff"] = min(k for k, arm in SWEEP.items()
                                                      if abs(comparisons[arm]["dense"]["pp"]) <= 3)
-            draw_curve(comparisons)
+            write_curve(comparisons)
     # One episode per physical layout, resampled within each task and cohort.
     rng = np.random.default_rng(20261124)
     strata = [row for matrix in timing_deltas.values() for row in matrix]

@@ -2,6 +2,8 @@
 
 The [manuscript](main.tex) reads generated LaTeX tables and headline macros. The table links below refer to files under the repository's results directory unless identified as archived evidence.
 
+The [cross-cohort table](tables/cohorts.tex), [headline macros](submission-metrics.tex) and submission figures are regenerated from the frozen ledgers by [the presentation script](make_submission.py). Figure 1 uses the matched Graph arms only. The archived Late baseline appears in the dose and cross-cohort comparisons. Goal and Spatial are the prospective one-third tests. Figure 4 gives marginal success intervals, while the cross-cohort table retains the paired EWS-minus-full intervals.
+
 | Claims in manuscript, README or workshop | Source and fields | Scope checked |
 |---|---|---|
 | Object 144 to 169 of 300, +8.33 pp [1.67, 15.00]. Original Bo4 170 to shared Bo4 169 of 300, −0.33 pp [−5.00, 4.33]. | [object-paired.json](../results/object-paired.json), B-BC, B-OrigBo4 and B-Bo4. Pair layout and noise and compare success. | Same actor and cohort. The first contrast measures the VGAS selection pipeline. The second holds candidate count fixed. The interval describes the paired difference. |

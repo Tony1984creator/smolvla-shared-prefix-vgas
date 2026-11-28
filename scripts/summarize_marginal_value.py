@@ -3,64 +3,12 @@
 import csv
 import json
 from itertools import pairwise
+from pathlib import Path
+import sys
 
 import numpy as np
-from reportlab.lib.colors import HexColor
-from reportlab.pdfgen.canvas import Canvas
 
-from summarize_scheduled_selection import DATA, PAPER, SWEEP, paired, read_cohort
-
-
-def draw(segments):
-    pdf = Canvas(str(PAPER / "figures/marginal-value.pdf"), pagesize=(500, 166), invariant=True)
-    blue = HexColor("#22577a")
-    grid = HexColor("#d8dde0")
-    ink = HexColor("#172531")
-    pdf.setFont("Helvetica", 9)
-    labels = [f'{r["first_query"]}–{r["last_query"]}' for r in segments]
-    for panel, left, right, low, high, ticks in (
-        ("A   Increment per block (pp)", 27, 237, -5, 12, (-4, 0, 4, 8, 12)),
-        ("B   Cumulative gain captured (%)", 270, 480, 0, 115, (0, 25, 50, 75, 100)),
-    ):
-        bottom, top = 35, 130
-        pdf.setFillColor(ink)
-        pdf.drawString(left, 148, panel)
-
-        def y(v):
-            return bottom + (top - bottom) * (v - low) / (high - low)
-
-        for tick in ticks:
-            pdf.setStrokeColor(ink if tick in (0, 100) else grid)
-            pdf.setLineWidth(0.55)
-            pdf.line(left, y(tick), right, y(tick))
-            pdf.drawRightString(left - 4, y(tick) - 3, str(tick))
-        xs = [left + (right - left) * (i + 0.5) / len(segments) for i in range(len(segments))]
-        for x, label in zip(xs, labels):
-            pdf.drawCentredString(x, 20, label)
-        pdf.drawCentredString((left + right) / 2, 6, "Query block")
-        pdf.setStrokeColor(blue)
-        pdf.setFillColor(blue)
-        if left == 27:
-            for x, r in zip(xs, segments):
-                height = y(r["delta_pp"]) - y(0)
-                if height:
-                    pdf.rect(x - 9, min(y(0), y(r["delta_pp"])), 18, abs(height), fill=1, stroke=0)
-                lo, hi = map(y, (r["ci95_low_pp"], r["ci95_high_pp"]))
-                pdf.setStrokeColor(ink)
-                pdf.setLineWidth(1)
-                pdf.line(x, lo, x, hi)
-                for end in (lo, hi):
-                    pdf.line(x - 3, end, x + 3, end)
-                if lo == hi:
-                    pdf.circle(x, lo, 1.5, fill=1, stroke=0)
-        else:
-            points = [(x, y(r["capture_pct"])) for x, r in zip(xs, segments)]
-            pdf.setLineWidth(1.4)
-            for (x1, y1), (x2, y2) in pairwise(points):
-                pdf.line(x1, y1, x2, y2)
-            for x, yy in points:
-                pdf.circle(x, yy, 2.6, fill=1, stroke=0)
-    pdf.save()
+from summarize_scheduled_selection import DATA, SWEEP, paired, read_cohort
 
 
 def main():
@@ -104,7 +52,10 @@ def main():
         writer = csv.DictWriter(stream, segments[0], lineterminator="\n")
         writer.writeheader()
         writer.writerows(segments)
-    draw(segments)
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "paper"))
+    from make_submission import marginal
+
+    marginal()
 
 
 if __name__ == "__main__":
