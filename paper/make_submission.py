@@ -78,9 +78,10 @@ def teaser():
     fig = plt.figure(figsize=(WIDTH, 1.65))
     scene = fig.add_axes((0.015, 0.11, 0.60, 0.81))
     scene.set_axis_off()
-    panel(scene, "a", x=0, y=1.04)
-    for i, q in enumerate((1, 3, 5, 7, 9)):
-        view = scene.inset_axes((0.19 * i + 0.022, 0.31, 0.171, 0.62))
+    query_centers = np.linspace(0.107, 0.867, len(widths))
+    for q in (1, 3, 5, 7, 9):
+        center = query_centers[q - 1]
+        view = scene.inset_axes((center - 0.0855, 0.31, 0.171, 0.62))
         view.imshow(plt.imread(ASSETS / f"object-q{q:02}.png"), interpolation="none")
         view.set_xticks([])
         view.set_yticks([])
@@ -88,12 +89,13 @@ def teaser():
             spine.set_visible(True)
             spine.set_linewidth(1.1)
             spine.set_edgecolor(C["front" if widths[q-1] == 4 else "single"])
-        scene.text(0.19 * i + 0.107, 0.26, f"q{q}", ha="center", va="top", transform=scene.transAxes)
-    for i, width in enumerate(widths):
-        scene.add_patch(Rectangle((0.024 + 0.103 * i, 0.073), 0.086, 0.081,
+        scene.text(center, 0.26, f"q{q}", ha="center", va="top", transform=scene.transAxes)
+    for center, width in zip(query_centers, widths, strict=True):
+        scene.add_patch(Rectangle((center - 0.041, 0.073), 0.082, 0.081,
                                   transform=scene.transAxes, facecolor=C["front" if width == 4 else "single"]))
-    scene.text(.025, 0, "Four proposals", transform=scene.transAxes, color=C["front"], va="center")
-    scene.text(.65, 0, "One proposal", transform=scene.transAxes, color=C["single"], va="center")
+    for width, caption, color in ((4, "Four proposals", C["front"]), (1, "One proposal", C["single"])):
+        center = np.mean(query_centers[np.asarray(widths) == width])
+        scene.text(center, 0, caption, transform=scene.transAxes, color=color, ha="center", va="center")
     ax = fig.add_axes((0.73, 0.22, 0.25, 0.64))
     for key, tag, offset in (("single", "single", (0, 6)), ("dense", "dense", (-2, 7)), ("front5", "front", (2, 7))):
         arm = graph[key]
@@ -106,9 +108,10 @@ def teaser():
                 (graph["dense"]["mean_episode_ms"] - 5, 55),
                 arrowprops=dict(arrowstyle="->", color=C["front"], lw=.85))
     ax.set(xlim=(805, 971), ylim=(46, 60), xlabel="Core ms / episode",
-           ylabel="Success (%)", xticks=(825, 875, 925, 950), yticks=(48, 52, 56))
+           ylabel="Success (%)", xticks=(825, 875, 925), yticks=(48, 52, 56))
     grid(ax)
-    panel(ax, "b", x=-.22, y=1.15)
+    panel(scene, "a", x=.018, y=.946, transform=fig.transFigure, va="top")
+    panel(ax, "b", x=.673, y=.946, transform=fig.transFigure, va="top")
     save(fig, "teaser")
 
 

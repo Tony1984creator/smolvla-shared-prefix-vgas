@@ -2,7 +2,9 @@
 
 Early-window selection (EWS) uses four SmolVLA proposals near the start of an episode and one thereafter, concentrating VGAS scoring where it yielded the most benefit.
 
-![Recorded LIBERO-Object queries and the matched CUDA Graph cost–success comparison](paper/figures/teaser.png)
+![Panel a: snapshots from one EWS episode and its query schedule. Panel b: success and mean core inference time for Single, Full Bo4, and EWS under warm CUDA Graph replay.](paper/figures/teaser.png)
+
+**(a)** One recorded LIBERO-Object episode. Frames mark queries 1, 3, 5, 7, and 9, and the strip shows all reached queries. **(b)** Success and mean core inference time on the same 200 layouts under warm CUDA Graph replay.
 
 - **When to select.** On paired Object layouts, the early window beat the tested Late schedule by **7.60 percentage points**, with a 95% paired interval of [2.60, 12.60].
 - **How much it saves.** Across the tested cohorts, EWS reduced realized four-way calls by about half while remaining within the specified 3 pp point-estimate tolerance of full selection.

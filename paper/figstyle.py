@@ -37,13 +37,27 @@ def grid(ax, axis="y"):
     ax.tick_params(length=2, pad=2, width=0.5)
 
 
-def panel(ax, letter, x=-0.13, y=1.025):
-    ax.text(x, y, f"({letter})", transform=ax.transAxes, va="bottom",
-            ha="left", fontweight="bold", fontsize=8, clip_on=False)
+def panel(ax, letter, x=-0.13, y=1.025, *, transform=None, va="bottom"):
+    ax.text(x, y, f"({letter})", transform=ax.transAxes if transform is None else transform,
+            va=va, ha="left", fontweight="bold", fontsize=8,
+            clip_on=False, gid=f"panel-label-{letter}")
 
 
 def save(fig, name):
+    def check_panel_margins(event):
+        margin = event.renderer.points_to_pixels(2)
+        labels = fig.findobj(lambda artist: (artist.get_gid() or "").startswith("panel-label-"))
+        for label in labels:
+            bounds = label.get_window_extent(event.renderer)
+            if (bounds.x0 < margin or bounds.y0 < margin
+                    or bounds.x1 > fig.bbox.width - margin or bounds.y1 > fig.bbox.height - margin):
+                raise ValueError(f"{name}: panel label {label.get_text()} lacks an export margin")
+
     FIGURES.mkdir(exist_ok=True)
-    fig.savefig(FIGURES / f"{name}.pdf", metadata={"CreationDate": None})
-    fig.savefig(FIGURES / f"{name}.png", dpi=300)
-    plt.close(fig)
+    connection = fig.canvas.mpl_connect("draw_event", check_panel_margins)
+    try:
+        fig.savefig(FIGURES / f"{name}.pdf", metadata={"CreationDate": None})
+        fig.savefig(FIGURES / f"{name}.png", dpi=300)
+    finally:
+        fig.canvas.mpl_disconnect(connection)
+        plt.close(fig)
